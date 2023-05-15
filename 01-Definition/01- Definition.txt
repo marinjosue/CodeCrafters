@@ -1,0 +1,19 @@
+DSA Hardware Store
+Version 0.9
+Prepared by:
+Jeffrey Manobanda
+Josue Marin
+Mesias Mariscal
+Jhordy Marcillo
+_______________________________________________________________________________________________________________________________________
+
+Definition
+Software Requirements Specification for DSA Hardware Store
+Abstract 
+The project is a comprehensive software solution that has been designed to meet the specific needs of the hardware store. In addition to automating and optimizing inventory and sales management processes, the software also includes features such as a user-friendly and intuitive interface for easy navigation, the ability for customers to browse and purchase products through the application, and the ability to view special promotions and offers. Additionally, the software is designed to handle a high volume of simultaneous users without affecting its performance, ensuring that the application remains fast and responsive even during peak usage periods. The application is also designed to be secure, protecting users' personal information and complying with all applicable laws and regulations. The software team is committed to providing ongoing technical support and updates to ensure that the application continues to meet the needs of the hardware company and its customers o buy products at the hardware store. It will allow them to view the inventory and product catalog, as well as make purchases.
+2.2 Product functions 
+●	Inventory: Customers will be able to see which products are available at the hardware store. 
+●	Product catalog: Customers will be able to browse the product catalog and see details about each product. Promotions and offers: Customers will be able to view special promotions and offers in the application. 
+●	Shopping cart: Customers will be able to add products to the shopping cart and make a purchase. 
+●	Customer service: Customers will be able to contact customer service through the application.
+
