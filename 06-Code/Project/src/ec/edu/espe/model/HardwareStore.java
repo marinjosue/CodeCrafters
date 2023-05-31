@@ -17,7 +17,7 @@ public class HardwareStore {
     private List<Product> productList;
     private String email;
 
-    public HardwareStore(int id, String name, int batch, int amount, List<Product> productList, String email) {
+    public HardwareStore(int id, String name, int batch, int amount1, List<Product> productList, String email) {
         this.id = id;
         this.name = name;
         this.batch = batch;
