@@ -1,16 +1,30 @@
 {
   "id": 1,
   "name": "Mi ferreteria",
-  "batch": 12,
+  "batch": 1,
   "amount": 1,
   "productList": [
     {
-      "id": 1,
+      "id": 11234,
+      "name": "Martillos",
+      "stock": 1000,
+      "price": 0.45,
+      "description": "Martillos para el uso diario"
+    },
+    {
+      "id": 11,
       "name": "Clavos",
-      "stock": 101,
-      "price": 0.4,
-      "description": "Clavos utiles para construcciones, principalmente de madera"
+      "stock": 21,
+      "price": 0.3,
+      "description": "clavitos clavon"
+    },
+    {
+      "id": 11,
+      "name": "Juan",
+      "stock": 200,
+      "price": 0.1,
+      "description": "hola"
     }
   ],
-  "email": "jhordypaulsb2@gmail.com"
+  "email": "jhordypaulsb@gmail.com"
 }
