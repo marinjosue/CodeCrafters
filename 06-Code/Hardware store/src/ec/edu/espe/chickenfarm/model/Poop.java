@@ -15,6 +15,8 @@ public class Poop {
     public String toString() {
         return "Poop{" + "id=" + id + '}';
     }
+
+
     
     /**
      * @return the id
