@@ -26,6 +26,11 @@ public class HardwareStore {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "HardwareStore{" + "id=" + id + ", name=" + name + ", batch=" + batch + ", amount=" + amount + ", productList=" + productList + ", email=" + email + '}';
+    }
+
     public void checkIn() {
 
     }
@@ -45,5 +50,89 @@ public class HardwareStore {
 
     public void modify(Product product) {
 
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the batch
+     */
+    public int getBatch() {
+        return batch;
+    }
+
+    /**
+     * @param batch the batch to set
+     */
+    public void setBatch(int batch) {
+        this.batch = batch;
+    }
+
+    /**
+     * @return the amount
+     */
+    public int getAmount() {
+        return amount;
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * @return the productList
+     */
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    /**
+     * @param productList the productList to set
+     */
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
