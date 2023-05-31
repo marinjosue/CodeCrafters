@@ -8,48 +8,33 @@ import java.util.ArrayList;
  */
 public class Coop {
 
-    private int id;
+    private String id;
     private ArrayList<Chicken> chickens;
 
-    public Coop(int id, ArrayList<Chicken> chickens) {
+    @Override
+    public String toString() {
+        return "Coop{" + "id=" + id + ", chickens=" + chickens + '}';
+    }
+
+    public Coop(String id, ArrayList<Chicken> chickens) {
         this.id = id;
         this.chickens = chickens;
     }
 
-    @Override
-    public String toString() {
-        return "Coop{" + "id=" + id + 
-                ", chickens=" + chickens + '}';
-    }
-    
-    /**
-     * @return the id
-     */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    /**
-     * @return the chickens
-     */
     public ArrayList<Chicken> getChickens() {
         return chickens;
     }
 
-    /**
-     * @param chickens the chickens to set
-     */
     public void setChickens(ArrayList<Chicken> chickens) {
         this.chickens = chickens;
     }
 
-    
-    
 }

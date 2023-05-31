@@ -1,14 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package ec.edu.espe.chickenfarm.model;
-
-/**
- *
- * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
- */
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,17 +31,17 @@ public class Menu {
                 case 1:
                     // Add coop
                     System.out.print("Enter coop id: ");
-                    int id = scanner.nextInt();
+                    String id = scanner.next();
                     Coop coop = new Coop(id, new ArrayList<>());
                     coops.add(coop);
                     break;
                 case 2:
                     // Add chicken
                     System.out.print("Enter coop id: ");
-                    int coopId = scanner.nextInt();
+                    String coopId = scanner.next();
                     Coop selectedCoop = null;
                     for (Coop c : coops) {
-                        if (c.getId() == coopId) {
+                        if (c.getId().equals(coopId)) {
                             selectedCoop = c;
                             break;
                         }
@@ -93,10 +83,10 @@ public class Menu {
                     break;
                 case 5:
                      System.out.print("Enter coop id: ");
-                     int coopIdToDeleteFrom = scanner.nextInt();
+                     String coopIdToDeleteFrom = scanner.next();
                      Coop selectedCoopToDeleteFrom = null;
                      for (Coop c : coops) {
-                         if (c.getId() == coopIdToDeleteFrom) {
+                         if (c.getId().equals(coopIdToDeleteFrom)) {
                              selectedCoopToDeleteFrom = c;
                              break;
                          }
@@ -105,26 +95,26 @@ public class Menu {
                          System.out.println("Coop not found");
                          break;
                      }
-                     System.out.print("Enter chicken id to delete: ");
+                     System.out.print("Enter chicken id: ");
                      int chickenIdToDelete = scanner.nextInt();
-                     Chicken selectedChickenToDelete = null;
+                     Chicken chickenToDelete = null;
                      for (Chicken ch : selectedCoopToDeleteFrom.getChickens()) {
                          if (ch.getId() == chickenIdToDelete) {
-                             selectedChickenToDelete = ch;
+                             chickenToDelete = ch;
                              break;
                          }
                      }
-                     if (selectedChickenToDelete == null) {
+                     if (chickenToDelete == null) {
                          System.out.println("Chicken not found");
                          break;
                      }
-                     selectedCoopToDeleteFrom.getChickens().remove(selectedChickenToDelete);
+                     selectedCoopToDeleteFrom.getChickens().remove(chickenToDelete);
                      System.out.println("Chicken deleted");
-                     break; 
+                     break;
                 default:
                     System.out.println("Invalid option");
+                    break;
             }
         }
     }
 }
-
