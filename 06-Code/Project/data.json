@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "name": "Mi ferreteria",
+  "batch": 12,
+  "amount": 1,
+  "productList": [
+    {
+      "id": 1,
+      "name": "Clavos",
+      "stock": 101,
+      "price": 0.4,
+      "description": "Clavos utiles para construcciones, principalmente de madera"
+    }
+  ],
+  "email": "jhordypaulsb2@gmail.com"
+}
