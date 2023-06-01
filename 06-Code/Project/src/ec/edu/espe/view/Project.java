@@ -22,15 +22,21 @@ public class Project {
 
         boolean exit = false;
         while (!exit) {
-            System.out.println("---------- Menú Principal ----------");
-            System.out.println("1. Ingresar datos del inventario");
-            System.out.println("2. Mostrar datos al usuario");
-            System.out.println("3. Mostrar promociones y ofertas");
-            System.out.println("4. Atención al usuario");
-            System.out.println("0. Salir");
+            System.out.println("---------- BIENVENIDO A FERRETERIA DSA ----------");
+            System.out.println("DESEA INGRESAR COMO:");
+            System.out.println("1.- USUARIO");
+            System.out.println("2.- PROPIETARIO");
             System.out.print("Ingrese la opción deseada: ");
-            int option = scanner.nextInt();
-            scanner.nextLine(); 
+            int op = scanner.nextInt();
+            if(op==1){
+                System.out.println("1. Ingresar datos del inventario");
+                System.out.println("2. Mostrar datos al usuario");
+                System.out.println("3. Mostrar promociones y ofertas");
+                System.out.println("4. Atención al usuario");
+                System.out.println("0. Salir");
+                System.out.print("Ingrese la opción deseada: ");
+                int option = scanner.nextInt();
+                scanner.nextLine(); 
 
             switch (option) {
                 case 1:
@@ -53,7 +59,40 @@ public class Project {
                     System.out.println("Opción no válida. Intente nuevamente.");
                     break;
             }
+            }else{
+                System.out.println("1. Registrarse");
+                System.out.println("2. Ver Catalogo");
+                System.out.println("3. Mostrar promociones y ofertas");
+                System.out.println("4. Atención al usuario");
+                System.out.println("0. Salir");
+                System.out.print("Ingrese la opción deseada: ");
+                int option = scanner.nextInt();
+                scanner.nextLine(); 
 
+            switch (option) {
+                case 1:
+
+                    hardwareStore = enterInventoryData(hardwareStore);
+                    break;
+                case 2:
+                    showProductList(hardwareStore.getProductList());
+                    break;
+                case 3:
+                    showPromotionsMenu(hardwareStore);
+                    break;
+                case 4:
+                    showOwnerData(hardwareStore);
+                    break;
+                case 0:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente nuevamente.");
+                    break;
+            }
+                
+            }
+          
             System.out.println("------------------------------------");
         }
     }
