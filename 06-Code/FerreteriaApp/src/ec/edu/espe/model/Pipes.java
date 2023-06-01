@@ -10,9 +10,11 @@ package ec.edu.espe.model;
  * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
  */
 public class Pipes {
- private String name;
- private float price;
- private String category;
+    
+    private String type;
+    private String name;
+    private float price;
+    private String category;
 
     public String getName() {
         return name;

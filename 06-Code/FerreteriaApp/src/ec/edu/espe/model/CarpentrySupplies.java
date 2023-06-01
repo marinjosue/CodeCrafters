@@ -5,9 +5,11 @@ package ec.edu.espe.model;
  * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
  */
 public class CarpentrySupplies {
-private String name;
-private float price;
-private String category;
+    
+    private String type;
+    private String name;
+    private float price;
+    private String category;
 
     public CarpentrySupplies(String name, float price, String category) {
         this.name = name;

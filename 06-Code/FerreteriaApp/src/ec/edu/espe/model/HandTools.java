@@ -7,9 +7,11 @@ import java.util.ArrayList;
  * @author Mesias Mariscal,josue marin CodeCrafters; DCCO-ESPE
  */
 public class HandTools {
-private String name;
-private float price;
-private String description;
+    
+    private String type;
+    private String name;
+    private float price;
+    private String description;
 
 
     public HandTools(String name, float price, String description) {

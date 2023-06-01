@@ -4,10 +4,11 @@ package ec.edu.espe.model;
 
 /**
  *
- * @author Mesias Mariscal,Josue Marin CodeCrafters; DCCO-ESPE
+ * @author Mesias Mariscal,Josue Marin, Jeffrey Manobanda CodeCrafters; DCCO-ESPE
  */
 public class BuildingMaterials {
-
+    
+    private String type;
     private String name;
     private float price;
     private String category;

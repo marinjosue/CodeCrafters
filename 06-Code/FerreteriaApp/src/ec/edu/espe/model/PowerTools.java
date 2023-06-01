@@ -10,9 +10,10 @@ package ec.edu.espe.model;
  * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
  */
 public class PowerTools {
+    
+    private String type;
     private String name;
     private float price;
-    private String type;
 
     public PowerTools(String name, float price, String type) {
         this.name = name;
