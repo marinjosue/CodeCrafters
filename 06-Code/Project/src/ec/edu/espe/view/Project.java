@@ -110,28 +110,19 @@ public class Project {
         System.out.println("Ingrese los datos del inventario:");
 
         // ID:
-        System.out.print("ID: ");
-        int id = readInt(scanner);
+        int id = 1;
         hardwareStore.setId(id);
 
         // Nombre del propietario:
-        System.out.print("Nombre del propietario: ");
-        String name = scanner.nextLine();
-        hardwareStore.setName(name);
+        String name = "Daniel Maza";
 
-        // Numero de CI:
-        System.out.print("Número de CI: ");
-        int batch = readInt(scanner);
-        hardwareStore.setBatch(batch);
 
         // Numero telefónico:
-        System.out.print("Número telefónico: ");
-        int amount = readInt(scanner);
+        int amount = 997232172;
         hardwareStore.setAmount(amount);
 
         // Email:
-        System.out.print("Email: ");
-        String email = scanner.nextLine();
+        String email = "modificaciones22@hotmail.com";
         hardwareStore.setEmail(email);
 
         List<Product> productList = new ArrayList<>();
