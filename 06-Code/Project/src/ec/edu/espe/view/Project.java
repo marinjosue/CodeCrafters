@@ -1,10 +1,11 @@
 package ec.edu.espe.view;
 
-
 import ec.edu.espe.controller.JSONDataManager;
 import ec.edu.espe.model.HardwareStore;
 import ec.edu.espe.model.Product;
+
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,119 +23,124 @@ public class Project {
 
         boolean exit = false;
         while (!exit) {
+
             System.out.println("---------- BIENVENIDO A FERRETERIA DSA ----------");
             System.out.println("DESEA INGRESAR COMO:");
-            System.out.println("1.- USUARIO");
-            System.out.println("2.- PROPIETARIO");
+            System.out.println("1.- PROPIETARIO");
+            System.out.println("2.- USUARIO");
             System.out.print("Ingrese la opción deseada: ");
-            int op = scanner.nextInt();
-            if(op==1){
+            int op = readInt(scanner);
+            if (op == 1) {
                 System.out.println("1. Ingresar datos del inventario");
-                System.out.println("2. Mostrar datos al usuario");
-                System.out.println("3. Mostrar promociones y ofertas");
-                System.out.println("4. Atención al usuario");
+                System.out.println("2. Mostrar promociones y ofertas");
                 System.out.println("0. Salir");
                 System.out.print("Ingrese la opción deseada: ");
-                int option = scanner.nextInt();
-                scanner.nextLine(); 
+                int option = readInt(scanner);
+                scanner.nextLine();
 
-            switch (option) {
-                case 1:
+                switch (option) {
+                    case 1:
+                        hardwareStore = enterInventoryData(hardwareStore, scanner);
+                        break;
+                    case 2:
+                        showPromotionsMenu(hardwareStore, scanner);
+                        break;
+                    case 0:
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intente nuevamente.");
+                        break;
+                }
+            } else {
 
-                    hardwareStore = enterInventoryData(hardwareStore);
-                    break;
-                case 2:
-                    showProductList(hardwareStore.getProductList());
-                    break;
-                case 3:
-                    showPromotionsMenu(hardwareStore);
-                    break;
-                case 4:
-                    showOwnerData(hardwareStore);
-                    break;
-                case 0:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente nuevamente.");
-                    break;
-            }
-            }else{
-                System.out.println("1. Registrarse");
-                System.out.println("2. Ver Catalogo");
-                System.out.println("3. Mostrar promociones y ofertas");
-                System.out.println("4. Atención al usuario");
+                System.out.println("1. Ver Catálogo");
+                System.out.println("2. Mostrar promociones y ofertas");
+                System.out.println("3. Atención al usuario");
                 System.out.println("0. Salir");
                 System.out.print("Ingrese la opción deseada: ");
-                int option = scanner.nextInt();
-                scanner.nextLine(); 
+                int option = readInt(scanner);
+                scanner.nextLine();
 
-            switch (option) {
-                case 1:
+                switch (option) {
+                    case 1:
+                        showProductList(hardwareStore.getProductList());
+                        break;
+                    case 2:
+                        showPromotionsMenu(hardwareStore, scanner);
+                        break;
+                    case 3:
+                        showOwnerData(hardwareStore);
+                        break;
+                    case 0:
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intente nuevamente.");
+                        break;
+                }
+            }
 
-                    hardwareStore = enterInventoryData(hardwareStore);
-                    break;
-                case 2:
-                    showProductList(hardwareStore.getProductList());
-                    break;
-                case 3:
-                    showPromotionsMenu(hardwareStore);
-                    break;
-                case 4:
-                    showOwnerData(hardwareStore);
-                    break;
-                case 0:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente nuevamente.");
-                    break;
-            }
-                
-            }
-          
             System.out.println("------------------------------------");
         }
     }
 
-    private static HardwareStore enterInventoryData(HardwareStore hardwareStore) {
-        Scanner scanner = new Scanner(System.in);
 
+    private static int readInt(Scanner scanner) {
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+            scanner.nextLine(); // Consumir la entrada incorrecta
+            return readInt(scanner); // Pedir de nuevo la entrada
+        }
+    }
+
+    private static float readFloat(Scanner scanner) {
+        try {
+            return scanner.nextFloat();
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida. Por favor, ingrese un número decimal válido.");
+            scanner.nextLine(); // Consumir la entrada incorrecta
+            return readFloat(scanner); // Pedir de nuevo la entrada
+        }
+    }
+
+    private static HardwareStore enterInventoryData(HardwareStore hardwareStore, Scanner scanner) {
         System.out.println("Ingrese los datos del inventario:");
 
+        // ID:
         System.out.print("ID: ");
-        int id = scanner.nextInt();
+        int id = readInt(scanner);
         hardwareStore.setId(id);
 
-        scanner.nextLine();
-
+        // Nombre del propietario:
         System.out.print("Nombre del propietario: ");
         String name = scanner.nextLine();
         hardwareStore.setName(name);
 
-        System.out.print("Numero de CI: ");
-        int batch = scanner.nextInt();
+        // Numero de CI:
+        System.out.print("Número de CI: ");
+        int batch = readInt(scanner);
         hardwareStore.setBatch(batch);
 
-        System.out.print("Numero telefonico: ");
-        int amount = scanner.nextInt();
+        // Numero telefónico:
+        System.out.print("Número telefónico: ");
+        int amount = readInt(scanner);
         hardwareStore.setAmount(amount);
 
-        scanner.nextLine();
-
+        // Email:
         System.out.print("Email: ");
         String email = scanner.nextLine();
         hardwareStore.setEmail(email);
-
-        System.out.println("Datos del inventario actualizados.");
 
         List<Product> productList = new ArrayList<>();
 
         System.out.println("Ingrese los datos de los productos (Ingrese '0' para terminar):");
         boolean finished = false;
         while (!finished) {
-            System.out.print("ID del producto (numeros unicos): ");
-            int productId = scanner.nextInt();
+            System.out.print("ID del producto (números únicos): ");
+            int productId = readInt(scanner);
             scanner.nextLine();
 
             if (productId == 0) {
@@ -146,11 +152,11 @@ public class Project {
             String productName = scanner.nextLine();
 
             System.out.print("Stock del producto: ");
-            int stock = scanner.nextInt();
+            int stock = readInt(scanner);
             scanner.nextLine();
 
             System.out.print("Precio del producto (0.000): ");
-            float price = scanner.nextFloat();
+            float price = readFloat(scanner);
             scanner.nextLine();
 
             System.out.print("Descripción del producto: ");
@@ -175,24 +181,21 @@ public class Project {
         }
     }
 
-
-    private static void showPromotionsMenu(HardwareStore hardwareStore) {
-        Scanner scanner = new Scanner(System.in);
-
+    private static void showPromotionsMenu(HardwareStore hardwareStore, Scanner scanner) {
         System.out.println("---------- Menú de Promociones ----------");
         System.out.println("1. Dueño: Aplicar descuento a un producto");
         System.out.println("2. Usuario: Ver precio con descuento de un producto");
         System.out.println("0. Volver");
         System.out.print("Ingrese la opción deseada: ");
-        int option = scanner.nextInt();
-        scanner.nextLine(); 
+        int option = readInt(scanner);
+        scanner.nextLine();
 
         switch (option) {
             case 1:
-                applyDiscount(hardwareStore);
+                applyDiscount(hardwareStore, scanner);
                 break;
             case 2:
-                showDiscountedPrice(hardwareStore);
+                showDiscountedPrice(hardwareStore, scanner);
                 break;
             case 0:
                 break;
@@ -202,11 +205,9 @@ public class Project {
         }
     }
 
-    private static void applyDiscount(HardwareStore hardwareStore) {
-        Scanner scanner = new Scanner(System.in);
-
+    private static void applyDiscount(HardwareStore hardwareStore, Scanner scanner) {
         System.out.print("Ingrese el ID del producto al que desea aplicar descuento: ");
-        int productId = scanner.nextInt();
+        int productId = readInt(scanner);
         scanner.nextLine();
 
         Product product = findProductById(hardwareStore, productId);
@@ -216,20 +217,18 @@ public class Project {
         }
 
         System.out.print("Ingrese el porcentaje de descuento (0-100): ");
-        int discountPercentage = scanner.nextInt();
-        scanner.nextLine(); 
-        
+        int discountPercentage = readInt(scanner);
+        scanner.nextLine();
+
         float discountedPrice = product.getPrice() * (1 - (discountPercentage / 100.0f));
         product.setPrice(discountedPrice);
 
         System.out.println("Descuento aplicado al producto con ID " + productId + ".");
     }
 
-    private static void showDiscountedPrice(HardwareStore hardwareStore) {
-        Scanner scanner = new Scanner(System.in);
-
+    private static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
         System.out.print("Ingrese el ID del producto para ver el precio con descuento: ");
-        int productId = scanner.nextInt();
+        int productId = readInt(scanner);
         scanner.nextLine();
 
         Product product = findProductById(hardwareStore, productId);
