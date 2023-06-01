@@ -34,7 +34,7 @@ public class InventoryMenu {
         System.out.println("Ingrese los datos de los productos (Ingrese '0' para terminar):");
         boolean finished = false;
         while (!finished) {
-            System.out.print("ID del producto (números únicos): ");
+            System.out.print("ID del producto (numeros unicos): ");
             int productId = readInt(scanner);
             scanner.nextLine();
 
@@ -54,7 +54,7 @@ public class InventoryMenu {
             float price = readFloat(scanner);
             scanner.nextLine();
 
-            System.out.print("Descripción del producto: ");
+            System.out.print("Descripcion del producto: ");
             String description = scanner.nextLine();
 
             Product product = new Product(productId, productName, stock, price, description, null);
@@ -69,7 +69,7 @@ public class InventoryMenu {
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+            System.out.println("Entrada invalida. Por favor, ingrese un numero entero.");
             scanner.nextLine(); // Consumir la entrada incorrecta
             return readInt(scanner); // Pedir de nuevo la entrada
         }
@@ -79,7 +79,7 @@ public class InventoryMenu {
         try {
             return scanner.nextFloat();
         } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida. Por favor, ingrese un número decimal válido.");
+            System.out.println("Entrada invalida. Por favor, ingrese un numero decimal valido.");
             scanner.nextLine(); // Consumir la entrada incorrecta
             return readFloat(scanner); // Pedir de nuevo la entrada
         }

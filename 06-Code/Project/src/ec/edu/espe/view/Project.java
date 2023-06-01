@@ -28,7 +28,7 @@ public class Project {
             System.out.println("DESEA INGRESAR COMO:");
             System.out.println("1.- PROPIETARIO");
             System.out.println("2.- USUARIO");
-            System.out.print("Ingrese la opción deseada: ");
+            System.out.print("Ingrese la opcion deseada: ");
             int op = readInt(scanner);
             if (op == 1) {
                 System.out.println("1. Ingresar datos del inventario");
@@ -49,16 +49,16 @@ public class Project {
                         exit = true;
                         break;
                     default:
-                        System.out.println("Opción no válida. Intente nuevamente.");
+                        System.out.println("Opcion no valida. Intente nuevamente.");
                         break;
                 }
             } else {
 
-                System.out.println("1. Ver Catálogo");
+                System.out.println("1. Ver Catalogo");
                 System.out.println("2. Mostrar promociones y ofertas");
-                System.out.println("3. Atención al usuario");
+                System.out.println("3. Atencion al usuario");
                 System.out.println("0. Salir");
-                System.out.print("Ingrese la opción deseada: ");
+                System.out.print("Ingrese la opcion deseada: ");
                 int option = readInt(scanner);
                 scanner.nextLine();
 
@@ -76,7 +76,7 @@ public class Project {
                         exit = true;
                         break;
                     default:
-                        System.out.println("Opción no válida. Intente nuevamente.");
+                        System.out.println("Opcion no valida. Intente nuevamente.");
                         break;
                 }
             }
@@ -90,7 +90,7 @@ public class Project {
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+            System.out.println("Entrada invalida. Por favor, ingrese un numero entero.");
             scanner.nextLine(); // Consumir la entrada incorrecta
             return readInt(scanner); // Pedir de nuevo la entrada
         }
@@ -100,7 +100,7 @@ public class Project {
         try {
             return scanner.nextFloat();
         } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida. Por favor, ingrese un número decimal válido.");
+            System.out.println("Entrada invalida. Por favor, ingrese un numero decimal valido.");
             scanner.nextLine(); // Consumir la entrada incorrecta
             return readFloat(scanner); // Pedir de nuevo la entrada
         }
@@ -130,7 +130,7 @@ public class Project {
         System.out.println("Ingrese los datos de los productos (Ingrese '0' para terminar):");
         boolean finished = false;
         while (!finished) {
-            System.out.print("ID del producto (números únicos): ");
+            System.out.print("ID del producto (numeros unicos): ");
             int productId = readInt(scanner);
             scanner.nextLine();
 
@@ -150,7 +150,7 @@ public class Project {
             float price = readFloat(scanner);
             scanner.nextLine();
 
-            System.out.print("Descripción del producto: ");
+            System.out.print("Descripcion del producto: ");
             String description = scanner.nextLine();
 
             Product product = new Product(productId, productName, stock, price, description, null);
@@ -167,17 +167,17 @@ public class Project {
             System.out.println("ID: " + product.getId());
             System.out.println("Nombre: " + product.getName());
             System.out.println("Precio: " + product.getPrice());
-            System.out.println("Descripción: " + product.getDescription());
+            System.out.println("Descripcion: " + product.getDescription());
             System.out.println("----------------------------------------");
         }
     }
 
     private static void showPromotionsMenu(HardwareStore hardwareStore, Scanner scanner) {
-        System.out.println("---------- Menú de Promociones ----------");
-        System.out.println("1. Dueño: Aplicar descuento a un producto");
+        System.out.println("---------- Menu de Promociones ----------");
+        System.out.println("1. Dueno: Aplicar descuento a un producto");
         System.out.println("2. Usuario: Ver precio con descuento de un producto");
         System.out.println("0. Volver");
-        System.out.print("Ingrese la opción deseada: ");
+        System.out.print("Ingrese la opcion deseada: ");
         int option = readInt(scanner);
         scanner.nextLine();
 
