@@ -5,12 +5,12 @@ package ec.edu.espe.model;
  *
  * @author USER
  */
-public class IronMonger {
+public class Owner {
     private int id;
     private String name;
     private int phone;
 
-    public IronMonger(int id, String name, int phone) {
+    public Owner(int id, String name, int phone) {
         this.id = id;
         this.name = name;
         this.phone = phone;

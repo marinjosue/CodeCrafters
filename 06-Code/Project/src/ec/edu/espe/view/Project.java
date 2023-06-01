@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Project {
-    public static void main(String[] args) {
+    public static void run() {
         JSONDataManager jsonDataManager = new JSONDataManager();
-
         HardwareStore hardwareStore = jsonDataManager.loadData();
-
         showMainMenu(hardwareStore);
     }
 
@@ -34,11 +32,11 @@ public class Project {
                 System.out.println("1. Ingresar datos del inventario");
                 System.out.println("2. Mostrar promociones y ofertas");
                 System.out.println("0. Salir");
-                System.out.print("Ingrese la opción deseada: ");
+                System.out.print("Ingrese la opcion deseada: ");
                 int option = readInt(scanner);
                 scanner.nextLine();
 
-                switch (option) {
+              switch (option) {
                     case 1:
                         hardwareStore = enterInventoryData(hardwareStore, scanner);
                         break;
@@ -48,9 +46,9 @@ public class Project {
                     case 0:
                         exit = true;
                         break;
-                    default:
+                     default:
                         System.out.println("Opcion no valida. Intente nuevamente.");
-                        break;
+                        break; 
                 }
             } else {
 
@@ -85,14 +83,13 @@ public class Project {
         }
     }
 
-
     private static int readInt(Scanner scanner) {
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Entrada invalida. Por favor, ingrese un numero entero.");
-            scanner.nextLine(); // Consumir la entrada incorrecta
-            return readInt(scanner); // Pedir de nuevo la entrada
+            scanner.nextLine();
+            return readInt(scanner);
         }
     }
 
@@ -101,30 +98,24 @@ public class Project {
             return scanner.nextFloat();
         } catch (InputMismatchException e) {
             System.out.println("Entrada invalida. Por favor, ingrese un numero decimal valido.");
-            scanner.nextLine(); // Consumir la entrada incorrecta
-            return readFloat(scanner); // Pedir de nuevo la entrada
+            scanner.nextLine();
+            return readFloat(scanner);
         }
-    }
+    } 
 
     private static HardwareStore enterInventoryData(HardwareStore hardwareStore, Scanner scanner) {
         System.out.println("Ingrese los datos del inventario:");
 
-        // ID:
         int id = 1;
         hardwareStore.setId(id);
 
-        // Nombre del propietario:
         String name = "Daniel Maza";
 
-
-        // Numero telefónico:
         int amount = 997232172;
         hardwareStore.setAmount(amount);
 
-        // Email:
         String email = "modificaciones22@hotmail.com";
         hardwareStore.setEmail(email);
-
         List<Product> productList = new ArrayList<>();
 
         System.out.println("Ingrese los datos de los productos (Ingrese '0' para terminar):");
@@ -228,12 +219,11 @@ public class Project {
             return;
         }
 
-        System.out.println("Precio del producto con descuento: " + product.getPrice());
+        System.out.println("Precio con descuento del producto con ID " + productId + ": " + product.getPrice());
     }
 
     private static Product findProductById(HardwareStore hardwareStore, int productId) {
-        List<Product> productList = hardwareStore.getProductList();
-        for (Product product : productList) {
+        for (Product product : hardwareStore.getProductList()) {
             if (product.getId() == productId) {
                 return product;
             }
@@ -242,11 +232,10 @@ public class Project {
     }
 
     private static void showOwnerData(HardwareStore hardwareStore) {
-        System.out.println("---------- Datos del Dueño ----------");
-        System.out.println("Nombre de la Ferretería: " + hardwareStore.getName());
-        System.out.println("Correo: " + hardwareStore.getEmail());
-        System.out.println("Numero CI " +hardwareStore.getBatch());
-        System.out.println("Numero telefonico: "+ hardwareStore.getAmount());
-        System.out.println("--------------------------------------");
+        System.out.println("---------- Datos del Propietario ----------");
+        System.out.println("Nombre: " + hardwareStore.getName());
+        System.out.println("Cantidad de productos: " + hardwareStore.getAmount());
+        System.out.println("Correo electronico: " + hardwareStore.getEmail());
+        System.out.println("-------------------------------------------");
     }
 }
