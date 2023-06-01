@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package ec.edu.espe.model;
 
 /**
  *
- * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
+ * @author Josue Marin, CodeCrafters: DCCO-ESPE
  */
-public class ElectricalWiring {
-private String name;
-private float price;
-private String category;
+public class Inventory {
+
+    
+    
+    
 }
