@@ -1,6 +1,7 @@
 package ec.edu.espe.view;
 
 import ec.edu.espe.controller.JSONDataManager;
+import ec.edu.espe.model.Cart;
 import ec.edu.espe.model.HardwareStore;
 import ec.edu.espe.model.Product;
 
@@ -14,6 +15,7 @@ public class Project {
         JSONDataManager jsonDataManager = new JSONDataManager();
         HardwareStore hardwareStore = jsonDataManager.loadData();
         showMainMenu(hardwareStore);
+        Cart cart = new Cart();
     }
 
     private static void showMainMenu(HardwareStore hardwareStore) {
@@ -36,7 +38,7 @@ public class Project {
                 int option = readInt(scanner);
                 scanner.nextLine();
 
-              switch (option) {
+                switch (option) {
                     case 1:
                         hardwareStore = enterInventoryData(hardwareStore, scanner);
                         break;
@@ -46,15 +48,16 @@ public class Project {
                     case 0:
                         exit = true;
                         break;
-                     default:
+                    default:
                         System.out.println("Opcion no valida. Intente nuevamente.");
-                        break; 
+                        break;
                 }
             } else {
 
                 System.out.println("1. Ver Catalogo");
                 System.out.println("2. Mostrar promociones y ofertas");
-                System.out.println("3. Atencion al usuario");
+                System.out.println("3. Carrito de compras");
+                System.out.println("4. Atencion de usuario");
                 System.out.println("0. Salir");
                 System.out.print("Ingrese la opcion deseada: ");
                 int option = readInt(scanner);
@@ -68,7 +71,14 @@ public class Project {
                         showPromotionsMenu(hardwareStore, scanner);
                         break;
                     case 3:
-                        showOwnerData(hardwareStore);
+                        cart(hardwareStore, scanner);
+                        break;
+                    case 4:         
+                        System.out.println("--- Datos del dueno ---");
+                        System.out.println("Nombre: Daniel Maza");
+                        System.out.println("Numero de telefono: 0995743691");
+                        System.out.println("Email: modificaciones22@hotmail.com");
+                                
                         break;
                     case 0:
                         exit = true;
@@ -101,21 +111,12 @@ public class Project {
             scanner.nextLine();
             return readFloat(scanner);
         }
-    } 
+    }
 
     private static HardwareStore enterInventoryData(HardwareStore hardwareStore, Scanner scanner) {
         System.out.println("Ingrese los datos del inventario:");
 
-        int id = 1;
-        hardwareStore.setId(id);
 
-        String name = "Daniel Maza";
-
-        int amount = 997232172;
-        hardwareStore.setAmount(amount);
-
-        String email = "modificaciones22@hotmail.com";
-        hardwareStore.setEmail(email);
         List<Product> productList = new ArrayList<>();
 
         System.out.println("Ingrese los datos de los productos (Ingrese '0' para terminar):");
@@ -158,6 +159,7 @@ public class Project {
             System.out.println("ID: " + product.getId());
             System.out.println("Nombre: " + product.getName());
             System.out.println("Precio: " + product.getPrice());
+            System.out.println("Stock:  " + product.getStock());
             System.out.println("Descripcion: " + product.getDescription());
             System.out.println("----------------------------------------");
         }
@@ -204,6 +206,7 @@ public class Project {
 
         float discountedPrice = product.getPrice() * (1 - (discountPercentage / 100.0f));
         product.setPrice(discountedPrice);
+        hardwareStore.getCart();
 
         System.out.println("Descuento aplicado al producto con ID " + productId + ".");
     }
@@ -219,7 +222,7 @@ public class Project {
             return;
         }
 
-        System.out.println("Precio con descuento del producto con ID " + productId + ": " + product.getPrice());
+        System.out.println("El precio con descuento del producto con ID " + productId + " es: " + product.getPrice());
     }
 
     private static Product findProductById(HardwareStore hardwareStore, int productId) {
@@ -231,11 +234,53 @@ public class Project {
         return null;
     }
 
-    private static void showOwnerData(HardwareStore hardwareStore) {
-        System.out.println("---------- Datos del Propietario ----------");
-        System.out.println("Nombre: " + hardwareStore.getName());
-        System.out.println("Cantidad de productos: " + hardwareStore.getAmount());
-        System.out.println("Correo electronico: " + hardwareStore.getEmail());
-        System.out.println("-------------------------------------------");
+private static void cart(HardwareStore hardwareStore, Scanner scanner) {
+    System.out.println("---------- Carrito de Compras ----------");
+    Cart cart = (Cart) hardwareStore.getCart();
+    if (cart == null) {
+        cart = new Cart();
+        hardwareStore.setCart(cart);
+    }
+
+    boolean exit = false;
+    while (!exit) {
+        System.out.print("Ingrese el ID del producto que desea agregar al carrito (0 para finalizar): ");
+        int productId = readInt(scanner);
+        scanner.nextLine();
+
+        if (productId == 0) {
+            exit = true;
+            continue;
+        }
+
+        Product product = findProductById(hardwareStore, productId);
+        if (product == null) {
+            System.out.println("Producto no encontrado.");
+            continue;
+        }
+
+        if (product.getStock() == 0) {
+            System.out.println("El producto seleccionado no esta disponible en stock.");
+            continue;
+        }
+
+        cart.addProduct(product);
+        product.setStock(product.getStock() - 1);  // Restar 1 al stock del producto
+        System.out.println("Producto agregado al carrito.");
+    }
+
+    System.out.println("---------- Resumen de Compra ----------");
+    for (Product product : cart.getProducts()) {
+        System.out.println("ID: " + product.getId());
+        System.out.println("Nombre: " + product.getName());
+        System.out.println("Precio: " + product.getPrice());
+        System.out.println("---------------------------------------");
+    }
+
+    System.out.println("Total de la factura: " + cart.getTotal());
+}
+
+    public static void main(String[] args) {
+        run();
     }
 }

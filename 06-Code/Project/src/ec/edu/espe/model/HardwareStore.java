@@ -5,8 +5,8 @@ package ec.edu.espe.model;
  *
  * @author USER
  */
+import java.util.ArrayList;
 import java.util.List;
-
 import java.util.List;
 
 public class HardwareStore {
@@ -14,8 +14,15 @@ public class HardwareStore {
     private String name;
     private int batch;
     private int amount;
+    
     private List<Product> productList;
     private String email;
+    private Cart cart;
+
+    public HardwareStore() {
+        productList = new ArrayList<>();
+        cart = new Cart();
+    }
 
     public HardwareStore(int id, String name, int batch, int amount1, List<Product> productList, String email) {
         this.id = id;
@@ -134,5 +141,13 @@ public class HardwareStore {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+  public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Cart getCart() {
+        return cart;
     }
 }
