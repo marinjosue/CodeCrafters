@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Project {
- private static final String OWNER_PASSWORD = "josue";
+ private static final String OWNER_PASSWORD = "edison2";
 
-private float discountprice; 
-//    public static void run() {
-   //     JSONDataManager jsonDataManager = new JSONDataManager();
-   //     HardwareStore hardwareStore = jsonDataManager.loadData();
-    //    showMainMenu(hardwareStore);
-  //  }
+ private float discountprice; 
+    public static void run() {
+        JSONDataManager jsonDataManager = new JSONDataManager();
+        HardwareStore hardwareStore = jsonDataManager.loadData();
+        showMainMenu(hardwareStore);
+    }
    
     
 public static void showMainMenu(HardwareStore hardwareStore) {
@@ -74,6 +74,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
                 case 1:
                     hardwareStore = enterInventoryData(hardwareStore, scanner);
                     break;
+
                 case 2:
                     showPromotionsMenu(hardwareStore, scanner);
                     break;
@@ -200,32 +201,34 @@ public static void showMainMenu(HardwareStore hardwareStore) {
         return hardwareStore;
     }
 
-  private static void showProductList(List<Product> productList) {
-        clearScreen();
-        System.out.println("---------- Lista de Productos ----------");
-            for (Product product : productList) {
-                System.out.println("ID: " + product.getId());
-                System.out.println("Nombre: " + product.getName());
-                System.out.println("Precio: " + product.getPrice());
-                System.out.println("Stock:  " + product.getStock());
-                System.out.println("Descripcion: " + product.getDescription());
-                System.out.println("Descuento: " + product.getDiscountPercentage() + "%"); // Agregar esta línea
-                System.out.println("----------------------------------------");
-            }
-        System.out.println("Presione Enter para continuar...");
-        try {
-            System.in.read();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+private static void showProductList(List<Product> productList) {
+    clearScreen();
+    System.out.println("---------- Lista de Productos ----------");
+     for (Product product : productList) {
+        System.out.println("ID: " + product.getId());
+        System.out.println("Nombre: " + product.getName());
+        System.out.println("Precio: " + product.getPrice());
+        System.out.println("Stock:  " + product.getStock());
+        System.out.println("Descripcion: " + product.getDescription());
+        System.out.println("Descuento: " + product.getDiscountPercentage() + "%");
+        System.out.println("----------------------------------------");
     }
+
+    System.out.println("Presione Enter para continuar...");
+    try {
+        System.in.read();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 
     private static void showPromotionsMenu(HardwareStore hardwareStore, Scanner scanner) {
         boolean exit = false;
         while (!exit) {
             clearScreen();
             System.out.println("---------- Menu de Promociones ----------");
-            System.out.println("1. Dueno: Aplicar descuento a un producto");
+            System.out.println("1. Propietario: Aplicar descuento a un producto");
             System.out.println("0. Volver");
             System.out.print("Ingrese la opcion deseada: ");
             int option = readInt(scanner);
@@ -306,63 +309,82 @@ public static void showMainMenu(HardwareStore hardwareStore) {
     }
 
 private static void cart(HardwareStore hardwareStore, Scanner scanner) {
-        JSONDataManager jsonDataManager = new JSONDataManager();
-    
-        clearScreen();
-        System.out.println("---------- Carrito de Compras ----------");
-        Cart cart = (Cart) hardwareStore.getCart();
-        if (cart == null) {
-            cart = new Cart();
-            hardwareStore.setCart(cart);
-        }
+    JSONDataManager jsonDataManager = new JSONDataManager();
+    HardwareStore existingHardwareStore = jsonDataManager.loadData();
 
-        boolean exit = false;
-        while (!exit) {
-            System.out.print("Ingrese el ID del producto que desea agregar al carrito (0 para finalizar): ");
-            int productId = readInt(scanner);
-            scanner.nextLine();
-
-            if (productId == 0) {
-                exit = true;
-                continue;
-            }
-
-            Product product = findProductById(hardwareStore, productId);
-            if (product == null) {
-                System.out.println("Producto no encontrado.");
-                continue;
-            }
-
-            if (product.getStock() == 0) {
-                System.out.println("El producto seleccionado no esta disponible en stock.");
-                continue;
-            }
-
-            cart.addProduct(product);
-            product.setStock(product.getStock() - 1);
-            System.out.println("Producto agregado al carrito.");
-        }
-
-        System.out.println("---------- Resumen de Compra ----------");
-        for (Product product : cart.getProducts()) {
-            System.out.println("ID: " + product.getId());
-            System.out.println("Nombre: " + product.getName());
-            System.out.println("Precio: " + product.getPrice());
-            System.out.println("---------------------------------------");
-        }
-
-        System.out.println("Total de la factura: " + cart.getTotal());
-        System.out.println("Presione Enter para continuar...");
-        try {
-            System.in.read();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    clearScreen();
+    System.out.println("---------- Carrito de Compras ----------");
+    Cart cart = (Cart) hardwareStore.getCart();
+    if (cart == null) {
+        cart = new Cart();
+        hardwareStore.setCart(cart);
     }
+
+    boolean exit = false;
+    while (!exit) {
+        System.out.print("Ingrese el ID del producto que desea agregar al carrito (0 para finalizar): ");
+        int productId = readInt(scanner);
+        scanner.nextLine();
+
+        if (productId == 0) {
+            exit = true;
+            continue;
+        }
+
+        Product product = findProductById(existingHardwareStore, productId); // Buscar en los datos antiguos
+        if (product == null) {
+            System.out.println("Producto no encontrado.");
+            continue;
+        }
+
+        if (product.getStock() == 0) {
+            System.out.println("El producto seleccionado no esta disponible en stock.");
+            continue;
+        }
+
+        cart.addProduct(product);
+        product.setStock(product.getStock() - 1);
+        System.out.println("Producto agregado al carrito.");
+    }
+
+    System.out.println("---------- Resumen de Compra ----------");
+    for (Product product : cart.getProducts()) {
+        System.out.println("ID: " + product.getId());
+        System.out.println("Nombre: " + product.getName());
+        System.out.println("Precio: " + product.getPrice());
+        System.out.println("---------------------------------------");
+    }
+
+    System.out.println("Total de la factura: " + cart.getTotal());
+    System.out.println("Presione Enter para continuar...");
+    try {
+        System.in.read();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
    private static void saveChanges(HardwareStore hardwareStore) {
     JSONDataManager jsonDataManager = new JSONDataManager();
     jsonDataManager.saveData(hardwareStore);
     System.out.println("Cambios guardados correctamente en el archivo JSON.");
+    System.out.println("Presione Enter para continuar...");
+    try {
+        System.in.read();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+private static void showCatalog(List<Product> productList) {
+    clearScreen();
+    System.out.println("---------- Catálogo de Productos ----------");
+    for (Product product : productList) {
+        System.out.println("ID: " + product.getId());
+        System.out.println("Nombre: " + product.getName());
+        System.out.println("Precio: " + product.getPrice());
+        System.out.println("Stock: " + product.getStock());
+        System.out.println("Descripción: " + product.getDescription());
+        System.out.println("----------------------------------------");
+    }
     System.out.println("Presione Enter para continuar...");
     try {
         System.in.read();
@@ -383,5 +405,5 @@ private static void cart(HardwareStore hardwareStore, Scanner scanner) {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+}
 }
