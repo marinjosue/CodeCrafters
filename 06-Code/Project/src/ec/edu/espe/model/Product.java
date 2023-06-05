@@ -15,6 +15,7 @@ public class Product {
     private float price;
     private String description;
     private List<Category> categoryList;
+   private float regularPrice;
 
     public int getId() {
         return id;
@@ -71,8 +72,11 @@ public class Product {
         this.price = price;
         this.description = description;
         this.categoryList = categoryList;
+        this.regularPrice = regularPrice;
     }
-
+     public float getRegularPrice() {
+        return regularPrice;
+      }
     public void checkIn() {
        
     }

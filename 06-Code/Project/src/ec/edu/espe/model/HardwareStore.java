@@ -7,14 +7,12 @@ package ec.edu.espe.model;
  */
 import java.util.ArrayList;
 import java.util.List;
-import java.util.List;
 
 public class HardwareStore {
     private int id;
     private String name;
     private int batch;
     private int amount;
-    
     private List<Product> productList;
     private String email;
     private Cart cart;
