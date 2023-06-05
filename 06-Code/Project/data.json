@@ -35,11 +35,21 @@
       "discountPercentage": 0.0
     },
     {
-      "id": 8,
-      "name": "asdas",
-      "stock": 55,
-      "price": 4.0,
-      "description": "asdas",
+      "id": 4,
+      "name": "metro",
+      "stock": 3,
+      "price": 1.25,
+      "description": "herramienta de medicion",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 50.0
+    },
+    {
+      "id": 5,
+      "name": "Taladro",
+      "stock": 0,
+      "price": 3.4,
+      "description": "taladro multiusos",
       "regularPrice": 0.0,
       "discount": 0.0,
       "discountPercentage": 0.0
