@@ -15,7 +15,26 @@ public class Product {
     private float price;
     private String description;
     private List<Category> categoryList;
-   private float regularPrice;
+    private float regularPrice;
+    private float discount;
+    private float discountPercentage;
+
+    public float getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(float discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
+
 
     public int getId() {
         return id;

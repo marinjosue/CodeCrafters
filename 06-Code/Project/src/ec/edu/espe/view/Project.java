@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 public class Project {
  private static final String OWNER_PASSWORD = "josue";
+
+ private float discountprice; 
     public static void run() {
         JSONDataManager jsonDataManager = new JSONDataManager();
         HardwareStore hardwareStore = jsonDataManager.loadData();
@@ -60,7 +62,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
             clearScreen();
             System.out.println("---------- Menu de Propietario ----------");
             System.out.println("1. Ingresar datos del inventario");
-            System.out.println("2. Mostrar promociones y ofertas");
+            System.out.println("2. Agregar promociones y ofertas");
             System.out.println("0. Salir");
             System.out.print("Ingrese la opcion deseada: ");
             int option = readInt(scanner);
@@ -103,7 +105,8 @@ public static void showMainMenu(HardwareStore hardwareStore) {
                     showProductList(hardwareStore.getProductList());
                     break;
                 case 2:
-                    showPromotionsMenu(hardwareStore, scanner);
+                    System.out.println("----Promociones de usuario-----");
+                    showDiscountedPrice(hardwareStore, scanner);
                     break;
                 case 3:
                     cart(hardwareStore, scanner);
@@ -194,14 +197,15 @@ public static void showMainMenu(HardwareStore hardwareStore) {
     private static void showProductList(List<Product> productList) {
         clearScreen();
         System.out.println("---------- Lista de Productos ----------");
-        for (Product product : productList) {
-            System.out.println("ID: " + product.getId());
-            System.out.println("Nombre: " + product.getName());
-            System.out.println("Precio: " + product.getPrice());
-            System.out.println("Stock:  " + product.getStock());
-            System.out.println("Descripcion: " + product.getDescription());
-            System.out.println("----------------------------------------");
-        }
+            for (Product product : productList) {
+                System.out.println("ID: " + product.getId());
+                System.out.println("Nombre: " + product.getName());
+                System.out.println("Precio: " + product.getPrice());
+                System.out.println("Stock:  " + product.getStock());
+                System.out.println("Descripcion: " + product.getDescription());
+                System.out.println("Descuento: " + product.getDiscountPercentage() + "%"); // Agregar esta línea
+                System.out.println("----------------------------------------");
+            }
         System.out.println("Presione Enter para continuar...");
         try {
             System.in.read();
@@ -216,7 +220,6 @@ public static void showMainMenu(HardwareStore hardwareStore) {
             clearScreen();
             System.out.println("---------- Menu de Promociones ----------");
             System.out.println("1. Dueno: Aplicar descuento a un producto");
-            System.out.println("2. Usuario: Ver precio con descuento de un producto");
             System.out.println("0. Volver");
             System.out.print("Ingrese la opcion deseada: ");
             int option = readInt(scanner);
@@ -225,9 +228,6 @@ public static void showMainMenu(HardwareStore hardwareStore) {
             switch (option) {
                 case 1:
                     applyDiscount(hardwareStore, scanner);
-                    break;
-                case 2:
-                    showDiscountedPrice(hardwareStore, scanner);
                     break;
                 case 0:
                     exit = true;
@@ -257,6 +257,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
 
         float discountedPrice = product.getPrice() * (1 - (discountPercentage / 100.0f));
         product.setPrice(discountedPrice);
+        product.setDiscountPercentage(discountPercentage);
         hardwareStore.getCart();
 
         System.out.println("Descuento aplicado al producto con ID " + productId + ".");
