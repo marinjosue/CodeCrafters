@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+//autor: Jhordy Marcillo
+
 public class JSONDataManager {
     private final String FILE_PATH = "data.json";
 
@@ -17,7 +19,6 @@ public class JSONDataManager {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         HardwareStore existingHardwareStore = loadData();
         if (existingHardwareStore != null) {
-            // Agrega los nuevos datos al objeto HardwareStore existente
             existingHardwareStore.getProductList().addAll(hardwareStore.getProductList());
         } else {
             existingHardwareStore = hardwareStore;
