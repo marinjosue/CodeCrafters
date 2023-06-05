@@ -31,6 +31,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
         System.out.println("DESEA INGRESAR COMO:");
         System.out.println("1.- PROPIETARIO");
         System.out.println("2.- USUARIO");
+
         System.out.print("Ingrese la opcion deseada: ");
         int op = readInt(scanner);
         if (op == 1){
@@ -63,6 +64,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
             System.out.println("---------- Menu de Propietario ----------");
             System.out.println("1. Ingresar datos del inventario");
             System.out.println("2. Agregar promociones y ofertas");
+            System.out.println("3. Guardar cambios");
             System.out.println("0. Salir");
             System.out.print("Ingrese la opcion deseada: ");
             int option = readInt(scanner);
@@ -72,9 +74,14 @@ public static void showMainMenu(HardwareStore hardwareStore) {
                 case 1:
                     hardwareStore = enterInventoryData(hardwareStore, scanner);
                     break;
+
                 case 2:
                     showPromotionsMenu(hardwareStore, scanner);
                     break;
+                case 3:
+                    saveChanges(hardwareStore);
+                    break;
+
                 case 0:
                     exit = true;
                     break;
@@ -351,7 +358,36 @@ public static void showMainMenu(HardwareStore hardwareStore) {
             e.printStackTrace();
         }
     }
-   
+   private static void saveChanges(HardwareStore hardwareStore) {
+    JSONDataManager jsonDataManager = new JSONDataManager();
+    jsonDataManager.saveData(hardwareStore);
+    System.out.println("Cambios guardados correctamente en el archivo JSON.");
+    System.out.println("Presione Enter para continuar...");
+    try {
+        System.in.read();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+private static void showCatalog(List<Product> productList) {
+    clearScreen();
+    System.out.println("---------- Catálogo de Productos ----------");
+    for (Product product : productList) {
+        System.out.println("ID: " + product.getId());
+        System.out.println("Nombre: " + product.getName());
+        System.out.println("Precio: " + product.getPrice());
+        System.out.println("Stock: " + product.getStock());
+        System.out.println("Descripción: " + product.getDescription());
+        System.out.println("----------------------------------------");
+    }
+    System.out.println("Presione Enter para continuar...");
+    try {
+        System.in.read();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
     private static void showContactInfo() {
         clearScreen();
         System.out.println("---------- Atencion al Usuario ----------");

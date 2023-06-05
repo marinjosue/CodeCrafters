@@ -18,15 +18,24 @@ import java.io.IOException;
 public class JSONDataManager {
     private final String FILE_PATH = "data.json";
 
-    public void saveData(HardwareStore hardwareStore) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String json = gson.toJson(hardwareStore);
-            writer.write(json);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+public void saveData(HardwareStore hardwareStore) {
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    HardwareStore existingHardwareStore = loadData();
+    if (existingHardwareStore != null) {
+        // Agrega los nuevos datos al objeto HardwareStore existente
+        existingHardwareStore.getProductList().addAll(hardwareStore.getProductList());
+    } else {
+        existingHardwareStore = hardwareStore;
     }
+    String json = gson.toJson(existingHardwareStore);
+
+    try (FileWriter writer = new FileWriter(FILE_PATH)) {
+        writer.write(json);
+        System.out.println("Cambios guardados correctamente en el archivo JSON.");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
     public HardwareStore loadData() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -37,4 +46,5 @@ public class JSONDataManager {
         }
         return null;
     }
+    
 }

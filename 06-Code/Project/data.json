@@ -5,26 +5,47 @@
   "amount": 1,
   "productList": [
     {
-      "id": 11234,
-      "name": "Martillos",
-      "stock": 1000,
-      "price": 0.45,
-      "description": "Martillos para el uso diario"
+      "id": 1,
+      "name": "Martillo",
+      "stock": 10,
+      "price": 4.0,
+      "description": "El martillo es una herramienta de mano compuesta por una cabeza de metal, generalmente de acero, unida a un mango o mango de madera, plastico o fibra de vidrio. ",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
     },
     {
-      "id": 11,
-      "name": "Clavos",
+      "id": 2,
+      "name": "Brocha",
+      "stock": 10,
+      "price": 2.0,
+      "description": "La brocha es una herramienta de pintura versátil y duradera, diseñada para facilitar la aplicación uniforme de pintura sobre diversas superficies",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 3,
+      "name": "Clavo",
       "stock": 21,
-      "price": 0.3,
-      "description": "clavitos clavon"
+      "price": 0.75,
+      "description": "Los clavos son elementos de fijación fabricados en metal, generalmente acero, que se utilizan para unir y asegurar materiales de manera firme y duradera",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
     },
     {
-      "id": 11,
-      "name": "Juan",
-      "stock": 200,
-      "price": 0.1,
-      "description": "hola"
+      "id": 8,
+      "name": "asdas",
+      "stock": 55,
+      "price": 4.0,
+      "description": "asdas",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
     }
   ],
-  "email": "jhordypaulsb@gmail.com"
+  "cart": {
+    "products": []
+  }
 }
