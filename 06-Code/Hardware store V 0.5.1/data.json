@@ -123,6 +123,56 @@
       "regularPrice": 0.0,
       "discount": 0.0,
       "discountPercentage": 0.0
+    },
+    {
+      "id": 8,
+      "name": "Taladro",
+      "stock": 0,
+      "price": 25.0,
+      "description": "Taladro electrico ",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 6,
+      "name": "brocha",
+      "stock": 15,
+      "price": 5.0,
+      "description": "brocha de madera",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 4,
+      "name": "dsffsd",
+      "stock": 2,
+      "price": 12.0,
+      "description": "vdds",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 9,
+      "name": "dasdsa ",
+      "stock": 12,
+      "price": 1213.0,
+      "description": "2132",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 2,
+      "name": "josue",
+      "stock": 12,
+      "price": 99.0,
+      "description": "abcd",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
     }
   ],
   "cart": {
