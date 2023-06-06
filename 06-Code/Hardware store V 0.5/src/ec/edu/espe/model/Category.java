@@ -3,7 +3,7 @@ package ec.edu.espe.model;
 
 /**
  *
- * @author USER
+ * @author Josue Marin, Jhordy Marcillo, CodeCrafters: DCCO-ESPE
  */
 public class Category {
     private int id;

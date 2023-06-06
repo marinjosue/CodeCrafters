@@ -1,5 +1,10 @@
 package ec.edu.espe.controller;
 
+/**
+ *
+ * @author Josue Marin, Jhordy Marcillo, CodeCrafters: DCCO-ESPE
+ */
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ec.edu.espe.model.HardwareStore;

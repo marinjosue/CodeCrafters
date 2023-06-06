@@ -1,5 +1,9 @@
 package ec.edu.espe.view;
 
+/**
+ *
+ * @author Josue Marin, Jhordy Marcillo, CodeCrafters: DCCO-ESPE
+ */
 import ec.edu.espe.controller.JSONDataManager;
 import ec.edu.espe.model.Cart;
 import ec.edu.espe.model.HardwareStore;
