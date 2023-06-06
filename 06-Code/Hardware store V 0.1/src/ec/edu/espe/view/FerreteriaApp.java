@@ -21,7 +21,22 @@ public class FerreteriaApp {
         String bmCategory = scanner.nextLine();
         BuildingMaterials bm = new BuildingMaterials(bmName, bmPrice, bmCategory);
         list.add(bm);
-
+        //
+        System.out.println("Enter BuildingMaterials name, price, and category:");
+        String bmName = scanner.nextLine();
+        float bmPrice = scanner.nextFloat();
+        scanner.nextLine();
+        String bmCategory = scanner.nextLine();
+        BuildingMaterials bm = new BuildingMaterials(bmName, bmPrice, bmCategory);
+        list.add(bm);
+        System.out.println("Enter BuildingMaterials name, price, and category:");
+        String bmName = scanner.nextLine();
+        float bmPrice = scanner.nextFloat();
+        scanner.nextLine();
+        String bmCategory = scanner.nextLine();
+        BuildingMaterials bm = new BuildingMaterials(bmName, bmPrice, bmCategory);
+        list.add(bm);
+        //
         System.out.println("Enter CarpentrySupplies name, price, and category:");
         String csName = scanner.nextLine();
         float csPrice = scanner.nextFloat();

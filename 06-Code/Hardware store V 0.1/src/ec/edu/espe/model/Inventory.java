@@ -6,7 +6,7 @@ package ec.edu.espe.model;
 
 /**
  *
- * @author Josue Marin, CodeCrafters: DCCO-ESPE
+ * @author Josue Marin, Jeffrey Manobanda CodeCrafters: DCCO-ESPE
  */
 import java.util.ArrayList;
 import java.util.Scanner;

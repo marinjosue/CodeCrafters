@@ -2,7 +2,7 @@ package ec.edu.espe.model;
 
 /**
  *
- * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
+ * @author Mesias Mariscal, Jeffrey Manobanda CodeCrafters; DCCO-ESPE
  */
 public class CarpentrySupplies {
     

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Mesias Mariscal,josue marin CodeCrafters; DCCO-ESPE
+ * @author Mesias Mariscal,josue marin, Jeffrey Manobanda CodeCrafters; DCCO-ESPE
  */
 public class HandTools {
     
