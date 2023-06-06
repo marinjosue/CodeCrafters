@@ -2,7 +2,7 @@ package ec.edu.espe.controller;
 
 /**
  *
- * @author Josue Marin, Jhordy Marcillo, CodeCrafters: DCCO-ESPE
+ * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda CodeCrafters: DCCO-ESPE
  */
 
 import com.google.gson.Gson;

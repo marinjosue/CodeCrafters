@@ -54,19 +54,7 @@ public class Menu {
                     int Productname = scanner.nextInt();
                     System.out.print("Enter name product: ");
                     String name = scanner.next();
-                    //System.out.print("Enter chicken color: ");
-                    //String color = scanner.next();
-                    //System.out.print("Is chicken molting (true/false): ");
-                    //boolean isMolting = scanner.nextBoolean();
-                    //System.out.print("Enter chicken birth year: ");
-                    //int year = scanner.nextInt();
-                    //System.out.print("Enter chicken birth month: ");
-                    //int month = scanner.nextInt();
-                    //System.out.print("Enter chicken birth day: ");
-                    //int day = scanner.nextInt();
-                    //Product products = new Product(Productname);
-                    //System.out.println("Product added: " + chicken.getName() + ");
-                    //selectedCoop.getProducts().add(products);
+
                     break;
 
 
