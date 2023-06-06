@@ -69,6 +69,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
             System.out.println("1. Ingresar datos del inventario");
             System.out.println("2. Agregar promociones y ofertas");
             System.out.println("3. Guardar cambios");
+            System.out.println("4. Verificar Stock de los Productos");
             System.out.println("0. Salir");
             System.out.print("Ingrese la opcion deseada: ");
             int option = readInt(scanner);
@@ -85,7 +86,10 @@ public static void showMainMenu(HardwareStore hardwareStore) {
                 case 3:
                     saveChanges(hardwareStore);
                     break;
-
+                
+                case 4:
+                    verificarStock(hardwareStore.getProductList());
+                    break;
                 case 0:
                     exit = true;
                     break;
@@ -122,9 +126,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
                 case 3:
                     cart(hardwareStore, scanner);
                     break;
-                case 4:
-                    showContactInfo();
-                    break;
+                
                 case 0:
                     exit = true;
                     break;
@@ -223,6 +225,14 @@ private static void showProductList(List<Product> productList) {
         System.in.read();
     } catch (Exception e) {
         e.printStackTrace();
+    }
+}
+
+public static void verificarStock(List<Product> productList) {
+        for (Product product : productList) {
+        if (product.getStock() == 0) {
+            System.out.println("ADVERTENCIA!!!!: " + product.getName() + " esta agotado");
+        }
     }
 }
 
@@ -410,4 +420,6 @@ private static void showCatalog(List<Product> productList) {
             e.printStackTrace();
         }
 }
+    
+
 }
