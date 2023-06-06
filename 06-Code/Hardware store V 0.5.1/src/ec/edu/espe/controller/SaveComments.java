@@ -7,7 +7,7 @@ package ec.edu.espe.controller;
 
 /**
  *
- * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
+ * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda, Mesias Mariscal CodeCrafters: DCCO-ESPE
  */
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

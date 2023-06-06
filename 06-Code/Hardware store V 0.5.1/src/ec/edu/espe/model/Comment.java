@@ -7,7 +7,7 @@ package ec.edu.espe.model;
 
 /**
  *
- * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
+ * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda, Mesias Mariscal CodeCrafters: DCCO-ESPE
  */
 public class Comment {
     private String name;

@@ -3,7 +3,8 @@ package ec.edu.espe.view;
 
 /**
  *
- * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda CodeCrafters: DCCO-ESPE
+ * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda, Mesias Mariscal CodeCrafters: DCCO-ESPE
+ * 
  */
 import ec.edu.espe.controller.JSONDataManager;
 import ec.edu.espe.model.HardwareStore;
