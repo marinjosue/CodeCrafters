@@ -32,7 +32,6 @@ public class JSONDataManager {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             writer.write(json);
-            System.out.println("Cambios guardados correctamente en el archivo JSON.");
         } catch (IOException e) {
             e.printStackTrace();
         }

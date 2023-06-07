@@ -12,6 +12,8 @@ import ec.edu.espe.view.Owner;
 import static ec.edu.espe.view.Owner.OWNER_PASSWORD;
 import ec.edu.espe.view.Costomer;
 import static ec.edu.espe.view.Costomer.readInt;
+
+
 public class Project {
     public static void run() {
         JSONDataManager jsonDataManager = new JSONDataManager();
@@ -30,6 +32,7 @@ public static void showMainMenu(HardwareStore hardwareStore) {
         System.out.println("1. Propietario");
         System.out.println("2. Usuario");
         System.out.println("3. Ver Comentarios del establecimiento");
+        System.out.println("4. Salir del sistema");
         System.out.print("Ingrese la opcion deseada: ");
         int op = readInt(scanner);
         if (op == 1){
@@ -51,6 +54,10 @@ public static void showMainMenu(HardwareStore hardwareStore) {
         }
             else if(op==3){
              Costomer.showComments();
+            }else if(op ==4 ){
+                    System.out.println("Gracias :D");
+                    exit = true;
+                    break;
         } else {
             System.out.println("Opcion no valida. Intente nuevamente.");
         }

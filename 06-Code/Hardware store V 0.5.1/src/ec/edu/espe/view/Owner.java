@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 import ec.edu.espe.controller.JSONDataManager;
 
 /**
@@ -27,7 +28,7 @@ public class Owner {
             System.out.println("0. Salir");
             System.out.print("Ingrese la opcion deseada: ");
             int option = Costomer.readInt(scanner);
-            scanner.nextLine();
+            scanner.nextLine(); 
 
             switch (option) {
                 case 1:
@@ -53,7 +54,7 @@ public class Owner {
    static HardwareStore enterInventoryData(HardwareStore hardwareStore, Scanner scanner) {
     System.out.println("Ingrese los datos del inventario:");
     List<Product> productList = new ArrayList<>();
-
+    
     boolean finished = false;
     while (!finished) {
         System.out.print("ID del producto (numeros unicos): ");
@@ -63,6 +64,12 @@ public class Owner {
             finished = true;
             break;
         }
+        
+        if (ProductValidator.isProductExists(hardwareStore, productId)) {
+            System.out.println("Error. El producto con ID " + productId + " ya existe.");
+            continue;
+        }
+        
         System.out.print("Nombre del producto: ");
         String productName = scanner.nextLine();
 
@@ -70,7 +77,7 @@ public class Owner {
         int stock = Costomer.readInt(scanner);
         scanner.nextLine();
 
-        System.out.print("Precio del producto (0.000): ");
+        System.out.print("Precio del producto (0.00): ");
         float price = readFloat(scanner);
         scanner.nextLine();
 
@@ -80,10 +87,10 @@ public class Owner {
         Product product = new Product(productId, productName, stock, price, description, null);
         productList.add(product);
 
-        System.out.print("Desea continuar agregando productos? (1 para si / 2 para no): ");
+        System.out.print("Desea continuar agregando productos? (1 para si / 0 para no): ");
         int choice = Costomer.readInt(scanner);
         scanner.nextLine();
-        if (choice == 2) {
+        if (choice == 0) {
             finished = true;
         }
     }
@@ -96,11 +103,15 @@ public class Owner {
 
     static void showPromotionsMenu(HardwareStore hardwareStore, Scanner scanner) {
         boolean exit = false;
+        JSONDataManager jsonDataManager = new JSONDataManager();
+        HardwareStore existingHardwareStore = jsonDataManager.loadData();
+        List<Product> existingProductList = existingHardwareStore.getProductList();
+        
         while (!exit) {
             Costomer.clearScreen();
             System.out.println("---------- Menu de Promociones ----------");
-            System.out.println("1. Propietario: Aplicar descuento a un producto");
-            System.out.println("2. Propietario: Ver precio con descuento de un producto");
+            System.out.println("1. Aplicar descuento a un producto");
+            System.out.println("2. Ver precio con descuento de un producto");
             System.out.println("0. Volver");
             System.out.print("Ingrese la opcion deseada: ");
             int option = Costomer.readInt(scanner);
@@ -122,59 +133,87 @@ public class Owner {
             }
         }
     }
-    static void verificarStock(List<Product> productList) {
+static void verificarStock(List<Product> productList) {
+        boolean allInStock = true;
         for (Product product : productList) {
-        if (product.getStock() == 0) {
-            System.out.println("ADVERTENCIA!!!!: " + product.getName() + " esta agotado");
+            if (product.getStock() == 0) {
+                System.out.println("ADVERTENCIA: " + product.getName() + " con ID " + product.getId() + " esta agotado.");
+                allInStock = false;
+            }
         }
+
+        if (allInStock) {
+            System.out.println("Todos los productos estan en stock. :D");
+        }
+
+        System.out.println("Presione Enter para continuar...");
+        try {
+            System.in.read();
+        } catch (IOException e) {
+        }
+}
+
+private static void applyDiscount(HardwareStore hardwareStore, Scanner scanner) {
+    Costomer.clearScreen();
+    
+    JSONDataManager jsonDataManager = new JSONDataManager();
+    HardwareStore existingHardwareStore = jsonDataManager.loadData();
+    List<Product> existingProductList = existingHardwareStore.getProductList();
+    
+    System.out.print("Ingrese el ID del producto al que desea aplicar descuento: ");
+    int productId = Costomer.readInt(scanner);
+    scanner.nextLine();
+
+    Product product = findProductById(existingHardwareStore, productId);
+    if (product == null) {
+        System.out.println("Producto no encontrado.");
+        return;
+    }
+
+    System.out.print("Ingrese el porcentaje de descuento (0-100): ");
+    int discountPercentage = Costomer.readInt(scanner);
+    scanner.nextLine();
+
+    float discountedPrice = product.getPrice() * (1 - (discountPercentage / 100.0f));
+    product.setPrice(discountedPrice);
+    product.setDiscountPercentage(discountPercentage);
+
+    System.out.println("Descuento aplicado al producto con ID " + productId + ".");
+    System.out.println("Presione Enter para continuar...");
+    try {
+        System.in.read();
+    } catch (IOException e) {
     }
 }
-    private static void applyDiscount(HardwareStore hardwareStore, Scanner scanner) {
-        Costomer.clearScreen();
-        System.out.print("Ingrese el ID del producto al que desea aplicar descuento: ");
-        int productId = Costomer.readInt(scanner);
-        scanner.nextLine();
 
-        Product product = findProductById(hardwareStore, productId);
-        if (product == null) {
-            System.out.println("Producto no encontrado.");
-            return;
-        }
+static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
+    Costomer.clearScreen();
 
-        System.out.print("Ingrese el porcentaje de descuento (0-100): ");
-        int discountPercentage = Costomer.readInt(scanner);
-        scanner.nextLine();
+    JSONDataManager jsonDataManager = new JSONDataManager();
+    HardwareStore existingHardwareStore = jsonDataManager.loadData();
+    List<Product> existingProductList = existingHardwareStore.getProductList();
 
-        float discountedPrice = product.getPrice() * (1 - (discountPercentage / 100.0f));
-        product.setPrice(discountedPrice);
-        product.setDiscountPercentage(discountPercentage);
+    System.out.print("Ingrese el ID del producto para ver el precio con descuento: ");
+    int productId = Costomer.readInt(scanner);
+    scanner.nextLine();
 
-        System.out.println("Descuento aplicado al producto con ID " + productId + ".");
-        System.out.println("Presione Enter para continuar...");
-        try {
-            System.in.read();
-        } catch (IOException e) {
-        }
+    Product product = findProductById(existingHardwareStore, productId);
+    if (product == null) {
+        System.out.println("Producto no encontrado.");
+        return;
     }
-    static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
-        Costomer.clearScreen();
-        System.out.print("Ingrese el ID del producto para ver el precio con descuento: ");
-        int productId = Costomer.readInt(scanner);
-        scanner.nextLine();
 
-        Product product = findProductById(hardwareStore, productId);
-        if (product == null) {
-            System.out.println("Producto no encontrado.");
-            return;
-        }
+    double discountedPrice = product.getPrice() * (1 - (product.getDiscountPercentage() / 100.0));
+    DecimalFormat decimalFormat = new DecimalFormat("#.00");
+    String formattedDiscountedPrice = decimalFormat.format(discountedPrice);
 
-        System.out.println("El precio con descuento del producto con ID " + productId + " es: " + product.getPrice());
-        System.out.println("Presione Enter para continuar...");
-        try {
-            System.in.read();
-        } catch (IOException e) {
-        }
+    System.out.println("El precio con descuento del producto con ID " + productId + " es: " + discountedPrice);
+    System.out.println("Presione Enter para continuar...");
+    try {
+        System.in.read();
+    } catch (IOException e) {
     }
+}
  
     
 

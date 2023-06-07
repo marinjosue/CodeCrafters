@@ -7,8 +7,10 @@ import ec.edu.espe.model.Cart;
 import ec.edu.espe.model.Comment;
 import ec.edu.espe.model.HardwareStore;
 import ec.edu.espe.model.Product;
+import ec.edu.espe.view.Owner;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -81,7 +83,11 @@ public class Costomer {
    private static void showProductList(List<Product> productList) {
     clearScreen();
     System.out.println("---------- Lista de Productos ----------");
-     for (Product product : productList) {
+    JSONDataManager jsonDataManager = new JSONDataManager();
+    HardwareStore existingHardwareStore = jsonDataManager.loadData();
+    List<Product> existingProductList = existingHardwareStore.getProductList();
+    
+    for (Product product : existingProductList) {
         System.out.println("ID: " + product.getId());
         System.out.println("Nombre: " + product.getName());
         System.out.println("Precio: " + product.getPrice());
@@ -90,7 +96,7 @@ public class Costomer {
         System.out.println("Descuento: " + product.getDiscountPercentage() + "%");
         System.out.println("----------------------------------------");
     }
-
+    
     System.out.println("Presione Enter para continuar...");
     try {
         System.in.read();
@@ -107,12 +113,9 @@ public class Costomer {
     }
 
 private static void cart(HardwareStore hardwareStore, Scanner scanner) {
-    JSONDataManager jsonDataManager = new JSONDataManager();
-    HardwareStore existingHardwareStore = jsonDataManager.loadData();
-
     clearScreen();
     System.out.println("---------- Carrito de Compras ----------");
-    Cart cart = (Cart) hardwareStore.getCart();
+    Cart cart = hardwareStore.getCart();
     if (cart == null) {
         cart = new Cart();
         hardwareStore.setCart(cart);
@@ -129,7 +132,9 @@ private static void cart(HardwareStore hardwareStore, Scanner scanner) {
             continue;
         }
 
-        Product product = findProductById(existingHardwareStore, productId); 
+        JSONDataManager jsonDataManager = new JSONDataManager();
+        HardwareStore existingHardwareStore = jsonDataManager.loadData();
+        Product product = findProductById(existingHardwareStore, productId);
         if (product == null) {
             System.out.println("Producto no encontrado.");
             continue;
@@ -144,6 +149,10 @@ private static void cart(HardwareStore hardwareStore, Scanner scanner) {
         product.setStock(product.getStock() - 1);
         System.out.println("Producto agregado al carrito.");
     }
+    
+    double total = cart.getTotal();
+    DecimalFormat decimalFormat = new DecimalFormat("#.00");
+    String formattedTotal = decimalFormat.format(total);
 
     System.out.println("---------- Resumen de Compra ----------");
     for (Product product : cart.getProducts()) {
@@ -153,13 +162,15 @@ private static void cart(HardwareStore hardwareStore, Scanner scanner) {
         System.out.println("---------------------------------------");
     }
 
-    System.out.println("Total de la factura: " + cart.getTotal());
+    System.out.println("Total de la factura: " + formattedTotal);
     System.out.println("Presione Enter para continuar...");
     try {
         System.in.read();
     } catch (IOException e) {
     }
 }
+
+
 
 private static List<Comment> comments = new ArrayList<>();
 
@@ -175,7 +186,7 @@ private static void leaveComment(Scanner scanner) {
     comments.add(comment);
     SaveComments.save(comments);
 
-    System.out.println("Comentario agregado con éxito.");
+    System.out.println("Comentario agregado con exito.");
     System.out.println("Presione Enter para continuar...");
     try {
         System.in.read();
