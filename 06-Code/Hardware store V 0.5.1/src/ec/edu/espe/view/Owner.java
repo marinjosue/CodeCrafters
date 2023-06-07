@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.text.DecimalFormat;
 import ec.edu.espe.controller.JSONDataManager;
 
 /**
@@ -103,15 +102,11 @@ public class Owner {
 
     static void showPromotionsMenu(HardwareStore hardwareStore, Scanner scanner) {
         boolean exit = false;
-        JSONDataManager jsonDataManager = new JSONDataManager();
-        HardwareStore existingHardwareStore = jsonDataManager.loadData();
-        List<Product> existingProductList = existingHardwareStore.getProductList();
-        
+                    
         while (!exit) {
             Costomer.clearScreen();
             System.out.println("---------- Menu de Promociones ----------");
             System.out.println("1. Aplicar descuento a un producto");
-            System.out.println("2. Ver precio con descuento de un producto");
             System.out.println("0. Volver");
             System.out.print("Ingrese la opcion deseada: ");
             int option = Costomer.readInt(scanner);
@@ -120,9 +115,6 @@ public class Owner {
             switch (option) {
                 case 1:
                     applyDiscount(hardwareStore, scanner);
-                    break;
-                case 2:
-                    showDiscountedPrice(hardwareStore, scanner);
                     break;
                 case 0:
                     exit = true;
@@ -143,7 +135,7 @@ static void verificarStock(List<Product> productList) {
         }
 
         if (allInStock) {
-            System.out.println("Todos los productos estan en stock. :D");
+            System.out.println("Todos los productos estan en stock.");
         }
 
         System.out.println("Presione Enter para continuar...");
@@ -155,11 +147,9 @@ static void verificarStock(List<Product> productList) {
 
 private static void applyDiscount(HardwareStore hardwareStore, Scanner scanner) {
     Costomer.clearScreen();
-    
     JSONDataManager jsonDataManager = new JSONDataManager();
     HardwareStore existingHardwareStore = jsonDataManager.loadData();
-    List<Product> existingProductList = existingHardwareStore.getProductList();
-    
+       
     System.out.print("Ingrese el ID del producto al que desea aplicar descuento: ");
     int productId = Costomer.readInt(scanner);
     scanner.nextLine();
@@ -169,7 +159,6 @@ private static void applyDiscount(HardwareStore hardwareStore, Scanner scanner) 
         System.out.println("Producto no encontrado.");
         return;
     }
-
     System.out.print("Ingrese el porcentaje de descuento (0-100): ");
     int discountPercentage = Costomer.readInt(scanner);
     scanner.nextLine();
@@ -179,6 +168,7 @@ private static void applyDiscount(HardwareStore hardwareStore, Scanner scanner) 
     product.setDiscountPercentage(discountPercentage);
 
     System.out.println("Descuento aplicado al producto con ID " + productId + ".");
+    System.out.println("El nuevo precio del producto es: " + discountedPrice);
     System.out.println("Presione Enter para continuar...");
     try {
         System.in.read();
@@ -191,8 +181,7 @@ static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
 
     JSONDataManager jsonDataManager = new JSONDataManager();
     HardwareStore existingHardwareStore = jsonDataManager.loadData();
-    List<Product> existingProductList = existingHardwareStore.getProductList();
-
+    
     System.out.print("Ingrese el ID del producto para ver el precio con descuento: ");
     int productId = Costomer.readInt(scanner);
     scanner.nextLine();
@@ -204,9 +193,6 @@ static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
     }
 
     double discountedPrice = product.getPrice() * (1 - (product.getDiscountPercentage() / 100.0));
-    DecimalFormat decimalFormat = new DecimalFormat("#.00");
-    String formattedDiscountedPrice = decimalFormat.format(discountedPrice);
-
     System.out.println("El precio con descuento del producto con ID " + productId + " es: " + discountedPrice);
     System.out.println("Presione Enter para continuar...");
     try {
@@ -214,10 +200,7 @@ static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
     } catch (IOException e) {
     }
 }
- 
-    
-
-    private static Product findProductById(HardwareStore hardwareStore, int productId) {
+     private static Product findProductById(HardwareStore hardwareStore, int productId) {
         for (Product product : hardwareStore.getProductList()) {
             if (product.getId() == productId) {
                 return product;
@@ -233,9 +216,5 @@ static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
             scanner.nextLine();
             return readFloat(scanner);
         }
-    }
-
-    static void showOwnerMenu(HardwareStore hardwareStore) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

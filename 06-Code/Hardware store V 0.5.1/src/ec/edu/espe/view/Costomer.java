@@ -7,7 +7,6 @@ import ec.edu.espe.model.Cart;
 import ec.edu.espe.model.Comment;
 import ec.edu.espe.model.HardwareStore;
 import ec.edu.espe.model.Product;
-import ec.edu.espe.view.Owner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
@@ -43,7 +42,7 @@ public class Costomer {
                     break;
                 case 2:
                     System.out.println("----Promociones de usuario-----");
-                    Owner.showDiscountedPrice(hardwareStore, scanner);
+                     Owner.showDiscountedPrice(hardwareStore, scanner);
                     break;
                 case 3:
                     cart(hardwareStore, scanner);
@@ -79,30 +78,29 @@ public class Costomer {
             return readInt(scanner);
         }
     }
-
-   private static void showProductList(List<Product> productList) {
+private static void showProductList(List<Product> productList) {
     clearScreen();
     System.out.println("---------- Lista de Productos ----------");
     JSONDataManager jsonDataManager = new JSONDataManager();
     HardwareStore existingHardwareStore = jsonDataManager.loadData();
     List<Product> existingProductList = existingHardwareStore.getProductList();
-    
+
     for (Product product : existingProductList) {
         System.out.println("ID: " + product.getId());
         System.out.println("Nombre: " + product.getName());
         System.out.println("Precio: " + product.getPrice());
         System.out.println("Stock:  " + product.getStock());
         System.out.println("Descripcion: " + product.getDescription());
-        System.out.println("Descuento: " + product.getDiscountPercentage() + "%");
         System.out.println("----------------------------------------");
     }
-    
+
     System.out.println("Presione Enter para continuar...");
     try {
         System.in.read();
     } catch (IOException e) {
     }
 }
+
     private static Product findProductById(HardwareStore hardwareStore, int productId) {
         for (Product product : hardwareStore.getProductList()) {
             if (product.getId() == productId) {
@@ -169,9 +167,6 @@ private static void cart(HardwareStore hardwareStore, Scanner scanner) {
     } catch (IOException e) {
     }
 }
-
-
-
 private static List<Comment> comments = new ArrayList<>();
 
 private static void leaveComment(Scanner scanner) {
@@ -193,7 +188,6 @@ private static void leaveComment(Scanner scanner) {
     } catch (IOException e) {
     }
 }
-
     static void showComments() {
         clearScreen();
         System.out.println("---------- Comentarios ----------");
@@ -220,18 +214,4 @@ private static void leaveComment(Scanner scanner) {
         } catch (IOException e) {
         }
 }
-
-    static String readPassword() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    static void showUserMenu(HardwareStore hardwareStore) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
-    
-    
-    
-    
 }

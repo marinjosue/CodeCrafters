@@ -9,17 +9,47 @@
       "name": "Martillo",
       "stock": 10,
       "price": 4.0,
-      "description": "El martillo es una herramienta de mano compuesta por una cabeza de metal ",
+      "description": "El martillo es una herramienta de mano compuesta por una cabeza de metal, generalmente de acero, unida a un mango o mango de madera, plastico o fibra de vidrio. ",
       "regularPrice": 0.0,
       "discount": 0.0,
       "discountPercentage": 0.0
     },
     {
       "id": 2,
-      "name": "taladro",
-      "stock": 2,
-      "price": 10.3,
-      "description": "talador multiusos",
+      "name": "Clavo",
+      "stock": 21,
+      "price": 0.75,
+      "description": "Los clavos son elementos de fijacion fabricados en metal, generalmente acero, que se utilizan para unir y asegurar materiales de manera firme y duradera",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 3,
+      "name": "Brocha",
+      "stock": 20,
+      "price": 2.0,
+      "description": "La brocha es una herramienta de pintura versatil y duradera, elavorada para facilitar la aplicacion uniforme de pintura sobre diversas superficies.",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 4,
+      "name": "Jafas ",
+      "stock": 4,
+      "price": 2500.0,
+      "description": "Jafas de seguridad ",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
+    },
+    {
+      "id": 5,
+      "name": "Taladro",
+      "stock": 0,
+      "price": 25.0,
+      "description": "Taladro electrico",
       "regularPrice": 0.0,
       "discount": 0.0,
       "discountPercentage": 0.0
