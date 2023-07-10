@@ -80,8 +80,10 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUser)
-                            .addComponent(btnOwner))))
+                            .addComponent(btnOwner)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(btnUser)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +104,9 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOwnerActionPerformed
-    Owner owner = new Owner();
+    PasswordOwner passwordOwner=new PasswordOwner();
+    passwordOwner.setVisible(true);
+    this.setVisible(false);
     
     }//GEN-LAST:event_btnOwnerActionPerformed
 
