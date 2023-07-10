@@ -53,16 +53,6 @@
       "regularPrice": 0.0,
       "discount": 0.0,
       "discountPercentage": 0.0
-    },
-    {
-      "id": 9,
-      "name": "hacha",
-      "stock": 9,
-      "price": 2.0,
-      "description": "sirve para cortar",
-      "regularPrice": 0.0,
-      "discount": 0.0,
-      "discountPercentage": 0.0
     }
   ],
   "cart": {

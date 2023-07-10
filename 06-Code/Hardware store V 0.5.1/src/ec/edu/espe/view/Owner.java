@@ -13,7 +13,7 @@ import ec.edu.espe.controller.JSONDataManager;
  * Author: Josue Marin, CodeCrafters: DCCO-ESPE
  */
 public class Owner {
-    static final String OWNER_PASSWORD = "edison2";
+    public static final String OWNER_PASSWORD = "edison2";
     
   
     static void showOwnerMenu(HardwareStore hardwareStore, Scanner scanner) {
@@ -216,5 +216,9 @@ static void showDiscountedPrice(HardwareStore hardwareStore, Scanner scanner) {
             scanner.nextLine();
             return readFloat(scanner);
         }
+    }
+
+    void setVisible(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
