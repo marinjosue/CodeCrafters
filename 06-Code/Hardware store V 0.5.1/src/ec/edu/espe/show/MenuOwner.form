@@ -68,16 +68,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresar los productos al inventario"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnterItemsActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAddOfers">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar promociones y ofertas "/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddOfersActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVerify">
       <Properties>
         <Property name="text" type="java.lang.String" value="Verificar stock de productos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerifyActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

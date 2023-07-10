@@ -1,8 +1,11 @@
 
 
-package ec.edu.espe.view;
+package ec.edu.espe.show;
 
+import ec.edu.espe.show.MenuOwner;
 import ec.edu.espe.view.Owner;
+import ec.edu.espe.view.Owner;
+import javax.swing.JOptionPane;
 /**
  *
  * @author USER
@@ -81,15 +84,17 @@ public class PasswordOwner extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        Owner owner = new Owner();
-        owner.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-         String password = txtPassword.getText(); // Obtener la contraseña ingresada
+        String password = txtPassword.getText();
         if (password.equals(Owner.OWNER_PASSWORD)) {
+            MenuOwner menuOwner = new MenuOwner();
+            menuOwner.setVisible(true);
+            this.setVisible(false);
         } else {
+            JOptionPane.showMessageDialog(this, "Contrasena Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnAcceptActionPerformed
 

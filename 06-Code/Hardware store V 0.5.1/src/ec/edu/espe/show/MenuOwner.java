@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ec.edu.espe.view;
+package ec.edu.espe.show;
+
+import ec.edu.espe.show.EnterItems;
 
 /**
  *
@@ -37,10 +39,25 @@ public class MenuOwner extends javax.swing.JFrame {
         jLabel1.setText("Menu del Propietario");
 
         btnEnterItems.setText("Ingresar los productos al inventario");
+        btnEnterItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnterItemsActionPerformed(evt);
+            }
+        });
 
         btnAddOfers.setText("Agregar promociones y ofertas ");
+        btnAddOfers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddOfersActionPerformed(evt);
+            }
+        });
 
         btnVerify.setText("Verificar stock de productos");
+        btnVerify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerifyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,6 +91,24 @@ public class MenuOwner extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEnterItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterItemsActionPerformed
+        EnterItems enterItems = new EnterItems();
+        enterItems.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEnterItemsActionPerformed
+
+    private void btnAddOfersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOfersActionPerformed
+       AddOfers addOfers = new AddOfers();
+       addOfers.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnAddOfersActionPerformed
+
+    private void btnVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifyActionPerformed
+        VerifyStock verifyStock = new VerifyStock();
+        verifyStock.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVerifyActionPerformed
 
     /**
      * @param args the command line arguments

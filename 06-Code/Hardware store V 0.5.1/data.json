@@ -53,6 +53,16 @@
       "regularPrice": 0.0,
       "discount": 0.0,
       "discountPercentage": 0.0
+    },
+    {
+      "id": 10,
+      "name": "as",
+      "stock": 2,
+      "price": 3.4,
+      "description": "asaddf",
+      "regularPrice": 0.0,
+      "discount": 0.0,
+      "discountPercentage": 0.0
     }
   ],
   "cart": {
