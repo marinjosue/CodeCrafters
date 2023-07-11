@@ -13,7 +13,6 @@ public class HardwareStoreSimulator {
 
     public static void main(String[] args) {
         
-     
         JSONDataManager jsonDataManager = new JSONDataManager();
         HardwareStore hardwareStore = jsonDataManager.loadData();
         showMainMenu(hardwareStore);

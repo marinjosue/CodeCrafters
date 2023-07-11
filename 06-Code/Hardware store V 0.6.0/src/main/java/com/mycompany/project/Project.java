@@ -11,13 +11,8 @@ package com.mycompany.project;
  */
 import ec.edu.espe.controller.JSONDataManager;
 import ec.edu.espe.model.HardwareStore;
-import java.io.IOException;
-import java.util.Scanner;
-import com.mycompany.project.Owner;
 import static com.mycompany.project.Owner.OWNER_PASSWORD;
-import com.mycompany.project.Costomer;
 import static com.mycompany.project.Costomer.readInt;
-
 import java.io.IOException;
 import java.util.Scanner;
 
