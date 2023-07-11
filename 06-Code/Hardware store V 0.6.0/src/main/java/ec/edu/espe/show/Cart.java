@@ -114,7 +114,9 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdCartActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        
+        MenuUser menuUser = new MenuUser();
+        menuUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed

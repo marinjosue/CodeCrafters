@@ -216,7 +216,7 @@ public class EnterItems extends javax.swing.JFrame {
 
     private StringBuilder appendItems() {
         StringBuilder confirmationMessage = new StringBuilder();
-        confirmationMessage.append("Do you want to add the following item?").append("\n\n");
+        confirmationMessage.append("Estas seguro de ingresar el siguiente producto?").append("\n\n");
         confirmationMessage.append("ID: ").append(product.getId()).append("\n");
         confirmationMessage.append("Name: ").append(product.getName()).append("\n");
         confirmationMessage.append("Stock: ").append(product.getStock()).append("\n");
