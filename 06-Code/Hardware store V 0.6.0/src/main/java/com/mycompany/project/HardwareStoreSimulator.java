@@ -16,6 +16,10 @@ public class HardwareStoreSimulator {
         JSONDataManager jsonDataManager = new JSONDataManager();
         HardwareStore hardwareStore = jsonDataManager.loadData();
         showMainMenu(hardwareStore);
+        
+        //JSONDataManager jsonDataManager = new JSONDataManager();
+        //HardwareStore hardwareStore = jsonDataManager.loadData();
+        //showMainMenu(hardwareStore);
     }
     }
     
