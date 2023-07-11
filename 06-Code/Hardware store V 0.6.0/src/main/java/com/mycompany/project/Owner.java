@@ -1,5 +1,6 @@
-package ec.edu.espe.view;
+package com.mycompany.project;
 
+import com.mycompany.project.Costomer;
 import ec.edu.espe.model.HardwareStore;
 import ec.edu.espe.model.Product;
 import java.io.IOException;
