@@ -22,7 +22,7 @@ public class HardwareStore {
         cart = new Cart();
     }
 
-    public HardwareStore(int id, String name, int batch, int amount1, List<Product> productList, String email) {
+    public HardwareStore(int id, String name, int batch, float amount1, String email) {
         this.id = id;
         this.name = name;
         this.batch = batch;

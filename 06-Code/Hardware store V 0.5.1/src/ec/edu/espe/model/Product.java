@@ -84,7 +84,7 @@ public class Product {
         this.categoryList = categoryList;
     }
 
-    public Product(int id, String name, int stock, float price, String description, List<Category> categoryList) {
+    public Product(int id, String name, int stock, int price, String description) {
         this.id = id;
         this.name = name;
         this.stock = stock;

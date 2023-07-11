@@ -4,6 +4,9 @@
  */
 package ec.edu.espe.show;
 
+import ec.edu.espe.model.Product;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class EnterItems extends javax.swing.JFrame {
-
+    Product product;
     /**
      * Creates new form EnterItems
      */
@@ -68,6 +71,11 @@ public class EnterItems extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDescription);
 
         btnAccept.setText("Agregar");
+        btnAccept.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAcceptMouseClicked(evt);
+            }
+        });
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcceptActionPerformed(evt);
@@ -174,15 +182,10 @@ public class EnterItems extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        readData();
-        JOptionPane.showMessageDialog(this, "you adding --->" + contact.getId());
+//
     }//GEN-LAST:event_btnAcceptActionPerformed
 
-    private void readData() {
-        txtId.getText();
-        txtNameItems.getText();
-        txtStock.getText();
-    }
+
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         txtId.setText("");
@@ -191,6 +194,53 @@ public class EnterItems extends javax.swing.JFrame {
         txtPrice.setText("");
         txtDescription.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
+
+    readData();
+    StringBuilder confirmationMessage = appendItems();
+    
+    int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
+    
+    if (option == 0) {
+        JOptionPane.showMessageDialog(rootPane, "Guardado");
+    } else if (option == 1) {
+        JOptionPane.showMessageDialog(rootPane, "No guardado");
+    } else if (option == 2) {
+        JOptionPane.showMessageDialog(rootPane, "Cancelado");
+    }
+
+
+    }//GEN-LAST:event_btnAcceptMouseClicked
+
+    private StringBuilder appendItems() {
+        StringBuilder confirmationMessage = new StringBuilder();
+        confirmationMessage.append("Do you want to add the following item?").append("\n\n");
+        confirmationMessage.append("ID: ").append(product.getId()).append("\n");
+        confirmationMessage.append("Name: ").append(product.getName()).append("\n");
+        confirmationMessage.append("Stock: ").append(product.getStock()).append("\n");
+        confirmationMessage.append("Price: ").append(product.getPrice()).append("\n");
+        confirmationMessage.append("Description: ").append(product.getDescription()).append("\n");
+        return confirmationMessage;
+    }
+    
+    private void readData() throws NumberFormatException {
+        
+        int id;
+        String NameItems;
+        int Stock;
+        int Price;
+        String Description;
+        
+        id =Integer.parseInt(txtId.getText());
+        NameItems=txtNameItems.getText();
+        Stock=Integer.parseInt(txtStock.getText());
+        Price=Integer.parseInt(txtPrice.getText());
+        Description=txtDescription.getText();
+
+        
+        product = new Product(id,NameItems,Stock,Price,Description);
+    }
 
     /**
      * @param args the command line arguments
