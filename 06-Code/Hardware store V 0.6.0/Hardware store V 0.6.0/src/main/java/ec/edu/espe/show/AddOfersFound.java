@@ -4,8 +4,15 @@
  */
 package ec.edu.espe.show;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.show.AddOfersFound2;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
@@ -13,11 +20,27 @@ import javax.swing.JOptionPane;
  */
 public class AddOfersFound extends javax.swing.JFrame {
 
+    private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
+    private static final String DATABASE_NAME = "Project";
+    private static final String COLLECTION_NAME = "products";
+    private static MongoClient mongoClient;
+    private static MongoDatabase database;
+    private static MongoCollection<Document> collection;
+    
+    
     /**
      * Creates new form AddOfers2
      */
     public AddOfersFound() {
         initComponents();
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+        MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(connectionString)
+        .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase(DATABASE_NAME);
+        collection = database.getCollection(COLLECTION_NAME);
+
         this.setLocationRelativeTo(null);
     }
 
@@ -35,6 +58,7 @@ public class AddOfersFound extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtDisscount = new javax.swing.JTextField();
         btnAcceptOfersFounf = new javax.swing.JButton();
+        btnCance = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,26 +82,35 @@ public class AddOfersFound extends javax.swing.JFrame {
             }
         });
 
+        btnCance.setText("Cancelar");
+        btnCance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCanceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80))
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDisscount, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(80, 80, 80))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCance)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAcceptOfersFounf)
-                        .addGap(47, 47, 47))))
+                        .addGap(47, 47, 47))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDisscount, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +123,9 @@ public class AddOfersFound extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDisscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(btnAcceptOfersFounf)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAcceptOfersFounf)
+                    .addComponent(btnCance))
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
@@ -98,27 +133,33 @@ public class AddOfersFound extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptOfersFounfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOfersFounfActionPerformed
-        AddOfersFound2 addOfersFound2 = new AddOfersFound2();
-        addOfersFound2.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnAcceptOfersFounfActionPerformed
-
-    private void txtDisscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDisscountActionPerformed
-            try {
+     try {
         String discountText = txtDisscount.getText();
-        int discounttext = Integer.parseInt(discountText);
+        int discount = Integer.parseInt(discountText);
         
-        if (discounttext >= 0 && discounttext <= 100) {
+        if (discount >= 0 && discount <= 100) {
             AddOfersFound2 addOfersFound2 = new AddOfersFound2();
             addOfersFound2.setVisible(true);
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(rootPane, "El porcentaje de descuento debe estar entre 0 y 100", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDisscount.setText(""); // Limpiar el campo de texto
         }
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números por favor", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números enteros por favor", "Error", JOptionPane.ERROR_MESSAGE);
+        txtDisscount.setText(""); // Limpiar el campo de texto
     }
+    }//GEN-LAST:event_btnAcceptOfersFounfActionPerformed
+
+    private void txtDisscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDisscountActionPerformed
+
     }//GEN-LAST:event_txtDisscountActionPerformed
+
+    private void btnCanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanceActionPerformed
+        AddOfers addOfers = new AddOfers();
+        addOfers.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCanceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +201,7 @@ public class AddOfersFound extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcceptOfersFounf;
+    private javax.swing.JButton btnCance;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

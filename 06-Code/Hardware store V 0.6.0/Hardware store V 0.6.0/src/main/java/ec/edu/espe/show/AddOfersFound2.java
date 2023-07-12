@@ -4,17 +4,52 @@
  */
 package ec.edu.espe.show;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
 /**
  *
  * @author USER
  */
 public class AddOfersFound2 extends javax.swing.JFrame {
 
+    private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
+    private static final String DATABASE_NAME = "Project";
+    private static final String COLLECTION_NAME = "products";
+    private static MongoClient mongoClient;
+    private static MongoDatabase database;
+    private static MongoCollection<Document> collection;
+    
+    private double nuevoPrecio;
+    private int idArticulo;
+    
     /**
      * Creates new form AddOfersFound2
      */
+    
+    public AddOfersFound2(double nuevoPrecio, int idArticulo) {
+        initComponents();
+        this.idArticulo = idArticulo;
+        this.nuevoPrecio = nuevoPrecio;
+        mostrarDatosArticulo();
+        this.setLocationRelativeTo(null);
+    }
+    
     public AddOfersFound2() {
         initComponents();
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+        MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(connectionString)
+        .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase(DATABASE_NAME);
+        collection = database.getCollection(COLLECTION_NAME);
+
         this.setLocationRelativeTo(null);
     }
 
@@ -30,6 +65,8 @@ public class AddOfersFound2 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +78,15 @@ public class AddOfersFound2 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("El nuevo precio es de: ");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextArea1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,7 +101,8 @@ public class AddOfersFound2 extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2))))
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -67,12 +114,41 @@ public class AddOfersFound2 extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
+        
+    }//GEN-LAST:event_jTextArea1MouseClicked
+
+    
+
+    private void mostrarNuevoPrecio() {
+        jTextArea1.setText(String.valueOf(nuevoPrecio));
+    }
+
+    private void mostrarDatosArticulo() {
+        Document query = new Document("_id", idArticulo);
+        Document result = collection.find(query).first();
+
+        // Obtener los datos del artículo desde la base de datos
+        String nombre = result.getString("name");
+        double precioOriginal = result.getDouble("price");
+
+        // Mostrar los datos del artículo en el componente de texto
+        jTextArea1.setText("Datos del artículo:\n");
+        jTextArea1.append("Nombre: " + nombre + "\n");
+        jTextArea1.append("Precio Original: " + precioOriginal + "\n");
+        jTextArea1.append("Nuevo Precio: " + nuevoPrecio);
+    }
+
+
+    
     /**
      * @param args the command line arguments
      */
@@ -112,5 +188,7 @@ public class AddOfersFound2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

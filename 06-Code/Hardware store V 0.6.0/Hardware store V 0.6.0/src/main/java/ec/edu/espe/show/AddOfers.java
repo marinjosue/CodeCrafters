@@ -4,9 +4,16 @@
  */
 package ec.edu.espe.show;
 
-import ec.edu.espe.show.AddOfersFound;
-import ec.edu.espe.show.MenuOwner;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.model.Product;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
@@ -14,11 +21,26 @@ import javax.swing.JOptionPane;
  */
 public class AddOfers extends javax.swing.JFrame {
 
+    private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
+    private static final String DATABASE_NAME = "Project";
+    private static final String COLLECTION_NAME = "products";
+    private static MongoClient mongoClient;
+    private static MongoDatabase database;
+    private static MongoCollection<Document> collection;
+    
     /**
      * Creates new form AddOfers
      */
     public AddOfers() {
         initComponents();
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+        MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(connectionString)
+        .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase(DATABASE_NAME);
+        collection = database.getCollection(COLLECTION_NAME);
+
         this.setLocationRelativeTo(null);
     }
 
@@ -126,9 +148,9 @@ public class AddOfers extends javax.swing.JFrame {
 
 
 private boolean verificarExistenciaId(String id) {
-    id = "1";
-        return false;
-    }
+    Document query = new Document("id", Integer.parseInt(id));
+    return collection.countDocuments(query) > 0;
+}
     
     /**
      * @param args the command line arguments
