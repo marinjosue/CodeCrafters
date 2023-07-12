@@ -115,7 +115,9 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdCartActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        
+        MenuUser menuUser = new MenuUser();
+        menuUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
@@ -123,15 +125,12 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
-        readData();
-        int id = product.getId();
-        if(id == 0){
-            JOptionPane.showMessageDialog(this, "Producto no encontrado", "Not found product", JOptionPane.ERROR_MESSAGE);
-        } else if (product.getStock()==0){
-            JOptionPane.showMessageDialog(this, "Producto agotado", "NO STOCK", JOptionPane.WARNING_MESSAGE);
-        } else{
-            JOptionPane.showMessageDialog(this, "Producto agregado correctamente", "Not found product", JOptionPane.OK_OPTION);
-        }
+    try {
+        int id = Integer.parseInt(txtIdCart.getText());
+        // Resto del código
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnAcceptMouseClicked
 
         private void readData() throws NumberFormatException {
@@ -144,7 +143,7 @@ public class Cart extends javax.swing.JFrame {
         
         id =Integer.parseInt(txtIdCart.getText());
     }
-    
+        
 
     
     /**
