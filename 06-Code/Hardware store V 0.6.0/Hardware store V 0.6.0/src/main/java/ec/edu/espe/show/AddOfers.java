@@ -106,16 +106,21 @@ public class AddOfers extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnAcceptOfersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOfersActionPerformed
+     try {
         String id = txtIdOffers.getText();
-    
-    boolean idExists = verificarExistenciaId(id);
-    
-    if (idExists) {
-        AddOfersFound addOfersFound = new AddOfersFound();
-        addOfersFound.setVisible(true);
-        this.setVisible(false);
-    } else {
-        JOptionPane.showMessageDialog(this, "El ID no existe en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+        int numericId = Integer.parseInt(id);
+        
+        boolean idExists = verificarExistenciaId(id);
+        
+        if (idExists) {
+            AddOfersFound addOfersFound = new AddOfersFound();
+            addOfersFound.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "El ID no existe en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números por favor");
     }
     }//GEN-LAST:event_btnAcceptOfersActionPerformed
 

@@ -125,15 +125,12 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
-        readData();
-        int id = product.getId();
-        if(id == 0){
-            JOptionPane.showMessageDialog(this, "Producto no encontrado", "Not found product", JOptionPane.ERROR_MESSAGE);
-        } else if (product.getStock()==0){
-            JOptionPane.showMessageDialog(this, "Producto agotado", "NO STOCK", JOptionPane.WARNING_MESSAGE);
-        } else{
-            JOptionPane.showMessageDialog(this, "Producto agregado correctamente", "Not found product", JOptionPane.OK_OPTION);
-        }
+    try {
+        int id = Integer.parseInt(txtIdCart.getText());
+        // Resto del código
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnAcceptMouseClicked
 
         private void readData() throws NumberFormatException {

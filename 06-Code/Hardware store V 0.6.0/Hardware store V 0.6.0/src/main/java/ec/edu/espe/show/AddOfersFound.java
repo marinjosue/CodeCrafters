@@ -5,6 +5,7 @@
 package ec.edu.espe.show;
 
 import ec.edu.espe.show.AddOfersFound2;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,6 +44,12 @@ public class AddOfersFound extends javax.swing.JFrame {
         jLabel2.setText("Encontramos el producto :) ");
 
         jLabel3.setText("Ingrese el porcentaje de descuento a aplicar (0-100%):");
+
+        txtDisscount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDisscountActionPerformed(evt);
+            }
+        });
 
         btnAcceptOfersFounf.setText("Aceptar");
         btnAcceptOfersFounf.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +102,23 @@ public class AddOfersFound extends javax.swing.JFrame {
         addOfersFound2.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAcceptOfersFounfActionPerformed
+
+    private void txtDisscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDisscountActionPerformed
+            try {
+        String discountText = txtDisscount.getText();
+        int discounttext = Integer.parseInt(discountText);
+        
+        if (discounttext >= 0 && discounttext <= 100) {
+            AddOfersFound2 addOfersFound2 = new AddOfersFound2();
+            addOfersFound2.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "El porcentaje de descuento debe estar entre 0 y 100", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números por favor", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_txtDisscountActionPerformed
 
     /**
      * @param args the command line arguments

@@ -103,6 +103,9 @@ public class Comments extends javax.swing.JFrame {
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         JOptionPane.showMessageDialog(rootPane, "El comentario se guardo con exito");
+        MenuUser menuUser = new MenuUser();
+        menuUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
