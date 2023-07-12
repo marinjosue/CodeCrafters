@@ -18,28 +18,29 @@ import org.bson.Document;
  */
 public class VerifyStock extends javax.swing.JFrame {
    
-    
-        //btnAcceptActionPerformed();
-    private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
-    private static MongoClient mongoClient;
-    private static MongoDatabase database;
-    private static MongoCollection<Document>collection;
+
+private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
+private static final String DATABASE_NAME = "Project";
+private static final String COLLECTION_NAME = "products";
+private static MongoClient mongoClient;
+private static MongoDatabase database;
+private static MongoCollection<Document> collection;
      Product product;
     /**
      * Creates new form VerifyStock
      */
      
     
-    public VerifyStock() {
+    public VerifyStock() {        
+        initComponents();
         ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
         MongoClientSettings settings = MongoClientSettings.builder()
-                .applyConnectionString(connectionString)
-                .build();
-        MongoClient mongoClient = MongoClients.create(settings);
-        MongoDatabase database = mongoClient.getDatabase("Project");
-        MongoCollection<Document> collection = database.getCollection("products");
-    
-        initComponents();
+        .applyConnectionString(connectionString)
+        .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase(DATABASE_NAME);
+        collection = database.getCollection(COLLECTION_NAME);
+
         this.setLocationRelativeTo(null);
     }
 
@@ -92,39 +93,33 @@ public class VerifyStock extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(74, 74, 74))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnViewProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(108, 108, 108)
-                                .addComponent(btnRetunr, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)))
-                        .addGap(18, 18, 18))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jButton1)
+                                .addGap(105, 105, 105)
+                                .addComponent(jButton2)
+                                .addGap(80, 80, 80)
+                                .addComponent(btnRetunr))
+                            .addComponent(btnViewProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(jLabel1)))
+                .addGap(0, 129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnViewProduct)
-                .addGap(121, 121, 121)
+                .addGap(93, 93, 93)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRetunr, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,25 +137,32 @@ public class VerifyStock extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetunrActionPerformed
 
     private void btnViewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProductActionPerformed
-MongoCursor<Document> cursor = collection.find().iterator();
-    StringBuilder allData = new StringBuilder();
+    MongoCursor<Document> cursor = collection.find().iterator();
+    StringBuilder stockZeroData = new StringBuilder();
+    boolean hasStockZero = false;
+
     while (cursor.hasNext()) {
         Document document = cursor.next();
-        int id = document.getInteger("id");
-        String name = document.getString("name");
         int stock = document.getInteger("stock");
-        double price = document.getDouble("price");
-        String description = document.getString("description");
-        allData.append("Document id=").append(id).append(", name=").append(name).append(", stock=").append(stock).append(", price=").append(price).append(", description=").append(description);
-        for (String key : document.keySet()) {
-            if (!key.equals("_id") && !key.equals("id") && !key.equals("name") && !key.equals("stock") && !key.equals("price") && !key.equals("description")) {
-                allData.append(", ").append(key).append("=").append(document.get(key));
-            }
+
+        if (stock == 0) {
+            int id = document.getInteger("id");
+            String name = document.getString("name");
+            double price = document.getDouble("price");
+            String description = document.getString("description");
+            stockZeroData.append("ID: ").append(id).append("\n");
+            stockZeroData.append("Name: ").append(name).append("\n");
+            stockZeroData.append("Price: ").append(price).append("\n");
+            stockZeroData.append("Description: ").append(description).append("\n\n");
+            hasStockZero = true;
         }
-        allData.append("\n");
     }
-    txtAStock.setText(allData.toString());
-        
+
+    if (hasStockZero) {
+        txtAStock.setText(stockZeroData.toString());
+    } else {
+        txtAStock.setText("Todos los artículos tienen stock.");
+    }
     }//GEN-LAST:event_btnViewProductActionPerformed
 
     /**
