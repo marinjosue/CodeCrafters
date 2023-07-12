@@ -4,7 +4,21 @@
  */
 package ec.edu.espe.show;
 
-import ec.edu.espe.show.MenuUser;
+import com.google.gson.Gson;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.model.Product;
+import ec.edu.espe.show.MenuOwner;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
@@ -12,11 +26,29 @@ import ec.edu.espe.show.MenuUser;
  */
 public class Catalog extends javax.swing.JFrame {
 
+       
+private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
+private static final String DATABASE_NAME = "Project";
+private static final String COLLECTION_NAME = "products";
+private static MongoClient mongoClient;
+private static MongoDatabase database;
+private static MongoCollection<Document> collection;
+
+    
+    
     /**
      * Creates new form Catalog
      */
     public Catalog() {
         initComponents();
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+        MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(connectionString)
+        .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase(DATABASE_NAME);
+        collection = database.getCollection(COLLECTION_NAME);
+
         this.setLocationRelativeTo(null);
     }
 
@@ -35,6 +67,7 @@ public class Catalog extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         btnExit = new javax.swing.JButton();
         btnCart = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,43 +95,58 @@ public class Catalog extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Mostrar Catalogo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(82, 82, 82))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(142, 142, 142))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCart)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExit))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 44, Short.MAX_VALUE))
+                        .addGap(189, 189, 189)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(249, 249, 249))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCart)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnExit)
+                                .addGap(31, 31, 31))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExit)
-                    .addComponent(btnCart))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExit))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btnCart)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +163,28 @@ public class Catalog extends javax.swing.JFrame {
         cart.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCartActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MongoCursor<Document> cursor = collection.find().iterator();
+        StringBuilder allData = new StringBuilder();
+        while (cursor.hasNext()) {
+            Document document = cursor.next();
+            int id = document.getInteger("id");
+            String name = document.getString("name");
+            int stock = document.getInteger("stock");
+            double price = document.getDouble("price");
+            String description = document.getString("description");
+            allData.append("Document id=").append(id).append(", name=").append(name).append(", stock=").append(stock).append(", price=").append(price).append(", description=").append(description);
+            for (String key : document.keySet()) {
+                if (!key.equals("_id") && !key.equals("id") && !key.equals("name") && !key.equals("stock") && !key.equals("price") && !key.equals("description")) {
+                    allData.append(", ").append(key).append("=").append(document.get(key));
+                }
+            }
+            allData.append("\n");
+        }
+        jTextArea1.setText(allData.toString());
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +224,7 @@ public class Catalog extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCart;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

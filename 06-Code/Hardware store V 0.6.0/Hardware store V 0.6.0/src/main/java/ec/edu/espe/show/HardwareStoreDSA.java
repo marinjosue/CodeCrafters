@@ -162,9 +162,7 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUserActionPerformed
 
     private void btnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseClicked
-    MenuUser menuUser = new MenuUser();
-    menuUser.setVisible(true);
-    this.setVisible(false);
+
     }//GEN-LAST:event_btnOwnerMouseClicked
 
     private void JContacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JContacActionPerformed

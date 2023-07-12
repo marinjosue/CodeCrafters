@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.show;
 
 import com.google.gson.Gson;
@@ -248,39 +245,55 @@ public class EnterItems extends javax.swing.JFrame {
     String cell3 = txtStock.getText();
     String cell4 = txtPrice.getText();
     String cell5 = txtDescription.getText();
-    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty()|| cell3.isEmpty()|| cell4.isEmpty()|| cell5.isEmpty()) {
+    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        readData();
-        Gson gson = new Gson();
-        String json = gson.toJson(product);
-        Document document= Document.parse(json);
-        collection.insertOne(document);
-        System.out.println("Datos guardato correctamente:v");
+        int id = Integer.parseInt(cell1);
+        if (checkIdExists(id)) {
+            JOptionPane.showMessageDialog(this, "El ID ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            readData();
+            StringBuilder confirmationMessage = appendItems();
+            int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
+
+            if (option == JOptionPane.YES_OPTION) {
+                Gson gson = new Gson();
+                String json = gson.toJson(product);
+                Document document = Document.parse(json);
+                collection.insertOne(document);
+                JOptionPane.showMessageDialog(rootPane, "Guardado");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Cancelado");
+            }
         }
+    }
     
     }//GEN-LAST:event_btnAcceptActionPerformed
 
 
 
     private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
-        try {
-        readData();
-        StringBuilder confirmationMessage = appendItems();
+try {
+    readData();
+    StringBuilder confirmationMessage = appendItems();
 
-        int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
+    int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
 
-        if (option == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Guardado");
-        } else if (option == 1) {
-            JOptionPane.showMessageDialog(rootPane, "No guardado");
-        } else if (option == 2) {
-            JOptionPane.showMessageDialog(rootPane, "Cancelado");
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números en los campos ID, Stock y Precio");
+    if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.NO_OPTION) {
+        JOptionPane.showMessageDialog(rootPane, "Cancelado");
+        return; // Salir del método sin guardar los datos
     }
 
+    if (option == JOptionPane.YES_OPTION) {
+        Gson gson = new Gson();
+        String json = gson.toJson(product);
+        Document document = Document.parse(json);
+        collection.insertOne(document);
+        JOptionPane.showMessageDialog(rootPane, "Guardado");
+    }
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(rootPane, "Ingrese solo números en los campos ID, Stock y Precio");
+}
 
     }//GEN-LAST:event_btnAcceptMouseClicked
 
@@ -295,11 +308,25 @@ public class EnterItems extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-     MongoCursor<Document> cursor = collection.find().iterator();
-       while(cursor.hasNext()){
-           txtAStock.setText(txtAStock.getText()+"\n"+cursor.next());
-       }
+ MongoCursor<Document> cursor = collection.find().iterator();
+    StringBuilder allData = new StringBuilder();
+    while (cursor.hasNext()) {
+        Document document = cursor.next();
+        int id = document.getInteger("id");
+        String name = document.getString("name");
+        int stock = document.getInteger("stock");
+        double price = document.getDouble("price");
+        String description = document.getString("description");
+        allData.append("Document id=").append(id).append(", name=").append(name).append(", stock=").append(stock).append(", price=").append(price).append(", description=").append(description);
+        for (String key : document.keySet()) {
+            if (!key.equals("_id") && !key.equals("id") && !key.equals("name") && !key.equals("stock") && !key.equals("price") && !key.equals("description")) {
+                allData.append(", ").append(key).append("=").append(document.get(key));
+            }
+        }
+        allData.append("\n");
+    }
+    txtAStock.setText(allData.toString());
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private StringBuilder appendItems() {
@@ -312,6 +339,11 @@ public class EnterItems extends javax.swing.JFrame {
         confirmationMessage.append("Description: ").append(product.getDescription()).append("\n");
         return confirmationMessage;
     }
+    
+    private boolean checkIdExists(int id) {
+    Document query = new Document("id", id);
+    return collection.countDocuments(query) > 0;
+}
     
     private void readData() throws NumberFormatException {
         

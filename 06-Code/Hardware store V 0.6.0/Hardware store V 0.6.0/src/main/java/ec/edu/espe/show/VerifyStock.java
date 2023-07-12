@@ -142,10 +142,24 @@ public class VerifyStock extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetunrActionPerformed
 
     private void btnViewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProductActionPerformed
-    MongoCursor<Document> cursor = collection.find().iterator();
-       while(cursor.hasNext()){
-           txtAStock.setText(txtAStock.getText()+"\n"+cursor.next());        
-       }
+MongoCursor<Document> cursor = collection.find().iterator();
+    StringBuilder allData = new StringBuilder();
+    while (cursor.hasNext()) {
+        Document document = cursor.next();
+        int id = document.getInteger("id");
+        String name = document.getString("name");
+        int stock = document.getInteger("stock");
+        double price = document.getDouble("price");
+        String description = document.getString("description");
+        allData.append("Document id=").append(id).append(", name=").append(name).append(", stock=").append(stock).append(", price=").append(price).append(", description=").append(description);
+        for (String key : document.keySet()) {
+            if (!key.equals("_id") && !key.equals("id") && !key.equals("name") && !key.equals("stock") && !key.equals("price") && !key.equals("description")) {
+                allData.append(", ").append(key).append("=").append(document.get(key));
+            }
+        }
+        allData.append("\n");
+    }
+    txtAStock.setText(allData.toString());
         
     }//GEN-LAST:event_btnViewProductActionPerformed
 
