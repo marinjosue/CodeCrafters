@@ -63,8 +63,18 @@ public class MenuUser extends javax.swing.JFrame {
         });
 
         btnComments.setText("Dejar Comentarios");
+        btnComments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCommentsActionPerformed(evt);
+            }
+        });
 
         btnExit.setText("Salir");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,6 +136,18 @@ public class MenuUser extends javax.swing.JFrame {
         cart.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCartActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        HardwareStoreDSA hardwareStoreDSA = new HardwareStoreDSA();
+        hardwareStoreDSA.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnCommentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentsActionPerformed
+        Comments comments = new Comments();
+        comments.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCommentsActionPerformed
 
     /**
      * @param args the command line arguments
