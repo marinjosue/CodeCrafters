@@ -14,7 +14,7 @@ import org.w3c.dom.Document;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+
 /**
  *
  * @author USER
@@ -224,14 +224,12 @@ public class EnterItems extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-<<<<<<< HEAD
+
         readData();
         Gson gson = new Gson();
         String json = gson.toJson(product);
         
-        Document document= Document.parse(json);
-
-=======
+     
         try {
         readData();
         StringBuilder confirmationMessage = appendItems();
@@ -248,7 +246,7 @@ public class EnterItems extends javax.swing.JFrame {
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(rootPane, "Ingrese solo números en los campos ID, Stock y Precio");
     }
->>>>>>> ce93d7a7e5ad9fff418f4aad5b82921db6ed9e0b
+
 
 
     }//GEN-LAST:event_btnAcceptActionPerformed
