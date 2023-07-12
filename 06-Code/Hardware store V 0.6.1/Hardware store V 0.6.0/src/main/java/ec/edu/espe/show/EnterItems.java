@@ -180,7 +180,24 @@ public class EnterItems extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-//
+        try {
+        readData();
+        StringBuilder confirmationMessage = appendItems();
+
+        int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
+
+        if (option == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Guardado");
+        } else if (option == 1) {
+            JOptionPane.showMessageDialog(rootPane, "No guardado");
+        } else if (option == 2) {
+            JOptionPane.showMessageDialog(rootPane, "Cancelado");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números en los campos ID, Stock y Precio");
+    }
+
+
     }//GEN-LAST:event_btnAcceptActionPerformed
 
 

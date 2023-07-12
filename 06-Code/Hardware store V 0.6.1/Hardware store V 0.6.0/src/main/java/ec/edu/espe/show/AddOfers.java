@@ -45,6 +45,12 @@ public class AddOfers extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese el ID del producto a añadir ofertas");
 
+        txtIdOffers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdOffersActionPerformed(evt);
+            }
+        });
+
         btnReturn.setText("Regresar");
         btnReturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,18 +113,27 @@ public class AddOfers extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReturnActionPerformed
 
     private void btnAcceptOfersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOfersActionPerformed
+     try {
         String id = txtIdOffers.getText();
-    
-    boolean idExists = verificarExistenciaId(id);
-    
-    if (idExists) {
-        AddOfersFound addOfersFound = new AddOfersFound();
-        addOfersFound.setVisible(true);
-        this.setVisible(false);
-    } else {
-        JOptionPane.showMessageDialog(this, "El ID no existe en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+        int numericId = Integer.parseInt(id);
+        
+        boolean idExists = verificarExistenciaId(id);
+        
+        if (idExists) {
+            AddOfersFound addOfersFound = new AddOfersFound();
+            addOfersFound.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "El ID no existe en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números por favor");
     }
     }//GEN-LAST:event_btnAcceptOfersActionPerformed
+
+    private void txtIdOffersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdOffersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdOffersActionPerformed
 
 
 private boolean verificarExistenciaId(String id) {
