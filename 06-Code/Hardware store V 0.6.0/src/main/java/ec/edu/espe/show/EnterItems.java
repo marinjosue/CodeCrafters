@@ -4,22 +4,42 @@
  */
 package ec.edu.espe.show;
 
+import com.google.gson.Gson;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.model.Product;
 import ec.edu.espe.show.MenuOwner;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
  * @author USER
  */
 public class EnterItems extends javax.swing.JFrame {
+    private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
+    private static MongoClient mongoClient;
+    private static MongoDatabase database;
+    private static MongoCollection<Document>collection;
     Product product;
     /**
      * Creates new form EnterItems
      */
     public EnterItems() {
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase("Project");
+        collection = database.getCollection("products");
+
         initComponents();
     }
 
@@ -183,7 +203,15 @@ public class EnterItems extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-//
+ readData();
+        Gson gson = new Gson();
+        String json = gson.toJson(product);
+         Document document= Document.parse(json);
+         collection.insertOne(document);
+         
+        System.out.println("Datos guardato correctamente:v");
+        
+       
     }//GEN-LAST:event_btnAcceptActionPerformed
 
 

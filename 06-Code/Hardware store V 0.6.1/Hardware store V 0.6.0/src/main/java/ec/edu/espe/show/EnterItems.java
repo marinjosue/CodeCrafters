@@ -4,19 +4,29 @@
  */
 package ec.edu.espe.show;
 
+import com.google.gson.Gson;
 import ec.edu.espe.model.Product;
 import ec.edu.espe.show.MenuOwner;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
-
+import org.w3c.dom.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 /**
  *
  * @author USER
  */
 public class EnterItems extends javax.swing.JFrame {
+    private static final String CONNECTION_STRING = "\"mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/?retryWrites=true&w=majority\"";
+        
+    private static MongoClient mongoClient;
+    private static MongoDatabase database;
+    private static MongoCollection<Document>collection;
     Product product;
-    /**
+     /**
      * Creates new form EnterItems
      */
     public EnterItems() {
@@ -138,7 +148,7 @@ public class EnterItems extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +175,7 @@ public class EnterItems extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAccept)
                     .addComponent(btnNew)
@@ -184,7 +194,14 @@ public class EnterItems extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-//
+        readData();
+        Gson gson = new Gson();
+        String json = gson.toJson(product);
+        
+        Document document= Document.parse(json);
+
+
+
     }//GEN-LAST:event_btnAcceptActionPerformed
 
 
