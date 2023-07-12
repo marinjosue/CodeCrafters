@@ -18,6 +18,7 @@ public class Cart extends javax.swing.JFrame {
      */
     public Cart() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

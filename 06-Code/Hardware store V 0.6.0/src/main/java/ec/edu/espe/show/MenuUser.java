@@ -17,6 +17,7 @@ public class MenuUser extends javax.swing.JFrame {
      */
     public MenuUser() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

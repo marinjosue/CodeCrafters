@@ -17,6 +17,7 @@ public class Comments extends javax.swing.JFrame {
      */
     public Comments() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

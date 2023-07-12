@@ -15,6 +15,7 @@ public class VerifyStock extends javax.swing.JFrame {
      */
     public VerifyStock() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

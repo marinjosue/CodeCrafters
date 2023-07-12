@@ -41,6 +41,8 @@ public class EnterItems extends javax.swing.JFrame {
         collection = database.getCollection("products");
 
         initComponents();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**

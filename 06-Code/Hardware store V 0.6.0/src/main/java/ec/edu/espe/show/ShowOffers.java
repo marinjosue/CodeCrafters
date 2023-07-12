@@ -15,6 +15,7 @@ public class ShowOffers extends javax.swing.JFrame {
      */
     public ShowOffers() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

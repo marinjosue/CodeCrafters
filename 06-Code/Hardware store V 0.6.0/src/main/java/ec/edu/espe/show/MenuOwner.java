@@ -17,6 +17,7 @@ public class MenuOwner extends javax.swing.JFrame {
      */
     public MenuOwner() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

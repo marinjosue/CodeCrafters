@@ -17,6 +17,7 @@ public class Catalog extends javax.swing.JFrame {
      */
     public Catalog() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

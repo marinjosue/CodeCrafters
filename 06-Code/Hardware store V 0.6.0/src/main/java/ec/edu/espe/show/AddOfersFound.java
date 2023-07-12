@@ -17,6 +17,7 @@ public class AddOfersFound extends javax.swing.JFrame {
      */
     public AddOfersFound() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

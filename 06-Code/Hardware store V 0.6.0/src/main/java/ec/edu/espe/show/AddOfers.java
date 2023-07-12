@@ -19,6 +19,7 @@ public class AddOfers extends javax.swing.JFrame {
      */
     public AddOfers() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

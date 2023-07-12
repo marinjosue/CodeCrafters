@@ -15,6 +15,7 @@ public class PasswordOwner extends javax.swing.JFrame {
      */
     public PasswordOwner() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
