@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
 /**
@@ -29,6 +30,7 @@ public class EnterItems extends javax.swing.JFrame {
     private static MongoDatabase database;
     private static MongoCollection<Document>collection;
     Product product;
+    DefaultTableModel tableModel;
     
     /**
      * Creates new form EnterItems
@@ -45,6 +47,7 @@ public class EnterItems extends javax.swing.JFrame {
 
         initComponents();
         this.setLocationRelativeTo(null);
+        tableModel = (DefaultTableModel) jTable1.getModel();
 
     }
 
@@ -74,8 +77,8 @@ public class EnterItems extends javax.swing.JFrame {
         btnNew = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtAStock = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jTextField1.setText("jTextField1");
 
@@ -131,9 +134,18 @@ public class EnterItems extends javax.swing.JFrame {
             }
         });
 
-        txtAStock.setColumns(20);
-        txtAStock.setRows(5);
-        jScrollPane2.setViewportView(txtAStock);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Stock", "Precio", "Descripcion"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,7 +165,7 @@ public class EnterItems extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                                    .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addGap(18, 18, 18)
@@ -175,14 +187,9 @@ public class EnterItems extends javax.swing.JFrame {
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49))))
+                .addContainerGap(364, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(78, 78, 78))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -190,7 +197,10 @@ public class EnterItems extends javax.swing.JFrame {
                         .addComponent(btnNew))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(217, 217, 217)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -225,9 +235,9 @@ public class EnterItems extends javax.swing.JFrame {
                     .addComponent(btnExit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,21 +250,49 @@ public class EnterItems extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-    String cell1 = txtId.getText();
-    String cell2 = txtNameItems.getText();
-    String cell3 = txtStock.getText();
-    String cell4 = txtPrice.getText();
-    String cell5 = txtDescription.getText();
-    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
-        int id = Integer.parseInt(cell1);
-        if (checkIdExists(id)) {
-            JOptionPane.showMessageDialog(this, "El ID ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+     String cell1 = txtId.getText();
+        String cell2 = txtNameItems.getText();
+        String cell3 = txtStock.getText();
+        String cell4 = txtPrice.getText();
+        String cell5 = txtDescription.getText();
+        if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
+            int id = Integer.parseInt(cell1);
+            if (checkIdExists(id)) {
+                JOptionPane.showMessageDialog(this, "El ID ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                readData();
+                StringBuilder confirmationMessage = appendItems();
+                int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
+
+                if (option == JOptionPane.YES_OPTION) {
+                    Gson gson = new Gson();
+                    String json = gson.toJson(product);
+                    Document document = Document.parse(json);
+                    collection.insertOne(document);
+                    JOptionPane.showMessageDialog(rootPane, "Guardado");
+                    addToTable(product);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Cancelado");
+                }
+            }
+        }
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
+
+
+    private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
+ try {
             readData();
             StringBuilder confirmationMessage = appendItems();
+
             int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
+
+            if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.NO_OPTION) {
+                JOptionPane.showMessageDialog(rootPane, "Cancelado");
+                return; // Salir del método sin guardar los datos
+            }
 
             if (option == JOptionPane.YES_OPTION) {
                 Gson gson = new Gson();
@@ -262,38 +300,11 @@ public class EnterItems extends javax.swing.JFrame {
                 Document document = Document.parse(json);
                 collection.insertOne(document);
                 JOptionPane.showMessageDialog(rootPane, "Guardado");
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Cancelado");
+                addToTable(product);
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números en los campos ID, Stock y Precio");
         }
-    }
-    
-    }//GEN-LAST:event_btnAcceptActionPerformed
-
-
-
-    private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
-try {
-    readData();
-    StringBuilder confirmationMessage = appendItems();
-
-    int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
-
-    if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.NO_OPTION) {
-        JOptionPane.showMessageDialog(rootPane, "Cancelado");
-        return; // Salir del método sin guardar los datos
-    }
-
-    if (option == JOptionPane.YES_OPTION) {
-        Gson gson = new Gson();
-        String json = gson.toJson(product);
-        Document document = Document.parse(json);
-        collection.insertOne(document);
-        JOptionPane.showMessageDialog(rootPane, "Guardado");
-    }
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(rootPane, "Ingrese solo números en los campos ID, Stock y Precio");
-}
 
     }//GEN-LAST:event_btnAcceptMouseClicked
 
@@ -308,24 +319,18 @@ try {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- MongoCursor<Document> cursor = collection.find().iterator();
-    StringBuilder allData = new StringBuilder();
-    while (cursor.hasNext()) {
-        Document document = cursor.next();
-        int id = document.getInteger("id");
-        String name = document.getString("name");
-        int stock = document.getInteger("stock");
-        double price = document.getDouble("price");
-        String description = document.getString("description");
-        allData.append("Document id=").append(id).append(", name=").append(name).append(", stock=").append(stock).append(", price=").append(price).append(", description=").append(description);
-        for (String key : document.keySet()) {
-            if (!key.equals("_id") && !key.equals("id") && !key.equals("name") && !key.equals("stock") && !key.equals("price") && !key.equals("description")) {
-                allData.append(", ").append(key).append("=").append(document.get(key));
-            }
+MongoCursor<Document> cursor = collection.find().iterator();
+        tableModel.setRowCount(0);
+        while (cursor.hasNext()) {
+            Document document = cursor.next();
+            int id = document.getInteger("id");
+            String name = document.getString("name");
+            int stock = document.getInteger("stock");
+            double price = document.getDouble("price");
+            String description = document.getString("description");
+            Object[] row = {id, name, stock, price, description};
+            tableModel.addRow(row);
         }
-        allData.append("\n");
-    }
-    txtAStock.setText(allData.toString());
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -360,9 +365,14 @@ try {
         Description=txtDescription.getText();
 
         
-        product = new Product(id,NameItems,Stock,Price,Description);
+        product = new Product(id,NameItems,Stock,Price);
     }
 
+    private void addToTable(Product product) {
+        Object[] row = {product.getId(), product.getName(), product.getStock(), product.getPrice(), product.getDescription()};
+        tableModel.addRow(row);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -410,9 +420,9 @@ try {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextArea txtAStock;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNameItems;

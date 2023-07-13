@@ -84,11 +84,11 @@ public class Product {
         this.categoryList = categoryList;
     }
 
-    public Product(int id, String name, int stock, int price, String description) {
+    public Product(int id, String name, int stock, double price) {
         this.id = id;
         this.name = name;
         this.stock = stock;
-        this.price = price;
+        this.price = (float) price;
         this.description = description;
         this.categoryList = categoryList;
         this.regularPrice = regularPrice;
