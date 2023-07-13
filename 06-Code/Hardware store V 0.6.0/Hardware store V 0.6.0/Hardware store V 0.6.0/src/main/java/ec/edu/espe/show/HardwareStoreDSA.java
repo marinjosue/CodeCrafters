@@ -7,12 +7,15 @@ package ec.edu.espe.show;
 import ec.edu.espe.show.MenuUser;
 import ec.edu.espe.show.PasswordOwner;
 
+
 /**
  *
  * @author USER
  */
 public class HardwareStoreDSA extends javax.swing.JFrame {
 
+    
+    
     /**
      * Creates new form HardwareStoreDSA
      */
@@ -117,7 +120,7 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
 
         jMenu3.setText("Información");
 
-        JContac.setText("Contanto");
+        JContac.setText("Contacto");
         JContac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JContacActionPerformed(evt);
@@ -126,6 +129,11 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
         jMenu3.add(JContac);
 
         jCments.setText("Comentarios");
+        jCments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmentsActionPerformed(evt);
+            }
+        });
         jMenu3.add(jCments);
 
         jMenuBar1.add(jMenu3);
@@ -156,8 +164,8 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
     //ya sirvio :D
     
-    MenuUser menuUser = new MenuUser();
-    menuUser.setVisible(true);
+    registerUser register = new registerUser();
+    register.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_btnUserActionPerformed
 
@@ -166,8 +174,14 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOwnerMouseClicked
 
     private void JContacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JContacActionPerformed
-        
+        Contacts contacts = new Contacts();
+        contacts.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_JContacActionPerformed
+
+    private void jCmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmentsActionPerformed
+        
+    }//GEN-LAST:event_jCmentsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
