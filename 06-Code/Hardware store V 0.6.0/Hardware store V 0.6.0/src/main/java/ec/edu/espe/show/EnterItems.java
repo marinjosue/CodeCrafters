@@ -351,21 +351,20 @@ MongoCursor<Document> cursor = collection.find().iterator();
 }
     
     private void readData() throws NumberFormatException {
-        
-        int id;
-        String NameItems;
-        int Stock;
-        int Price;
-        String Description;
-        
-        id =Integer.parseInt(txtId.getText());
-        NameItems=txtNameItems.getText();
-        Stock=Integer.parseInt(txtStock.getText());
-        Price=Integer.parseInt(txtPrice.getText());
-        Description=txtDescription.getText();
+    int id;
+    String name;
+    int stock;
+    double price;
+    String description;
 
-        
-        product = new Product(id,NameItems,Stock,Price);
+    id = Integer.parseInt(txtId.getText());
+    name = txtNameItems.getText();
+    stock = Integer.parseInt(txtStock.getText());
+    price = Double.parseDouble(txtPrice.getText());
+    description = txtDescription.getText();
+
+    product = new Product(id, name, stock, price);
+    product.setDescription(description);
     }
 
     private void addToTable(Product product) {
