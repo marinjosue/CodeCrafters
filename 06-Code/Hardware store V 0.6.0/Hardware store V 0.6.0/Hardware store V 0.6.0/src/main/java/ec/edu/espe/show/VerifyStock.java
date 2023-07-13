@@ -56,8 +56,6 @@ private static MongoCollection<Document> collection;
         jLabel1 = new javax.swing.JLabel();
         btnRetunr = new javax.swing.JButton();
         btnViewProduct = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAStock = new javax.swing.JTextArea();
 
@@ -80,10 +78,6 @@ private static MongoCollection<Document> collection;
             }
         });
 
-        jButton1.setText("Borrar");
-
-        jButton2.setText("Modificar");
-
         txtAStock.setColumns(20);
         txtAStock.setRows(5);
         jScrollPane1.setViewportView(txtAStock);
@@ -99,10 +93,7 @@ private static MongoCollection<Document> collection;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(105, 105, 105)
-                                .addComponent(jButton2)
-                                .addGap(80, 80, 80)
+                                .addGap(345, 345, 345)
                                 .addComponent(btnRetunr))
                             .addComponent(btnViewProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -119,12 +110,9 @@ private static MongoCollection<Document> collection;
                 .addComponent(btnViewProduct)
                 .addGap(93, 93, 93)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRetunr, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRetunr, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,8 +191,6 @@ private static MongoCollection<Document> collection;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRetunr;
     private javax.swing.JButton btnViewProduct;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAStock;

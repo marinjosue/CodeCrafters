@@ -4,7 +4,6 @@
  */
 package ec.edu.espe.show;
 
-import ec.edu.espe.show.ShowOffers;
 
 /**
  *
@@ -31,7 +30,6 @@ public class MenuUser extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnCatalog = new javax.swing.JButton();
-        btnShowOffers = new javax.swing.JButton();
         btnCart = new javax.swing.JButton();
         btnComments = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
@@ -45,13 +43,6 @@ public class MenuUser extends javax.swing.JFrame {
         btnCatalog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCatalogActionPerformed(evt);
-            }
-        });
-
-        btnShowOffers.setText("Mostrar Promociones y ofertas ");
-        btnShowOffers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowOffersActionPerformed(evt);
             }
         });
 
@@ -80,23 +71,22 @@ public class MenuUser extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCatalog, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnShowOffers)
                             .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnComments, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jLabel1)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,15 +95,13 @@ public class MenuUser extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(btnCatalog, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnShowOffers)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCart)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnComments)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,12 +112,6 @@ public class MenuUser extends javax.swing.JFrame {
         catalog.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCatalogActionPerformed
-
-    private void btnShowOffersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowOffersActionPerformed
-        ShowOffers showOffers = new ShowOffers();
-        showOffers.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnShowOffersActionPerformed
 
     private void btnCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCartActionPerformed
         Cart cart = new Cart();
@@ -189,7 +171,6 @@ public class MenuUser extends javax.swing.JFrame {
     private javax.swing.JButton btnCatalog;
     private javax.swing.JButton btnComments;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnShowOffers;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
