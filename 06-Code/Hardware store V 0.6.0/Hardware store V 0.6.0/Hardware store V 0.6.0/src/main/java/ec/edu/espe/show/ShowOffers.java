@@ -4,17 +4,35 @@
  */
 package ec.edu.espe.show;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
 /**
  *
  * @author USER
  */
 public class ShowOffers extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ShowOffers
-     */
+private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
+    private static final String DATABASE_NAME = "Project";
+    private static final String COLLECTION_NAME = "products";
+    private static MongoClient mongoClient;
+    private static MongoDatabase database;
+    private static MongoCollection<Document> collection;
     public ShowOffers() {
         initComponents();
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+        MongoClientSettings settings = MongoClientSettings.builder()
+        .applyConnectionString(connectionString)
+        .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase(DATABASE_NAME);
+        collection = database.getCollection(COLLECTION_NAME);
         this.setLocationRelativeTo(null);
     }
 
@@ -27,20 +45,17 @@ public class ShowOffers extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtOfer = new javax.swing.JTextArea();
         btnExit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Promociones y ofertas de la tienda");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Pensaba en mostrar a todos los items en promociones \nde una sola y no por ID :D");
-        jScrollPane1.setViewportView(jTextArea1);
+        txtOfer.setColumns(20);
+        txtOfer.setRows(5);
+        txtOfer.setText("Pensaba en mostrar a todos los items en promociones \nde una sola y no por ID :D");
+        jScrollPane1.setViewportView(txtOfer);
 
         btnExit.setText("Salir");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -49,28 +64,35 @@ public class ShowOffers extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Mostrar Productos con descuento");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnExit)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(72, 72, 72)
-                            .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnExit)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(52, 52, 52)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnExit)
@@ -85,6 +107,42 @@ public class ShowOffers extends javax.swing.JFrame {
         menuUser.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+ MongoCursor<Document> cursor = collection.find().iterator();
+StringBuilder discountZeroData = new StringBuilder();
+boolean hasDiscountZero = true;
+
+while (cursor.hasNext()) {
+    Document document = cursor.next();
+    int discount = document.getInteger("price");
+
+    if (discount > 0) {
+        int id = document.getInteger("id");
+        String name = document.getString("name");
+        double price = document.getDouble("price");
+        double discountAmount = document.getDouble("discount");
+        double discountPrice = document.getDouble("discountedPrice");
+        String description = document.getString("description");
+
+        discountZeroData.append("ID: ").append(id).append("\n");
+        discountZeroData.append("Name: ").append(name).append("\n");
+        discountZeroData.append("Price: ").append(price).append("\n");
+        discountZeroData.append("Discount: ").append(discountAmount).append("\n");
+        discountZeroData.append("Discounted Price: ").append(discountPrice).append("\n");
+        discountZeroData.append("Description: ").append(description).append("\n\n");
+        hasDiscountZero = false;
+    }
+}
+
+if (hasDiscountZero) {
+    txtOfer.setText(discountZeroData.toString());
+} else {
+    txtOfer.setText("No hay productos con descuento.");
+}
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,8 +181,8 @@ public class ShowOffers extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea txtOfer;
     // End of variables declaration//GEN-END:variables
 }

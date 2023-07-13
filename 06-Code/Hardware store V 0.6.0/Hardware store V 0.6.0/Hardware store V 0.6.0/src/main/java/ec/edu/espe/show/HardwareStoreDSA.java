@@ -180,7 +180,9 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     }//GEN-LAST:event_JContacActionPerformed
 
     private void jCmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmentsActionPerformed
-        
+        Commet contacts = new Commet();
+        contacts.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jCmentsActionPerformed
 
 

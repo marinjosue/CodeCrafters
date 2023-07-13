@@ -10,7 +10,9 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.show.AddOfersFound2;
+import ec.edu.espe.show.MenuOwner;
+import ec.edu.espe.show.MenuOwner;
+import ec.edu.espe.show.MenuOwner;
 import javax.swing.JOptionPane;
 import org.bson.Document;
 
@@ -20,6 +22,7 @@ import org.bson.Document;
  */
 public class AddOfersFound extends javax.swing.JFrame {
 
+ 
     private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
     private static final String DATABASE_NAME = "Project";
     private static final String COLLECTION_NAME = "products";
@@ -32,7 +35,9 @@ public class AddOfersFound extends javax.swing.JFrame {
      * Creates new form AddOfers2
      */
     public AddOfersFound() {
+        
         initComponents();
+        
         ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
         MongoClientSettings settings = MongoClientSettings.builder()
         .applyConnectionString(connectionString)
@@ -59,13 +64,14 @@ public class AddOfersFound extends javax.swing.JFrame {
         txtDisscount = new javax.swing.JTextField();
         btnAcceptOfersFounf = new javax.swing.JButton();
         btnCance = new javax.swing.JButton();
+        txtIdProduct = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Anadir ofertas y promociones");
 
-        jLabel2.setText("Encontramos el producto :) ");
+        jLabel2.setText("Id del producto para aplicar el descuento:");
 
         jLabel3.setText("Ingrese el porcentaje de descuento a aplicar (0-100%):");
 
@@ -89,14 +95,16 @@ public class AddOfersFound extends javax.swing.JFrame {
             }
         });
 
+        txtIdProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdProductActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(80, 80, 80))
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,46 +117,76 @@ public class AddOfersFound extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDisscount, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtIdProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(88, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtIdProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDisscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcceptOfersFounf)
                     .addComponent(btnCance))
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptOfersFounfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOfersFounfActionPerformed
-     try {
-        String discountText = txtDisscount.getText();
-        int discount = Integer.parseInt(discountText);
-        
+try {
+    String discountText = txtDisscount.getText();
+    int discount = Integer.parseInt(discountText);
+    int productId = Integer.parseInt(txtIdProduct.getText());
+
+    Document query = new Document("id", productId);
+    Document document = collection.find(query).first();
+
+    if (document != null) {
+        double price = document.getDouble("price");
         if (discount >= 0 && discount <= 100) {
-            AddOfersFound2 addOfersFound2 = new AddOfersFound2();
-            addOfersFound2.setVisible(true);
-            this.setVisible(false);
+            double discountedPrice = price * (1 - (discount / 100.0));
+            document.put("price", discountedPrice);
+            document.put("discount", discount);
+
+            collection.replaceOne(query, document);
+
+            int id = document.getInteger("id");
+            String name = document.getString("name");
+
+            StringBuilder confirmationMessage = new StringBuilder();
+            confirmationMessage.append("Descuento aplicado al producto:").append("\n\n");
+            confirmationMessage.append("ID: ").append(id).append("\n");
+            confirmationMessage.append("Name: ").append(name).append("\n");
+            confirmationMessage.append("Discounted Price: ").append(discountedPrice).append("\n");
+            JOptionPane.showMessageDialog(rootPane, confirmationMessage.toString(), "Descuento Aplicado", JOptionPane.INFORMATION_MESSAGE);
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "El porcentaje de descuento debe estar entre 0 y 100", "Error", JOptionPane.ERROR_MESSAGE);
-            txtDisscount.setText(""); // Limpiar el campo de texto
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números enteros por favor", "Error", JOptionPane.ERROR_MESSAGE);
-        txtDisscount.setText(""); // Limpiar el campo de texto
+    } else {
+        JOptionPane.showMessageDialog(rootPane, "No se encontró un producto con el ID ingresado", "Error", JOptionPane.ERROR_MESSAGE);
     }
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(rootPane, "Ingrese solo números enteros por favor", "Error", JOptionPane.ERROR_MESSAGE);
+}
+
     }//GEN-LAST:event_btnAcceptOfersFounfActionPerformed
 
     private void txtDisscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDisscountActionPerformed
@@ -156,10 +194,14 @@ public class AddOfersFound extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDisscountActionPerformed
 
     private void btnCanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanceActionPerformed
-        AddOfers addOfers = new AddOfers();
+        MenuOwner addOfers = new MenuOwner();
         addOfers.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCanceActionPerformed
+
+    private void txtIdProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdProductActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,12 +234,16 @@ public class AddOfersFound extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddOfersFound().setVisible(true);
             }
         });
     }
+    private boolean verificarExistenciaId(String id) {
+    Document query = new Document("id", Integer.parseInt(id));
+    return collection.countDocuments(query) > 0;
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcceptOfersFounf;
@@ -206,5 +252,6 @@ public class AddOfersFound extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtDisscount;
+    private javax.swing.JTextField txtIdProduct;
     // End of variables declaration//GEN-END:variables
 }

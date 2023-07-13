@@ -116,7 +116,7 @@ public class MenuOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterItemsActionPerformed
 
     private void btnAddOfersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOfersActionPerformed
-       AddOfers addOfers = new AddOfers();
+       AddOfersFound addOfers = new AddOfersFound();
        addOfers.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnAddOfersActionPerformed
