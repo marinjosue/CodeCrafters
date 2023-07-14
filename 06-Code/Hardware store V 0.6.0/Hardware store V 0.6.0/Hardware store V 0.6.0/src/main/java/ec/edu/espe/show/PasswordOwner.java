@@ -3,6 +3,7 @@
 package ec.edu.espe.show;
 
 import com.mycompany.project.Owner;
+import ec.edu.espe.controller.AESCipher;
 import javax.swing.JOptionPane;
 /**
  *
@@ -89,13 +90,22 @@ public class PasswordOwner extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+    String encryptedPassword = "SpZ6zXctconKNu3TvnbhgA=="; 
+
+    AESCipher cipher = new AESCipher();
+
+    try {
         String password = txtPassword.getText();
-        if (password.equals(Owner.OWNER_PASSWORD)) {
+        String decryptedPassword = cipher.descifra(encryptedPassword);
+        if (password.equals(decryptedPassword)) {
             MenuOwner menuOwner = new MenuOwner();
             menuOwner.setVisible(true);
             this.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(this, "Contrasena Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
     }//GEN-LAST:event_btnAcceptActionPerformed
 

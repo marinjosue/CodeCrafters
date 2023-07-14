@@ -72,6 +72,8 @@ public class registerUser extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtDirection = new javax.swing.JTextField();
         btnMenuUser1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txtUserName5 = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -139,43 +141,49 @@ public class registerUser extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Nombre de Usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(btnMenuUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMenuUser, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUserName2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                                .addComponent(txtUserName1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                                .addComponent(txtUserName5))
+                            .addComponent(txtCi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDirection, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41))))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(btnMenuUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtUserName1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel7))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtUserName2)
-                                        .addComponent(txtCi)
-                                        .addComponent(txtEmail)
-                                        .addComponent(txtDirection))))
-                            .addComponent(btnMenuUser, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(202, 202, 202)
-                        .addComponent(jLabel1)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +191,16 @@ public class registerUser extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 38, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(38, 38, 38))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(50, 50, 50)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtUserName5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUserName1))
@@ -192,7 +208,7 @@ public class registerUser extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
@@ -200,20 +216,14 @@ public class registerUser extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtDirection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 38, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btnMenuUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(btnMenuUser, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDirection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMenuUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenuUser, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -222,57 +232,60 @@ public class registerUser extends javax.swing.JFrame {
 
     private void btnMenuUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUserActionPerformed
 
-String user = txtUserName1.getText();
-String user1 = txtUserName2.getText();
-String user2 = txtCi.getText();
-String user3 = txtDirection.getText();
-String user4 = txtEmail.getText();
+    String user = txtUserName1.getText();
+    String user1 = txtUserName2.getText();
+    String user2 = txtCi.getText();
+    String user3 = txtDirection.getText();
+    String user4 = txtEmail.getText();
+    String user5 = txtUserName5.getText();
 
-if (user.isEmpty() || user1.isEmpty() || user2.isEmpty() || user3.isEmpty() || user4.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Ingrese todos los campos requeridos", "Error", JOptionPane.ERROR_MESSAGE);
-} else if (user.matches(".*\\d.*") || user1.matches(".*\\d.*")) {
-    JOptionPane.showMessageDialog(this, "Ingrese un nombre y apellido válidos", "Error", JOptionPane.ERROR_MESSAGE);
-} else if (user2.length() != 10 || !user2.matches("\\d+")) {
-    JOptionPane.showMessageDialog(this, "Ingrese una cédula válida de 10 dígitos", "Error", JOptionPane.ERROR_MESSAGE);
-} else {
-    // Buscar si el usuario ya está registrado
-    Document existingUser = collection.find(new Document("ci", user2)).first();
-    if (existingUser != null) {
-        JOptionPane.showMessageDialog(this, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
+
+    if (user.isEmpty() || user1.isEmpty() || user2.isEmpty() || user3.isEmpty() || user4.isEmpty() || user5.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese todos los campos requeridos", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if (user.matches(".*\\d.*") || user1.matches(".*\\d.*")) {
+        JOptionPane.showMessageDialog(this, "Ingrese un nombre y apellido válidos", "Error", JOptionPane.ERROR_MESSAGE);
+    } else if (user2.length() != 10 || !user2.matches("\\d+")) {
+        JOptionPane.showMessageDialog(this, "Ingrese una cédula válida de 10 dígitos", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
-        String[] nombres = user.split(" ");
-        String[] apellidos = user1.split(" ");
-
-        if (nombres.length != 2 || apellidos.length < 2 || apellidos.length > 3) {
-            JOptionPane.showMessageDialog(this, "Ingrese dos nombres y de dos a tres apellidos", "Error", JOptionPane.ERROR_MESSAGE);
+        // Buscar si el usuario ya está registrado
+        Document existingUser = collection.find(new Document("ci", user2)).first();
+        if (existingUser != null) {
+            JOptionPane.showMessageDialog(this, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            StringBuilder nombresTexto = new StringBuilder();
-            for (String nombre : nombres) {
-                nombresTexto.append(nombre).append(" ");
+            String[] nombres = user.split(" ");
+            String[] apellidos = user1.split(" ");
+
+            if (nombres.length != 2 || apellidos.length < 2 || apellidos.length > 3) {
+                JOptionPane.showMessageDialog(this, "Ingrese dos nombres y de dos a tres apellidos", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                StringBuilder nombresTexto = new StringBuilder();
+                for (String nombre : nombres) {
+                    nombresTexto.append(nombre).append(" ");
+                }
+
+                StringBuilder apellidosTexto = new StringBuilder();
+                for (String apellido : apellidos) {
+                    apellidosTexto.append(apellido).append(" ");
+                }
+
+                Document document = new Document();
+                document.append("nombres", nombresTexto.toString().trim());
+                document.append("apellidos", apellidosTexto.toString().trim());
+                document.append("ci", user2);
+                document.append("direccion", user3);
+                document.append("email", user4);
+                document.append("Usuario", user5);
+
+                collection.insertOne(document);
+
+                JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
+
+                EnterUser User = new EnterUser();
+                User.setVisible(true);
+                this.setVisible(false);
             }
-
-            StringBuilder apellidosTexto = new StringBuilder();
-            for (String apellido : apellidos) {
-                apellidosTexto.append(apellido).append(" ");
-            }
-
-            Document document = new Document();
-            document.append("nombres", nombresTexto.toString().trim());
-            document.append("apellidos", apellidosTexto.toString().trim());
-            document.append("ci", user2);
-            document.append("direccion", user3);
-            document.append("email", user4);
-
-            collection.insertOne(document);
-
-            JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
-
-            UserRegister User = new UserRegister();
-            User.setVisible(true);
-            this.setVisible(false);
         }
     }
-}
 
 
 
@@ -295,7 +308,7 @@ if (user.isEmpty() || user1.isEmpty() || user2.isEmpty() || user3.isEmpty() || u
     }//GEN-LAST:event_txtDirectionActionPerformed
 
     private void btnMenuUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUser1ActionPerformed
-       UserRegister userRegister = new UserRegister();
+       EnterUser userRegister = new EnterUser();
         userRegister.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuUser1ActionPerformed
@@ -311,12 +324,14 @@ if (user.isEmpty() || user1.isEmpty() || user2.isEmpty() || user3.isEmpty() || u
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCi;
     private javax.swing.JTextField txtDirection;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtUserName1;
     private javax.swing.JTextField txtUserName2;
+    private javax.swing.JTextField txtUserName5;
     // End of variables declaration//GEN-END:variables
 
     class FondoPanel extends JPanel
