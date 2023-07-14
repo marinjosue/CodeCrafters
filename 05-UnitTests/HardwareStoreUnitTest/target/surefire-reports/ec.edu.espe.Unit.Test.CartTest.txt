@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: ec.edu.espe.Unit.Test.CartTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec <<< FAILURE!
+ec.edu.espe.Unit.Test.CartTest.testCart()  Time elapsed: 0.014 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <51.0> but was: <50.9>
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:102)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:97)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:714)
+	at ec.edu.espe.Unit.Test.CartTest.testCart(CartTest.java:48)
+
