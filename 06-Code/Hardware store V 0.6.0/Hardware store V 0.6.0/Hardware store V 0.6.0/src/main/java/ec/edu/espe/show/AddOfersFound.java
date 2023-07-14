@@ -11,8 +11,6 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.show.MenuOwner;
-import ec.edu.espe.show.MenuOwner;
-import ec.edu.espe.show.MenuOwner;
 import javax.swing.JOptionPane;
 import org.bson.Document;
 

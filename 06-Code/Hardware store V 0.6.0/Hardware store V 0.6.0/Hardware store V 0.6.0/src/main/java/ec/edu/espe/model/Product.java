@@ -18,6 +18,9 @@ public class Product {
     private float regularPrice;
     private float discount;
     private float discountPercentage;
+    private int quantity;
+
+   
 
     public float getDiscountPercentage() {
         return discountPercentage;
@@ -83,7 +86,13 @@ public class Product {
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
-
+    public int getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
     public Product(int id, String name, int stock, double price) {
         this.id = id;
         this.name = name;

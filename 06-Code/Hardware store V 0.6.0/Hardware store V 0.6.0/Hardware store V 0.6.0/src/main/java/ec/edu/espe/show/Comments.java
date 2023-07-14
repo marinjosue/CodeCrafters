@@ -58,6 +58,7 @@ private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuem
         txtComment = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Comentarios");
