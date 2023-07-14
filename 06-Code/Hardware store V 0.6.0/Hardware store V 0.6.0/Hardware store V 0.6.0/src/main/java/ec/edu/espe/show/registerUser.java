@@ -65,6 +65,13 @@ public class registerUser extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUserName2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtCi = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtDirection = new javax.swing.JTextField();
+        btnMenuUser1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,7 +86,7 @@ public class registerUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnMenuUser.setText("Entrar");
+        btnMenuUser.setText("Registrarse");
         btnMenuUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuUserActionPerformed(evt);
@@ -101,65 +108,137 @@ public class registerUser extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pictures/log2.png"))); // NOI18N
 
+        jLabel5.setText("Email:");
+
+        jLabel6.setText("Cedula:");
+
+        txtCi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCiActionPerformed(evt);
+            }
+        });
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Dirección:");
+
+        txtDirection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDirectionActionPerformed(evt);
+            }
+        });
+
+        btnMenuUser1.setText("Regresar ");
+        btnMenuUser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuUser1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUserName1)
-                            .addComponent(txtUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMenuUser)
-                        .addGap(18, 18, 18)))
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(btnMenuUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtUserName1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtUserName2)
+                                        .addComponent(txtCi)
+                                        .addComponent(txtEmail)
+                                        .addComponent(txtDirection))))
+                            .addComponent(btnMenuUser, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(jLabel1)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
                         .addComponent(jLabel1)
-                        .addGap(98, 98, 98)
+                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUserName1))
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addComponent(btnMenuUser))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtDirection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 38, Short.MAX_VALUE)
+                        .addComponent(jLabel4)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(btnMenuUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(btnMenuUser, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUserActionPerformed
-    String user = txtUserName1.getText();
-    String user1 = txtUserName2.getText();
 
-    if (user.isEmpty() || user1.isEmpty() || user.matches(".*\\d.*") || user1.matches(".*\\d.*")) {
-        JOptionPane.showMessageDialog(this, "Ingrese un nombre y apellido válidos", "Error", JOptionPane.ERROR_MESSAGE);
+String user = txtUserName1.getText();
+String user1 = txtUserName2.getText();
+String user2 = txtCi.getText();
+String user3 = txtDirection.getText();
+String user4 = txtEmail.getText();
+
+if (user.isEmpty() || user1.isEmpty() || user2.isEmpty() || user3.isEmpty() || user4.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Ingrese todos los campos requeridos", "Error", JOptionPane.ERROR_MESSAGE);
+} else if (user.matches(".*\\d.*") || user1.matches(".*\\d.*")) {
+    JOptionPane.showMessageDialog(this, "Ingrese un nombre y apellido válidos", "Error", JOptionPane.ERROR_MESSAGE);
+} else if (user2.length() != 10 || !user2.matches("\\d+")) {
+    JOptionPane.showMessageDialog(this, "Ingrese una cédula válida de 10 dígitos", "Error", JOptionPane.ERROR_MESSAGE);
+} else {
+    // Buscar si el usuario ya está registrado
+    Document existingUser = collection.find(new Document("ci", user2)).first();
+    if (existingUser != null) {
+        JOptionPane.showMessageDialog(this, "Usuario ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
     } else {
         String[] nombres = user.split(" ");
         String[] apellidos = user1.split(" ");
@@ -167,33 +246,75 @@ public class registerUser extends javax.swing.JFrame {
         if (nombres.length != 2 || apellidos.length < 2 || apellidos.length > 3) {
             JOptionPane.showMessageDialog(this, "Ingrese dos nombres y de dos a tres apellidos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
+            StringBuilder nombresTexto = new StringBuilder();
+            for (String nombre : nombres) {
+                nombresTexto.append(nombre).append(" ");
+            }
+
+            StringBuilder apellidosTexto = new StringBuilder();
+            for (String apellido : apellidos) {
+                apellidosTexto.append(apellido).append(" ");
+            }
+
             Document document = new Document();
-            document.append("nombres", Arrays.asList(nombres));
-            document.append("apellidos", Arrays.asList(apellidos));
+            document.append("nombres", nombresTexto.toString().trim());
+            document.append("apellidos", apellidosTexto.toString().trim());
+            document.append("ci", user2);
+            document.append("direccion", user3);
+            document.append("email", user4);
 
             collection.insertOne(document);
 
             JOptionPane.showMessageDialog(this, "Usuario registrado correctamente");
 
-            MenuUser menuUser = new MenuUser();
-            menuUser.setVisible(true);
+            UserRegister User = new UserRegister();
+            User.setVisible(true);
             this.setVisible(false);
         }
     }
+}
+
+
+
     }//GEN-LAST:event_btnMenuUserActionPerformed
 
     private void txtUserName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserName2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserName2ActionPerformed
 
+    private void txtCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCiActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtDirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirectionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDirectionActionPerformed
+
+    private void btnMenuUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUser1ActionPerformed
+       UserRegister userRegister = new UserRegister();
+        userRegister.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMenuUser1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenuUser;
+    private javax.swing.JButton btnMenuUser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtCi;
+    private javax.swing.JTextField txtDirection;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtUserName1;
     private javax.swing.JTextField txtUserName2;
     // End of variables declaration//GEN-END:variables
