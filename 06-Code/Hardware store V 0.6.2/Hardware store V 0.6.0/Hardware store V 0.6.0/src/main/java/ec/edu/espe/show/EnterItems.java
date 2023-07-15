@@ -180,6 +180,7 @@ public EnterItems() {
         jScrollPane3.setViewportView(jTable1);
 
         btnEdit.setText("Editar");
+        btnEdit.setEnabled(false);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -187,6 +188,13 @@ public EnterItems() {
         });
 
         btnErrarse.setText("Borrar");
+        btnErrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnErrarse.setEnabled(false);
+        btnErrarse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnErrarseMouseClicked(evt);
+            }
+        });
         btnErrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnErrarseActionPerformed(evt);
@@ -197,10 +205,6 @@ public EnterItems() {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(364, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(78, 78, 78))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -238,14 +242,17 @@ public EnterItems() {
                                         .addComponent(btnErrarse)
                                         .addGap(51, 51, 51)
                                         .addComponent(btnExit))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(185, 185, 185)
+                                .addComponent(jLabel1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,6 +459,10 @@ int id = (int) jTable1.getValueAt(selectedRow, 1);
         JOptionPane.showMessageDialog(this, "Artículo eliminado correctamente");
     }
     }//GEN-LAST:event_btnErrarseActionPerformed
+
+    private void btnErrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnErrarseMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnErrarseMouseClicked
 
     private StringBuilder appendItems() {
         StringBuilder confirmationMessage = new StringBuilder();
