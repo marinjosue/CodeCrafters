@@ -83,7 +83,7 @@ public class Owner {
         System.out.print("Descripcion del producto: ");
         String description = scanner.nextLine();
 
-        Product product = new Product(productId, productName, stock, (int) price);
+        Product product = new Product(productId, productName, (int) price, (int) price);
         productList.add(product);
 
         System.out.print("Desea continuar agregando productos? (1 para si / 0 para no): ");

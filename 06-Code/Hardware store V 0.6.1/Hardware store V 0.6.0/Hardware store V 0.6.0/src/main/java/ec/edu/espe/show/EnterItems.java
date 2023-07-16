@@ -363,7 +363,7 @@ MongoCursor<Document> cursor = collection.find().iterator();
     price = Double.parseDouble(txtPrice.getText());
     description = txtDescription.getText();
 
-    product = new Product(id, name, stock, price);
+    product = new Product(id, name, price, price);
     product.setDescription(description);
     }
 

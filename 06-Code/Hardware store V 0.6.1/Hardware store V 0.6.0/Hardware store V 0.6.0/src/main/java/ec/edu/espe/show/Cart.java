@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
@@ -55,9 +56,14 @@ public class Cart extends javax.swing.JFrame {
         tableModel.addColumn("ID");
         tableModel.addColumn("Name");
         tableModel.addColumn("Price");
+        tableModel.addColumn("cantidad");
+        tableModel.addColumn("totalprice");
         tableCart.setModel(tableModel);
         cartProducts = new ArrayList<>();
         totalValue = 0.0;
+        tableModel = new DefaultTableModel() {
+
+        };
     }
 
     /**
@@ -80,9 +86,10 @@ public class Cart extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCart = new javax.swing.JTable();
-        txtTotalPrice = new javax.swing.JTextField();
+        txtAmountTotal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        spnQuantity = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,16 +152,22 @@ public class Cart extends javax.swing.JFrame {
 
         tableCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Stock", "Precio"
+                "ID", "Nombre", "Precio"
             }
         ));
         jScrollPane2.setViewportView(tableCart);
+
+        txtAmountTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAmountTotalActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("El total a pagar es de: $");
 
@@ -172,26 +185,30 @@ public class Cart extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(128, 128, 128)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(142, Short.MAX_VALUE))
+                                .addGap(134, 134, 134)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtAmountTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtIdCart, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAdd)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(spnQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAdd))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtIdCart, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addGap(247, 247, 247))))
+                        .addGap(112, 112, 112)))
+                .addContainerGap(135, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,20 +227,22 @@ public class Cart extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtIdCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtIdCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd))
+                            .addComponent(btnAdd)
+                            .addComponent(spnQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnExit)
                                     .addComponent(btnAccept))
@@ -232,7 +251,7 @@ public class Cart extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAmountTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
@@ -285,62 +304,54 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
-        
-        try {
-        int id = Integer.parseInt(txtIdCart.getText());
-        Document document = collection.find(new Document("id", id)).first();
-        if (document != null) {
-            String name = document.getString("name");
-            double price = document.getDouble("price");
-            int stock = document.getInteger("stock");
-
-            if (stock > 0) {
-                Product product = new Product(id, name, ABORT, price);
-                cartProducts.add(product);
-                updateTotalValue();
-                updateCartTable();
+            try{
+            int id = Integer.parseInt(txtIdCart.getText());
+            Document document = collection.find(new Document("id", id)).first();
+            if (document != null) {
+                String name = document.getString("name");
+                double price = document.getDouble("price");
+                int stock = document.getInteger("stock");
+           if (stock > 0) {
+                int quantity = (int) spnQuantity.getValue();
+                if (quantity <= stock) {
+                    Product product = new Product(id, name, price, quantity,totalPrice);
+                    cartProducts.add(product);
+                    updateCartTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cantidad ingresada excede el stock disponible", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "El producto seleccionado no se encuentra disponible", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "No se encontró un producto con el ID especificado", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
     }
+            }catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
-    
+    private void txtAmountTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAmountTotalActionPerformed
 
-private void updateCartTable() {
+        private void updateCartTable() {
     DefaultTableModel cartTableModel = (DefaultTableModel) tableCart.getModel();
-    cartTableModel.setRowCount(0);
-
-    for (Product product : cartProducts) {
-        Object[] row = {product.getId(), product.getName(), product.getPrice()};
-        cartTableModel.addRow(row);
+        cartTableModel.setRowCount(0);
+        for (Product product : cartProducts) {
+            double quantity = product.getQuantity();
+            double totalPrice = product.getPrice() * quantity;
+            product.setTotalPrice(totalPrice); 
+            totalValue += totalPrice; 
+            Object[] row = {product.getId(), product.getName(), product.getPrice(), quantity, totalPrice};
+            cartTableModel.addRow(row);
+        }
+        txtAmountTotal.setText(String.format("%.2f", totalValue));
     }
-
-    tableCart.setModel(cartTableModel); // Actualizar el modelo de la tabla
-}
-
-private void updateTotalValue() {
-    totalPrice = 0.0; // Reiniciar el valor de totalPrice
-    for (Product product : cartProducts) {
-        totalPrice += product.getPrice(); // Sumar los precios de los productos en el carrito
-    }
-    txtTotalPrice.setText(String.valueOf(totalPrice));
-}
-
-
-    
     private void readData() throws NumberFormatException {
         
         int id;
         String NameItems;
         int Stock;
-        int Price;
+        double Price;
         String Description;
         
         id =Integer.parseInt(txtIdCart.getText());
@@ -395,8 +406,9 @@ private void updateTotalValue() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JSpinner spnQuantity;
     private javax.swing.JTable tableCart;
+    private javax.swing.JTextField txtAmountTotal;
     private javax.swing.JTextField txtIdCart;
-    private javax.swing.JTextField txtTotalPrice;
     // End of variables declaration//GEN-END:variables
 }

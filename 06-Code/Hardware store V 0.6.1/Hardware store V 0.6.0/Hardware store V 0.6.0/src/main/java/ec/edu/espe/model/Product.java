@@ -18,7 +18,37 @@ public class Product {
     private float regularPrice;
     private float discount;
     private float discountPercentage;
+    private int quantity;
+    private float totalPrice;
 
+
+    public Product(int id, String name, double price, int quantity, double totalPrice) {
+        this.id = id;
+        this.name = name;
+        this.price = (float) price;
+        this.quantity = quantity;
+        this.totalPrice = (float) totalPrice;
+    }
+    
+    
+    
+
+    public float gettotalPrice() {
+        return totalPrice;
+    }
+
+    public void settotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
     public float getDiscountPercentage() {
         return discountPercentage;
     }
@@ -84,7 +114,7 @@ public class Product {
         this.categoryList = categoryList;
     }
 
-    public Product(int id, String name, int stock, double price) {
+    public Product(int id, String name, double price, double price1) {
         this.id = id;
         this.name = name;
         this.stock = stock;
@@ -116,5 +146,10 @@ public class Product {
     public void highAmount() {
 
     }
+
+    public void setTotalPrice(double totalPrice) {
+    }
+
+
 
 }

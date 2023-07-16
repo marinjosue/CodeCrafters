@@ -595,6 +595,9 @@ public class Cart extends javax.swing.JFrame {
     }
 });
      
+     
+     
+     
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
