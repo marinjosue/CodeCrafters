@@ -19,6 +19,24 @@ public class Product {
     private float discount;
     private float discountPercentage;
     private int quantity;
+    private float totalPrice;
+
+        public Product(int id, String name, double price, int quantity, double totalPrice) {
+        this.id = id;
+        this.name = name;
+        this.price = (float) price;
+        this.quantity = quantity;
+        this.totalPrice = (float) totalPrice;
+    }
+    
+    
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
    
 

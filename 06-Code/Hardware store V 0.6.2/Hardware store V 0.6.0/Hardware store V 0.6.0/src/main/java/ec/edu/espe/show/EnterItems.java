@@ -69,15 +69,7 @@ public EnterItems() {
             public void actionPerformed(ActionEvent e) {
                 deleteSelectedItem();
             }
-        });
-
-
-
-
-
-
-
-        
+        });  
     }
 
     /**

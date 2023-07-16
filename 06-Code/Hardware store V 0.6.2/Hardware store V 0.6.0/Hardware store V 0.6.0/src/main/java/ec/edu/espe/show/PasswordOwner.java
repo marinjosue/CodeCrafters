@@ -6,6 +6,7 @@ import com.mycompany.project.Owner;
 import ec.edu.espe.controller.AESCipher;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -59,6 +60,12 @@ public class PasswordOwner extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,7 +104,19 @@ public class PasswordOwner extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-    String encryptedPassword = "SpZ6zXctconKNu3TvnbhgA=="; 
+
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+  HardwareStoreDSA hardwareStoreDSA = new HardwareStoreDSA();
+        hardwareStoreDSA.setVisible(true);
+        this.setVisible(false);        
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+
+        if(evt.getExtendedKeyCode() == KeyEvent.VK_ENTER){
+                String encryptedPassword = "SpZ6zXctconKNu3TvnbhgA=="; 
 
     AESCipher cipher = new AESCipher();
 
@@ -114,13 +133,8 @@ public class PasswordOwner extends javax.swing.JFrame {
     } catch (Exception e) {
         e.printStackTrace();
     }
-    }//GEN-LAST:event_btnAcceptActionPerformed
-
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-  HardwareStoreDSA hardwareStoreDSA = new HardwareStoreDSA();
-        hardwareStoreDSA.setVisible(true);
-        this.setVisible(false);        
-    }//GEN-LAST:event_btnExitActionPerformed
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments
