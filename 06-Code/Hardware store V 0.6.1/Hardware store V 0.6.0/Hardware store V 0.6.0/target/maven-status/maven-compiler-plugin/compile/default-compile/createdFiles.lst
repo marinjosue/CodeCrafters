@@ -20,6 +20,7 @@ ec\edu\espe\show\Comments$2.class
 ec\edu\espe\show\registerUser.class
 com\mycompany\project\ProductValidator.class
 ec\edu\espe\show\EnterItems$5.class
+ec\edu\espe\show\EnterUser$5.class
 ec\edu\espe\show\ShowComments$2.class
 ec\edu\espe\show\HardwareStoreDSA$5.class
 ec\edu\espe\show\PasswordOwner$FondoPanel.class
@@ -92,6 +93,7 @@ ec\edu\espe\show\MenuUser$FondoPanel.class
 ec\edu\espe\model\UserFinder.class
 ec\edu\espe\show\AddOfersFound$FondoPanel.class
 ec\edu\espe\controller\JSONDataManager.class
+ec\edu\espe\show\PasswordOwner$4.class
 ec\edu\espe\show\ShowComments$1.class
 ec\edu\espe\show\EnterItems$11.class
 ec\edu\espe\show\HardwareStoreDSA$1.class
