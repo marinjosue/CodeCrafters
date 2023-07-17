@@ -4,17 +4,25 @@ package ec.edu.espe.show;
 
 import com.mycompany.project.Owner;
 import ec.edu.espe.controller.AESCipher;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /**
  *
  * @author USER
  */
 public class PasswordOwner extends javax.swing.JFrame {
+    FondoPanel fondo = new FondoPanel();
 
     /**
      * Creates new form PasswordOwner
      */
     public PasswordOwner() {
+        this.setContentPane(fondo);
+
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -49,6 +57,12 @@ public class PasswordOwner extends javax.swing.JFrame {
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
+            }
+        });
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
             }
         });
 
@@ -90,7 +104,19 @@ public class PasswordOwner extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-    String encryptedPassword = "SpZ6zXctconKNu3TvnbhgA=="; 
+
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+  HardwareStoreDSA hardwareStoreDSA = new HardwareStoreDSA();
+        hardwareStoreDSA.setVisible(true);
+        this.setVisible(false);        
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+
+        if(evt.getExtendedKeyCode() == KeyEvent.VK_ENTER){
+                String encryptedPassword = "SpZ6zXctconKNu3TvnbhgA=="; 
 
     AESCipher cipher = new AESCipher();
 
@@ -107,13 +133,8 @@ public class PasswordOwner extends javax.swing.JFrame {
     } catch (Exception e) {
         e.printStackTrace();
     }
-    }//GEN-LAST:event_btnAcceptActionPerformed
-
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-  HardwareStoreDSA hardwareStoreDSA = new HardwareStoreDSA();
-        hardwareStoreDSA.setVisible(true);
-        this.setVisible(false);        
-    }//GEN-LAST:event_btnExitActionPerformed
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     /**
      * @param args the command line arguments
@@ -156,4 +177,25 @@ public class PasswordOwner extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
+   class FondoPanel extends JPanel
+    {
+        private Image imagen;
+        @Override
+        public void paint (Graphics g){
+            
+            imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
+            
+           
+            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    
+    } 
+
+
+
+
+
+
 }

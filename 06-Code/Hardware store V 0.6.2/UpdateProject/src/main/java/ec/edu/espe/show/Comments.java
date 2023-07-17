@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.show;
 
 import com.google.gson.Gson;
@@ -166,15 +163,15 @@ public class Comments extends javax.swing.JFrame {
         System.out.println("Comentario guardato correctamente");
 
         JOptionPane.showMessageDialog(rootPane, "El comentario se guardo con exito");
-        MenuUser menuUser = new MenuUser();
-        menuUser.setVisible(true);
+        MenuOwner addOfers = new MenuOwner();
+        addOfers.setVisible(true);
         this.setVisible(false);
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        MenuUser menuUser = new MenuUser();
-        menuUser.setVisible(true);
+         MenuOwner addOfers = new MenuOwner();
+        addOfers.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 

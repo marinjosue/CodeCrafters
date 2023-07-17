@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.show;
 
 import com.mongodb.ConnectionString;
@@ -13,16 +10,14 @@ import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.model.newUser;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.Arrays;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.bson.Document;
 
 
 /**
  *
- * @author mesia
+ * @author mesia,Josue, CodeCrafther
  */
 public class registerUser extends javax.swing.JFrame {
 
@@ -73,8 +68,6 @@ public class registerUser extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtDirection = new javax.swing.JTextField();
         btnMenuUser1 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        txtUserName5 = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,8 +135,6 @@ public class registerUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Nombre de Usuario");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,8 +157,7 @@ public class registerUser extends javax.swing.JFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtUserName2, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                                .addComponent(txtUserName1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                                .addComponent(txtUserName5))
+                                .addComponent(txtUserName1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
                             .addComponent(txtCi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDirection, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41))))
@@ -180,7 +170,6 @@ public class registerUser extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
@@ -198,10 +187,6 @@ public class registerUser extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txtUserName5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUserName1))
@@ -233,7 +218,7 @@ public class registerUser extends javax.swing.JFrame {
 
     private void btnMenuUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUserActionPerformed
 
-    newUser user = new newUser(txtUserName1.getText(), txtUserName2.getText(), txtCi.getText(), txtDirection.getText(), txtEmail.getText(), txtUserName5.getText());
+    newUser user = new newUser(txtUserName1.getText(), txtUserName2.getText(), txtCi.getText(), txtDirection.getText(), txtEmail.getText());
         if (newUser.validar(user, collection)) {
             newUser.registrar(user, collection);
 }
@@ -275,14 +260,12 @@ public class registerUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCi;
     private javax.swing.JTextField txtDirection;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtUserName1;
     private javax.swing.JTextField txtUserName2;
-    private javax.swing.JTextField txtUserName5;
     // End of variables declaration//GEN-END:variables
 
     class FondoPanel extends JPanel

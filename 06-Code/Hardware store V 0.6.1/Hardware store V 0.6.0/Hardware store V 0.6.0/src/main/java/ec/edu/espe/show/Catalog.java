@@ -4,7 +4,6 @@
  */
 package ec.edu.espe.show;
 
-import com.google.gson.Gson;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
@@ -12,12 +11,10 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.model.Product;
-import ec.edu.espe.show.MenuOwner;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.swing.JOptionPane;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
@@ -26,6 +23,7 @@ import org.bson.Document;
  * @author USER
  */
 public class Catalog extends javax.swing.JFrame {
+    FondoPanel fondo = new FondoPanel();
 
        
 private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
@@ -42,6 +40,8 @@ DefaultTableModel tableModel;
      * Creates new form Catalog
      */
     public Catalog() {
+                this.setContentPane(fondo);
+
         initComponents();
         ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
         MongoClientSettings settings = MongoClientSettings.builder()
@@ -244,4 +244,24 @@ DefaultTableModel tableModel;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+
+   class FondoPanel extends JPanel
+    {
+        private Image imagen;
+        @Override
+        public void paint (Graphics g){
+            
+            imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
+            
+           
+            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    
+    } 
+
+
+
 }

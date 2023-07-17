@@ -162,11 +162,10 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOwnerActionPerformed
 
     private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
-    //ya sirvio :D
-    
-    registerUser register = new registerUser();
-    register.setVisible(true);
-    this.setVisible(false);
+     
+            EnterUser User = new EnterUser();
+            User.setVisible(true);
+            this.setVisible(false);
     }//GEN-LAST:event_btnUserActionPerformed
 
     private void btnOwnerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOwnerMouseClicked

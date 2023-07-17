@@ -6,7 +6,7 @@ import ec.edu.espe.model.Product;
 
 /**
  *
- * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda, Mesias Mariscal CodeCrafters: DCCO-ESPE
+ * @author Josue Marin, CodeCrafters: DCCO-ESPE
  */
 public class ProductValidator {
     public static boolean isProductExists(HardwareStore hardwareStore, int productId) {

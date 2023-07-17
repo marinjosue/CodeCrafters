@@ -36,6 +36,7 @@ public class EnterItems extends javax.swing.JFrame {
     Product product;
     DefaultTableModel tableModel;
     private int selectedRow;
+    int idc;
 
     
     /**
@@ -55,7 +56,7 @@ public EnterItems() {
 
         initComponents();
         this.setLocationRelativeTo(null);
-        tableModel = (DefaultTableModel) jTable1.getModel();
+        tableModel = (DefaultTableModel) Table.getModel();
         btnEdit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(rootPane, "Artículo actualizado correctamente");
@@ -99,7 +100,7 @@ public EnterItems() {
         btnExit = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table = new javax.swing.JTable();
         btnEdit = new javax.swing.JButton();
         btnErrarse = new javax.swing.JButton();
 
@@ -116,6 +117,12 @@ public EnterItems() {
         jLabel3.setText("- Nombre del producto:");
 
         jLabel4.setText("- Ingrese el Stock del producto:");
+
+        txtStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("- Ingrese el precio del producto");
 
@@ -158,7 +165,7 @@ public EnterItems() {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -169,10 +176,14 @@ public EnterItems() {
                 "ID", "Nombre", "Stock", "Precio", "Descripcion"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(Table);
 
         btnEdit.setText("Editar");
-        btnEdit.setEnabled(false);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -198,52 +209,54 @@ public EnterItems() {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtStock))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel2))
-                                    .addGap(58, 58, 58)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtNameItems, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                        .addComponent(txtId))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
+                                .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel4)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtStock))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel3)
+                                                .addComponent(jLabel2))
+                                            .addGap(58, 58, 58)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtNameItems, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                                .addComponent(txtId))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(btnAccept)
-                                        .addGap(46, 46, 46)
-                                        .addComponent(btnNew)
-                                        .addGap(49, 49, 49)
-                                        .addComponent(btnEdit)
-                                        .addGap(54, 54, 54)
-                                        .addComponent(btnErrarse)
-                                        .addGap(51, 51, 51)
-                                        .addComponent(btnExit))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(185, 185, 185)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnAccept)
+                                                .addGap(46, 46, 46)
+                                                .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnErrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(8, 8, 8))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(185, 185, 185)
-                                .addComponent(jLabel1))))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addGap(226, 226, 226)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,19 +282,22 @@ public EnterItems() {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAccept)
-                    .addComponent(btnNew)
-                    .addComponent(btnExit)
-                    .addComponent(btnEdit)
-                    .addComponent(btnErrarse))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAccept, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnNew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnErrarse, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -294,7 +310,7 @@ public EnterItems() {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-     String cell1 = txtId.getText();
+        String cell1 = txtId.getText();
         String cell2 = txtNameItems.getText();
         String cell3 = txtStock.getText();
         String cell4 = txtPrice.getText();
@@ -304,7 +320,7 @@ public EnterItems() {
         } else {
             int id = Integer.parseInt(cell1);
             if (checkIdExists(id)) {
-                JOptionPane.showMessageDialog(this, "El ID ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El ID ya existe si desea actualizar aplaste el boton Editar", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 readData();
                 StringBuilder confirmationMessage = appendItems();
@@ -323,8 +339,6 @@ public EnterItems() {
             }
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
-
-
     private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
  try {
             readData();
@@ -404,7 +418,7 @@ try {
     boolean articuloEncontrado = false;
 
     if (selectedDocument != null) {
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = Table.getSelectedRow();
 
         // Actualizar los datos en el documento
         selectedDocument.put("name", name);
@@ -416,11 +430,11 @@ try {
         collection.replaceOne(Filters.eq("id", id), selectedDocument);
 
         // Actualizar los datos en la tabla
-        jTable1.setValueAt(id, selectedRow, 0);
-        jTable1.setValueAt(name, selectedRow, 1);
-        jTable1.setValueAt(stock, selectedRow, 2);
-        jTable1.setValueAt(price, selectedRow, 3);
-        jTable1.setValueAt(description, selectedRow, 4);
+        Table.setValueAt(id, selectedRow, 0);
+        Table.setValueAt(name, selectedRow, 1);
+        Table.setValueAt(stock, selectedRow, 2);
+        Table.setValueAt(price, selectedRow, 3);
+        Table.setValueAt(description, selectedRow, 4);
 
         JOptionPane.showMessageDialog(this, "Artículo actualizado correctamente");
 
@@ -437,9 +451,9 @@ try {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnErrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErrarseActionPerformed
-            int selectedRow = jTable1.getSelectedRow();
+ int selectedRow = Table.getSelectedRow();
 
-int id = (int) jTable1.getValueAt(selectedRow, 1);
+int id = (int) Table.getValueAt(selectedRow, 1);
 
 
     int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
@@ -454,6 +468,37 @@ int id = (int) jTable1.getValueAt(selectedRow, 1);
     private void btnErrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnErrarseMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnErrarseMouseClicked
+
+    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockActionPerformed
+
+    private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
+     int fila = Table.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
+    } else {
+        try {
+            int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
+            String nom = (String) Table.getValueAt(fila, 1);
+            int stock = Integer.parseInt(Table.getValueAt(fila, 2).toString());
+            double price = Double.parseDouble(Table.getValueAt(fila, 3).toString());
+            String descrip = (String) Table.getValueAt(fila, 4);
+
+            txtId.setText(String.valueOf(id));
+            txtNameItems.setText(nom);
+            txtStock.setText(String.valueOf(stock));
+            txtPrice.setText(String.valueOf(price));
+            txtDescription.setText(descrip);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+        }
+    }
+        
+        
+        
+    
+    }//GEN-LAST:event_TableMouseClicked
 
     private StringBuilder appendItems() {
         StringBuilder confirmationMessage = new StringBuilder();
@@ -496,9 +541,9 @@ int id = (int) jTable1.getValueAt(selectedRow, 1);
 
 
 private void deleteSelectedItem() {
-    int selectedRow = jTable1.getSelectedRow();
+    int selectedRow = Table.getSelectedRow();
 
-    int id = (int) jTable1.getValueAt(selectedRow, 0);
+    int id = (int) Table.getValueAt(selectedRow, 0);
 
     int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
@@ -547,6 +592,7 @@ private void deleteSelectedItem() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table;
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnErrarse;
@@ -561,7 +607,6 @@ private void deleteSelectedItem() {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtId;

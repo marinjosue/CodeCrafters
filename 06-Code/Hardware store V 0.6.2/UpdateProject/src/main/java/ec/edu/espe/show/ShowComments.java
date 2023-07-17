@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package ec.edu.espe.show;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -136,7 +133,7 @@ public class ShowComments extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     MongoCursor<Document> cursor = collection.find().iterator();
-    tableModel.setRowCount(0); // Limpiar la tabla antes de mostrar los comentarios
+    tableModel.setRowCount(0); 
 
     while (cursor.hasNext()) {
         Document document = cursor.next();

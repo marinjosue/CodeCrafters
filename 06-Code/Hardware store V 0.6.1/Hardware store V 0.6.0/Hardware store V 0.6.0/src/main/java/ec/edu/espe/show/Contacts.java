@@ -5,21 +5,30 @@
 package ec.edu.espe.show;
 
 import java.awt.Desktop;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
  * @author USER
  */
 public class Contacts extends javax.swing.JFrame {
+    FondoPanel fondo = new FondoPanel();
 
     /**
      * Creates new form Contacts
      */
     public Contacts() {
+        this.setContentPane(fondo);
+
         initComponents();
+                this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -40,6 +49,7 @@ public class Contacts extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(null);
 
         jLabel5.setText("Correo Electrónico:");
 
@@ -91,7 +101,7 @@ public class Contacts extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(jLabel5)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
@@ -114,7 +124,7 @@ public class Contacts extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegresar)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,4 +191,24 @@ public class Contacts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
+
+   class FondoPanel extends JPanel
+    {
+        private Image imagen;
+        @Override
+        public void paint (Graphics g){
+            
+            imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
+            
+           
+            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    
+    } 
+
+
+
+
 }

@@ -9,6 +9,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.model.Product;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import org.bson.Document;
 
 
@@ -18,6 +22,7 @@ import org.bson.Document;
  */
 public class VerifyStock extends javax.swing.JFrame {
    
+    FondoPanel fondo = new FondoPanel();
 
 private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
 private static final String DATABASE_NAME = "Project";
@@ -31,7 +36,9 @@ private static MongoCollection<Document> collection;
      */
      
     
-    public VerifyStock() {        
+    public VerifyStock() {
+        this.setContentPane(fondo);
+        
         initComponents();
         ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
         MongoClientSettings settings = MongoClientSettings.builder()
@@ -195,4 +202,22 @@ private static MongoCollection<Document> collection;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAStock;
     // End of variables declaration//GEN-END:variables
+   class FondoPanel extends JPanel
+    {
+        private Image imagen;
+        @Override
+        public void paint (Graphics g){
+            
+            imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
+            
+           
+            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    
+    } 
+
+
+
 }
