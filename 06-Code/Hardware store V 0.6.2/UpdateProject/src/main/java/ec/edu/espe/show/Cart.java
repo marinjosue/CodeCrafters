@@ -124,7 +124,6 @@ public class Cart extends javax.swing.JFrame {
         txtdate = new javax.swing.JTextField();
         btnImprimir = new javax.swing.JButton();
         btnTotalPRice = new javax.swing.JButton();
-        btnDelate = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         spnQuantity = new javax.swing.JSpinner();
 
@@ -445,18 +444,6 @@ public class Cart extends javax.swing.JFrame {
             }
         });
 
-        btnDelate.setText("Borrar");
-        btnDelate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDelateMouseClicked(evt);
-            }
-        });
-        btnDelate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelateActionPerformed(evt);
-            }
-        });
-
         jLabel15.setText("Ingrese la cantidad deseada");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -499,9 +486,7 @@ public class Cart extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnTotalPRice)
-                                .addGap(94, 94, 94)
-                                .addComponent(btnDelate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(104, 104, 104)
+                                .addGap(278, 278, 278)
                                 .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45))))
@@ -535,11 +520,9 @@ public class Cart extends javax.swing.JFrame {
                         .addGap(14, 14, 14))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnTotalPRice, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                                .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnDelate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnTotalPRice, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                            .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -562,43 +545,28 @@ public class Cart extends javax.swing.JFrame {
      btnImprimir.addActionListener(new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Crear una instancia de PrinterJob
         PrinterJob printerJob = PrinterJob.getPrinterJob();
-
-        // Establecer el objeto Printable para la impresión
-        printerJob.setPrintable(new Printable() {
+       printerJob.setPrintable(new Printable() {
             @Override
             public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
                 if (pageIndex > 0) {
                     return NO_SUCH_PAGE;
                 }
-
-                // Obtener el contexto gráfico para dibujar
                 Graphics2D g2d = (Graphics2D) graphics;
-
-                // Dibujar el panel gráfico en el contexto gráfico
                 panelGrafico.print(g2d);
 
                 return PAGE_EXISTS;
             }
         });
-
-        // Mostrar el diálogo de impresión
         if (printerJob.printDialog()) {
             try {
-                // Iniciar la impresión
                 printerJob.print();
             } catch (PrinterException ex) {
-                // Manejar errores de impresión
                 ex.printStackTrace();
             }
         }
     }
 });
-     
-     
-     
-     
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
@@ -661,37 +629,20 @@ public class Cart extends javax.swing.JFrame {
     private void btnTotalPRiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalPRiceActionPerformed
 
         String usePrice = txtPrice.getText();
-String useIva = txtIva.getText();
-try {
-    double price = Double.parseDouble(usePrice);
-    double iva = Double.parseDouble(useIva);
-    double ivat = price * (iva / 100);
-    double totalPriceWithVAT = price + ivat;
+    String useIva = txtIva.getText();
+                double formattedTotalPrice = 0.0;
+    try {
+        double price = Double.parseDouble(usePrice);
+        double iva = Double.parseDouble(useIva);
+        double ivat = price * (iva / 100);
+        double totalPriceWithVAT = price + ivat;
+        txtTotalPrice.setText(String.valueOf(totalPriceWithVAT));
 
-    // Formatear el precio final con IVA a dos decimales
-    String formattedTotalPrice = String.format("%.2f", totalPriceWithVAT);
-
-    // Mostrar el precio final con IVA en txtTotalPrice
-    txtTotalPrice.setText(formattedTotalPrice);
-} catch (NumberFormatException e) {
-    // Manejar el caso en que los valores ingresados no sean numéricos
-    JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo Iva%", "Error", JOptionPane.ERROR_MESSAGE);
-}
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo Iva%", "Error", JOptionPane.ERROR_MESSAGE);
+    }
         
     }//GEN-LAST:event_btnTotalPRiceActionPerformed
-
-    private void btnDelateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelateMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelateMouseClicked
-
-    private void btnDelateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelateActionPerformed
-      txtIva.setText(""); 
-      txtTotalPrice.setText(""); 
-      txtPrice.setText(""); 
-      DefaultTableModel cartTableModel = (DefaultTableModel) tableCart.getModel();
-      cartTableModel.setRowCount(0);
-        
-    }//GEN-LAST:event_btnDelateActionPerformed
 
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         
@@ -740,9 +691,6 @@ try {
 
         txtadress.setText( adress);
     } 
-    
-      
-
     }//GEN-LAST:event_txtadressAncestorAdded
 
     private void txtciAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtciAncestorAdded
@@ -835,7 +783,6 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDelate;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnTotalPRice;
