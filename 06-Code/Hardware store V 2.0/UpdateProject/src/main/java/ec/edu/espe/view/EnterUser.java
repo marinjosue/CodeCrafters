@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.controller.AuthController;
 import ec.edu.espe.controller.UserData;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -22,7 +23,7 @@ public class EnterUser extends javax.swing.JFrame {
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection<Document> collection;
-    
+    String userCi;
     /**
      * Creates new form UserRegister
      */
@@ -153,30 +154,11 @@ public class EnterUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
-
-        
+   
     String userCi = txtCi.getText();
+    AuthController authController = new AuthController(collection); 
+    authController.authenticateUser(userCi);
 
-    Document query = new Document("ci", userCi);
-    Document existingUser = collection.find(query).first();
-
-    if (existingUser != null) {
-        String storedCi = existingUser.getString("ci");
-        if (storedCi.equals(userCi)) {
-            UserData.userCi = userCi; 
-
-            
-            Cart cart = new Cart();
-            cart.setVisible(true);
-
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    
     }//GEN-LAST:event_btnGetActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

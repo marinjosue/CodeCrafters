@@ -9,7 +9,7 @@ package ec.edu.espe.model;
  *
  * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda, Mesias Mariscal CodeCrafters: DCCO-ESPE
  */
-public class Comment {
+//public class Comment {
     private String name;
     private String content;
 
