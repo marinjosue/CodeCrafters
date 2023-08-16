@@ -8,19 +8,14 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.controller.PriceCalculator;
+import ec.edu.espe.controller.PrintController;
 import ec.edu.espe.model.Product;
 import ec.edu.espe.controller.User;
 import ec.edu.espe.controller.UserData;
 import ec.edu.espe.model.UserFinder;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,15 +43,12 @@ public class Cart extends javax.swing.JFrame {
     private static MongoCollection<Document> collection;
     private static MongoCollection<Document> collections;
     DefaultTableModel tableModel;
-    Product product;
+   // Product product;
     List<Product> cartProducts;
-    double totalValue;
+   double totalValue;
     private double totalPrice;
 
-    private String nombres;
-    private String apellidos;
-    private String direccion;
-
+    
     /**
      * Creates new form Cart
      */
@@ -542,31 +534,8 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-     btnImprimir.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        PrinterJob printerJob = PrinterJob.getPrinterJob();
-       printerJob.setPrintable(new Printable() {
-            @Override
-            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-                if (pageIndex > 0) {
-                    return NO_SUCH_PAGE;
-                }
-                Graphics2D g2d = (Graphics2D) graphics;
-                panelGrafico.print(g2d);
+    PrintController.setupPrintButtonAction(panelGrafico, btnImprimir);
 
-                return PAGE_EXISTS;
-            }
-        });
-        if (printerJob.printDialog()) {
-            try {
-                printerJob.print();
-            } catch (PrinterException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-});
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnImprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirMouseClicked
@@ -598,6 +567,7 @@ public class Cart extends javax.swing.JFrame {
     try {
     int id = Integer.parseInt(txtIdCart.getText());
     Document document = collection.find(new Document("id", id)).first();
+
     if (document != null) {
         String name = document.getString("name");
         double price = document.getDouble("price");
@@ -606,42 +576,64 @@ public class Cart extends javax.swing.JFrame {
         if (stock > 0) {
             int quantity = (int) spnQuantity.getValue();
 
-            if (quantity <= stock) {
+            if (quantity <= 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor que cero", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (quantity > stock) {
+                JOptionPane.showMessageDialog(this, "La cantidad ingresada excede el stock disponible", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int index = findProductIndexInCart(id);
+            if (index != -1) {
+                
+                Product existingProduct = cartProducts.get(index);
+                int newQuantity = existingProduct.getQuantity() + quantity;
+                if (newQuantity > stock) {
+                    JOptionPane.showMessageDialog(this, "La cantidad ingresada excede el stock disponible", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                existingProduct.setQuantity(newQuantity);
+                existingProduct.setTotalPrice((float) (existingProduct.getTotalPrice() + (price * quantity)));
+            } else {
                 int updatedStock = stock - quantity;
                 document.put("stock", updatedStock);
                 collection.replaceOne(new Document("id", id), document);
 
-                Product product = new Product(id, name, price, quantity, totalPrice);
+                Product product = new Product(id, name, price, quantity, price * quantity);
                 cartProducts.add(product);
-                updateCartTable();
-            } else {
-                JOptionPane.showMessageDialog(this, "La cantidad ingresada excede el stock disponible", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            updateCartTable();
         } else {
             JOptionPane.showMessageDialog(this, "El producto seleccionado no se encuentra disponible", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Producto no encontrado en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
     }
 } catch (NumberFormatException e) {
     JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
 }
+
     }//GEN-LAST:event_btnAddActionPerformed
+private int findProductIndexInCart(int productId) {
+    for (int i = 0; i < cartProducts.size(); i++) {
+        if (cartProducts.get(i).getId() == productId) {
+            return i; // Producto encontrado en el carrito, devuelve el índice
+        }
+    }
+    return -1; // Producto no encontrado en el carrito
+}
 
     private void btnTotalPRiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalPRiceActionPerformed
+String usePrice = txtPrice.getText();
+String useIva = txtIva.getText();
 
-        String usePrice = txtPrice.getText();
-    String useIva = txtIva.getText();
-    double formattedTotalPrice = 0.0;
-    try {
-        double price = Double.parseDouble(usePrice);
-        double iva = Double.parseDouble(useIva);
-        double ivat = price * (iva / 100);
-        double totalPriceWithVAT = price + ivat;
-        txtTotalPrice.setText(String.valueOf(totalPriceWithVAT));
+double totalPriceWithVAT = PriceCalculator.calculateTotalPriceWithVAT(usePrice, useIva);
 
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Ingrese solo números en el campo Iva%", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        
+txtTotalPrice.setText(String.valueOf(totalPriceWithVAT));
+
     }//GEN-LAST:event_btnTotalPRiceActionPerformed
 
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
@@ -726,7 +718,7 @@ public class Cart extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_txtemailAncestorAdded
  
-          private void updateCartTable() {
+    private void updateCartTable() {
     DefaultTableModel cartTableModel = (DefaultTableModel) tableCart.getModel();
     cartTableModel.setRowCount(0);
 
