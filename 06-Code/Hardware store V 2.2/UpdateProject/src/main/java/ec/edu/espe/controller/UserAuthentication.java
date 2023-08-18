@@ -34,6 +34,7 @@ public class UserAuthentication {
                     UserData.userCi = username;
                     MenuOwner owner = new MenuOwner();
                     owner.setVisible(true);
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
                 }

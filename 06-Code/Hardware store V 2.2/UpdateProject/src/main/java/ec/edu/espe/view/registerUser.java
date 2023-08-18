@@ -204,9 +204,13 @@ public class registerUser extends javax.swing.JFrame {
     private void btnMenuUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUserActionPerformed
     newUser user = new newUser(txtUserName1.getText(), txtUserName2.getText(), txtCi.getText(), txtDirection.getText(), txtEmail.getText());
 
-    user.registrar(); 
+    if (user.validar()) {
+        user.registrar();
+        dispose();
 
-
+        EnterUser enterUserWindow = new EnterUser();
+        enterUserWindow.setVisible(true);
+    }
     }//GEN-LAST:event_btnMenuUserActionPerformed
 
     private void txtUserName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserName2ActionPerformed
