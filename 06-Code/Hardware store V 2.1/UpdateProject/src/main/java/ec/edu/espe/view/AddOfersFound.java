@@ -150,42 +150,7 @@ public class AddOfersFound extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptOfersFounfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOfersFounfActionPerformed
-try {
-    String discountText = txtDisscount.getText();
-    int discount = Integer.parseInt(discountText);
-    int productId = Integer.parseInt(txtIdProduct.getText());
-
-    Document query = new Document("id", productId);
-    Document document = collection.find(query).first();
-
-    if (document != null) {
-        double price = document.getDouble("price");
-        if (discount >= 0 && discount <= 100) {
-            double discountedPrice = price * (1 - (discount / 100.0));
-            document.put("price", discountedPrice);
-            document.put("discount", discount);
-
-            collection.replaceOne(query, document);
-
-            int id = document.getInteger("id");
-            String name = document.getString("name");
-
-            StringBuilder confirmationMessage = new StringBuilder();
-            confirmationMessage.append("Descuento aplicado al producto:").append("\n\n");
-            confirmationMessage.append("ID: ").append(id).append("\n");
-            confirmationMessage.append("Name: ").append(name).append("\n");
-            confirmationMessage.append("Discounted Price: ").append(discountedPrice).append("\n");
-            JOptionPane.showMessageDialog(rootPane, confirmationMessage.toString(), "Descuento Aplicado", JOptionPane.INFORMATION_MESSAGE);
-
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "El porcentaje de descuento debe estar entre 0 y 100", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } else {
-        JOptionPane.showMessageDialog(rootPane, "No se encontró un producto con el ID ingresado", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(rootPane, "Ingrese solo números enteros por favor", "Error", JOptionPane.ERROR_MESSAGE);
-}
+        applyDiscount(txtDisscount.getText(), txtIdProduct.getText());
 
     }//GEN-LAST:event_btnAcceptOfersFounfActionPerformed
 
@@ -268,7 +233,46 @@ try {
             super.paint(g);
         }
     
-    } 
+    }
+   
+   public void applyDiscount(String discountText, String productIdText) {
+    try {
+        int discount = Integer.parseInt(discountText);
+        int productId = Integer.parseInt(productIdText);
+
+        Document query = new Document("id", productId);
+        Document document = collection.find(query).first();
+
+        if (document != null) {
+            double price = document.getDouble("price");
+            if (discount >= 0 && discount <= 100) {
+                double discountedPrice = price * (1 - (discount / 100.0));
+                document.put("price", discountedPrice);
+                document.put("discount", discount);
+
+                collection.replaceOne(query, document);
+
+                int id = document.getInteger("id");
+                String name = document.getString("name");
+
+                StringBuilder confirmationMessage = new StringBuilder();
+                confirmationMessage.append("Descuento aplicado al producto:").append("\n\n");
+                confirmationMessage.append("ID: ").append(id).append("\n");
+                confirmationMessage.append("Name: ").append(name).append("\n");
+                confirmationMessage.append("Discounted Price: ").append(discountedPrice).append("\n");
+                JOptionPane.showMessageDialog(rootPane, confirmationMessage.toString(), "Descuento Aplicado", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "El porcentaje de descuento debe estar entre 0 y 100", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "No se encontró un producto con el ID ingresado", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "Ingrese solo números enteros por favor", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
 
 
 
