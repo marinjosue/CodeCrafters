@@ -10,6 +10,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import ec.edu.espe.controller.DatabaseConnection;
+import ec.edu.espe.controller.TableController;
 import ec.edu.espe.model.Product;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -35,7 +37,7 @@ public class EnterItems extends javax.swing.JFrame {
     private static MongoCollection<Document>collection;
     Product product;
     DefaultTableModel tableModel;
-    
+    private DatabaseConnection dbConnection;
   
 
     
@@ -56,13 +58,13 @@ public EnterItems() {
 
         initComponents();
         this.setLocationRelativeTo(null);
-        tableModel = (DefaultTableModel) Table.getModel();
+        tableModel = (DefaultTableModel) jTable1.getModel();
         btnEdit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(rootPane, "Artículo actualizado correctamente");
-                // Actualizar la tabla después de editar el artículo
+           
                 jButton1ActionPerformed(e);
-
+        dbConnection = new DatabaseConnection("products");
 
             }
         });
@@ -100,7 +102,7 @@ public EnterItems() {
         btnExit = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         btnEdit = new javax.swing.JButton();
         btnErrarse = new javax.swing.JButton();
 
@@ -165,7 +167,7 @@ public EnterItems() {
             }
         });
 
-        Table.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -176,12 +178,12 @@ public EnterItems() {
                 "ID", "Nombre", "Stock", "Precio", "Descripcion"
             }
         ));
-        Table.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TableMouseClicked(evt);
+                jTable1MouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(Table);
+        jScrollPane3.setViewportView(jTable1);
 
         btnEdit.setText("Actualizar");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -348,7 +350,7 @@ public EnterItems() {
 
             if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.NO_OPTION) {
                 JOptionPane.showMessageDialog(rootPane, "Cancelado");
-                return; // Salir del método sin guardar los datos
+                return; 
             }
 
             if (option == JOptionPane.YES_OPTION) {
@@ -376,18 +378,8 @@ public EnterItems() {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-MongoCursor<Document> cursor = collection.find().iterator();
-        tableModel.setRowCount(0);
-        while (cursor.hasNext()) {
-            Document document = cursor.next();
-            int id = document.getInteger("id");
-            String name = document.getString("name");
-            int stock = document.getInteger("stock");
-            double price = document.getDouble("price");
-            String description = document.getString("description");
-            Object[] row = {id, name, stock, price, description};
-            tableModel.addRow(row);
-        }
+   TableController tableController = new TableController(dbConnection);
+        jTable1.setModel(tableController.getTableModel());
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -417,7 +409,7 @@ try {
     boolean articuloEncontrado = false;
 
     if (selectedDocument != null) {
-        int selectedRow = Table.getSelectedRow();
+        int selectedRow = jTable1.getSelectedRow();
 
         selectedDocument.put("name", name);
         selectedDocument.put("stock", stock);
@@ -442,9 +434,9 @@ try {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnErrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErrarseActionPerformed
- int selectedRow = Table.getSelectedRow();
+ int selectedRow = jTable1.getSelectedRow();
 
-int id = (int) Table.getValueAt(selectedRow, 1);
+int id = (int) jTable1.getValueAt(selectedRow, 1);
 
 
     int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
@@ -464,17 +456,17 @@ int id = (int) Table.getValueAt(selectedRow, 1);
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockActionPerformed
 
-    private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
-     int fila = Table.getSelectedRow();
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+     int fila = jTable1.getSelectedRow();
     if (fila == -1) {
         JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
     } else {
         try {
-            int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
-            String nom = (String) Table.getValueAt(fila, 1);
-            int stock = Integer.parseInt(Table.getValueAt(fila, 2).toString());
-            double price = Double.parseDouble(Table.getValueAt(fila, 3).toString());
-            String descrip = (String) Table.getValueAt(fila, 4);
+            int id = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
+            String nom = (String) jTable1.getValueAt(fila, 1);
+            int stock = Integer.parseInt(jTable1.getValueAt(fila, 2).toString());
+            double price = Double.parseDouble(jTable1.getValueAt(fila, 3).toString());
+            String descrip = (String) jTable1.getValueAt(fila, 4);
 
             txtId.setText(String.valueOf(id));
             txtNameItems.setText(nom);
@@ -486,7 +478,7 @@ int id = (int) Table.getValueAt(selectedRow, 1);
         }
     }
    
-    }//GEN-LAST:event_TableMouseClicked
+    }//GEN-LAST:event_jTable1MouseClicked
 
     private StringBuilder appendItems() {
         StringBuilder confirmationMessage = new StringBuilder();
@@ -529,9 +521,9 @@ int id = (int) Table.getValueAt(selectedRow, 1);
 
 
 private void deleteSelectedItem() {
-    int selectedRow = Table.getSelectedRow();
+    int selectedRow = jTable1.getSelectedRow();
 
-    int id = (int) Table.getValueAt(selectedRow, 0);
+    int id = (int) jTable1.getValueAt(selectedRow, 0);
 
     int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
@@ -580,7 +572,6 @@ private void deleteSelectedItem() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table;
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnErrarse;
@@ -595,6 +586,7 @@ private void deleteSelectedItem() {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtId;
