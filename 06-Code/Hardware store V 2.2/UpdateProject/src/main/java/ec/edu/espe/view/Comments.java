@@ -1,16 +1,14 @@
 
 package ec.edu.espe.view;
 
-import com.google.gson.Gson;
-import com.mongodb.client.MongoCollection;
+
+import ec.edu.espe.controller.CommentManager;
 import ec.edu.espe.controller.DatabaseConnection;
-import ec.edu.espe.model.Comment;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.bson.Document;
 
 /**
  *
@@ -18,21 +16,19 @@ import org.bson.Document;
  */
 public class Comments extends javax.swing.JFrame {
     FondoPanel fondo = new FondoPanel();
-    private DatabaseConnection dbConnection;
-
+    private final DatabaseConnection dbConnection;
+    private final CommentManager commentManager; 
    
-    Comment comment;
-    
     /**
      * Creates new form Comments
      */
     public Comments() {
         this.setContentPane(fondo);
         dbConnection = new DatabaseConnection("comments");
-
         initComponents();
         this.setLocationRelativeTo(null);
-    }
+        commentManager = new CommentManager(dbConnection);
+    } 
 
    
     @SuppressWarnings("unchecked")
@@ -138,23 +134,19 @@ public class Comments extends javax.swing.JFrame {
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         String cell1 = txtName.getText();
         String cell2 = txtComment.getText();
+        
         if (cell1.isEmpty() || cell2.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
-                MongoCollection<Document> collection = dbConnection.getCollection();
-
-        readData(); 
-        Gson gson = new Gson();
-        String json = gson.toJson(comment);
-        Document document= Document.parse(json);
-        collection.insertOne(document);
-        System.out.println("Comentario guardato correctamente");
-
-        JOptionPane.showMessageDialog(rootPane, "El comentario se guardo con exito");
-        MenuOwner addOfers = new MenuOwner();
-        addOfers.setVisible(true);
-        this.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            commentManager.addComment(cell1, cell2);
+            
+            JOptionPane.showMessageDialog(rootPane, "El comentario se guardó con éxito");
+            
+            MenuOwner addOffers = new MenuOwner();
+            addOffers.setVisible(true);
+            this.setVisible(false);
         }
+     
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -197,16 +189,7 @@ public class Comments extends javax.swing.JFrame {
             }
         });
     }
-  private void readData() {
-        
-        String Name;
-        String Comment;
-        
-        Name =txtName.getText();
-        Comment=txtComment.getText();
-        
-       comment = new Comment(Name,Comment);
-    }
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TxtComentario;
     private javax.swing.JButton btnAccept;
@@ -233,8 +216,5 @@ public class Comments extends javax.swing.JFrame {
         }
     
     } 
-
-
-
 
 }

@@ -2,6 +2,8 @@
 package ec.edu.espe.view;
 
 
+import ec.edu.espe.model.UserData;
+import ec.edu.espe.model.User;
 import ec.edu.espe.controller.*;
 import ec.edu.espe.model.*;
 import java.awt.*;
@@ -22,6 +24,7 @@ public class Cart extends javax.swing.JFrame {
     private DatabaseConnection dbConnection;
     List<Product> cartProducts;
     private double totalPrice;
+    
     /**
      * Creates new form Cart
      */

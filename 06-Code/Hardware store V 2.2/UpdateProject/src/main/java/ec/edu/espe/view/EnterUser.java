@@ -1,16 +1,15 @@
 
 package ec.edu.espe.view;
 
-import com.mongodb.client.MongoCollection;
+
 import ec.edu.espe.controller.DatabaseConnection;
 import ec.edu.espe.controller.LoginUser;
-import ec.edu.espe.controller.UserData;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.bson.Document;
+
 
 /**
  *

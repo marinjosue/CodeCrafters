@@ -1,7 +1,6 @@
 
 package ec.edu.espe.model;
 
-import ec.edu.espe.controller.User;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
