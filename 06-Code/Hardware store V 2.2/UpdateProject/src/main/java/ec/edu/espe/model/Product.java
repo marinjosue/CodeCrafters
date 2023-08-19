@@ -21,10 +21,10 @@ public class Product {
     private int quantity;
     private float totalPrice;
 
-        public Product(int id, String name, double price, int quantity, double totalPrice) {
+    public Product(int id, String name, Double price, int quantity) {
         this.id = id;
         this.name = name;
-        this.price = (float) price;
+        this.price = (float) (double) price;
         this.quantity = quantity;
         this.totalPrice = (float) totalPrice;
     }

@@ -2,6 +2,7 @@
 package ec.edu.espe.view;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import ec.edu.espe.controller.CommentController;
 import ec.edu.espe.controller.DatabaseConnection;
 import ec.edu.espe.model.Product;
 import java.awt.Graphics;
@@ -29,14 +30,14 @@ public class ShowComments extends javax.swing.JFrame {
      */
     public ShowComments() {
         this.setContentPane(fondo);
-
-        dbConnection = new DatabaseConnection("comments");
-
-
+        dbConnection = new DatabaseConnection("comments");        
         initComponents();
         this.setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) jTable1.getModel();
+        CommentController commentController = new CommentController(dbConnection);
+        commentController.loadProductsFromDatabase(tableModel); 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,17 +122,8 @@ public class ShowComments extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    MongoCollection<Document> collection = dbConnection.getCollection();
-    MongoCursor<Document> cursor = collection.find().iterator();
-    tableModel.setRowCount(0); 
-
-    while (cursor.hasNext()) {
-        Document document = cursor.next();
-        String name = document.getString("name"); 
-        String comment = document.getString("content"); 
-        Object[] row = {name, comment};
-        tableModel.addRow(row);
-    }
+        CommentController commentController = new CommentController(dbConnection); 
+        commentController.loadProductsFromDatabase(tableModel);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
