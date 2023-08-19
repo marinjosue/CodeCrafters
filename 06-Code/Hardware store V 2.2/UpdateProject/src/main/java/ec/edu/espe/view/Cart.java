@@ -1,7 +1,7 @@
 
 package ec.edu.espe.view;
 
-import com.mongodb.client.MongoCollection;
+
 import ec.edu.espe.controller.*;
 import ec.edu.espe.model.*;
 import java.awt.*;

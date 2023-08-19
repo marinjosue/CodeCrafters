@@ -67,7 +67,7 @@ private void updateCartTable() {
     double totalValue = 0.0;
     for (Product product : cartProducts) {
         double quantity = product.getQuantity();
-        double totalPriceWithVAT = calculateTotalPrice(product.getPrice(), 12.0); // Cambia el 12.0 al valor adecuado del IVA
+        double totalPriceWithVAT = calculateTotalPrice(product.getPrice(), 12.0); 
         double totalPrice = totalPriceWithVAT * quantity;
         product.setTotalPrice((float) totalPrice);
         totalValue += totalPrice;

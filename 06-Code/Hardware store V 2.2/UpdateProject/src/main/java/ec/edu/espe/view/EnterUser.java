@@ -3,6 +3,7 @@ package ec.edu.espe.view;
 
 import com.mongodb.client.MongoCollection;
 import ec.edu.espe.controller.DatabaseConnection;
+import ec.edu.espe.controller.LoginUser;
 import ec.edu.espe.controller.UserData;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,8 +18,9 @@ import org.bson.Document;
  */
 public class EnterUser extends javax.swing.JFrame {
     FondoPanel fondo = new FondoPanel();
+   
+    private LoginUser enterUser;
     private DatabaseConnection dbConnection;
-
     
     /**
      * Creates new form UserRegister
@@ -26,12 +28,14 @@ public class EnterUser extends javax.swing.JFrame {
     public EnterUser() {
         
         this.setContentPane(fondo);
-
         initComponents();
         this.setLocationRelativeTo(null);
-        dbConnection = new DatabaseConnection("User");
-
+        DatabaseConnection dbConnection = new DatabaseConnection("User");
+       enterUser = new LoginUser (dbConnection);
     }
+
+    private EnterUser(DatabaseConnection dbConnection) {
+        throw new UnsupportedOperationException("Not supported yet."); }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,31 +153,23 @@ public class EnterUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
-
-    MongoCollection<Document> collection = dbConnection.getCollection();
+   String userCi = txtCi.getText();
         
-    String userCi = txtCi.getText();
+        try {
+            boolean loginSuccessful = enterUser.loginUser(userCi);
 
-    Document query = new Document("ci", userCi);
-    Document existingUser = collection.find(query).first();
+            if (loginSuccessful) {
+                Cart cart = new Cart();
+                cart.setVisible(true);
 
-    if (existingUser != null) {
-        String storedCi = existingUser.getString("ci");
-        if (storedCi.equals(userCi)) {
-            UserData.userCi = userCi; 
-
-            
-            Cart cart = new Cart();
-            cart.setVisible(true);
-
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario no encontrado o contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al intentar iniciar sesión: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    
+     
     }//GEN-LAST:event_btnGetActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
