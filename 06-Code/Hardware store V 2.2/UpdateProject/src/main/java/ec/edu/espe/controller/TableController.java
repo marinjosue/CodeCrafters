@@ -7,7 +7,6 @@ package ec.edu.espe.controller;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.bson.Document;
 
 /**
@@ -38,8 +37,9 @@ public class TableController {
             int stock = document.getInteger("stock");
             double price = document.getDouble("price");
             String description = document.getString("description");
+            //int discount = document.getInteger("discount");
             
-            Object[] row = {id, name, stock, price, description};
+            Object[] row = {id, name, stock, price, description };
             tableModel.addRow(row);
         }
         return tableModel;

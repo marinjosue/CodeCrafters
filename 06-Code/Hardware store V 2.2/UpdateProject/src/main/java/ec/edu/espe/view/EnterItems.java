@@ -7,7 +7,6 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import ec.edu.espe.controller.DatabaseConnection;
@@ -312,34 +311,7 @@ public EnterItems() {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        String cell1 = txtId.getText();
-        String cell2 = txtNameItems.getText();
-        String cell3 = txtStock.getText();
-        String cell4 = txtPrice.getText();
-        String cell5 = txtDescription.getText();
-        if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            int id = Integer.parseInt(cell1);
-            if (checkIdExists(id)) {
-                JOptionPane.showMessageDialog(this, "El ID ya existe si desea actualizar aplaste el boton Editar", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                readData();
-                StringBuilder confirmationMessage = appendItems();
-                int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
-
-                if (option == JOptionPane.YES_OPTION) {
-                    Gson gson = new Gson();
-                    String json = gson.toJson(product);
-                    Document document = Document.parse(json);
-                    collection.insertOne(document);
-                    JOptionPane.showMessageDialog(rootPane, "Guardado");
-                    addToTable(product);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Cancelado");
-                }
-            }
-        }
+        processProductData();
     }//GEN-LAST:event_btnAcceptActionPerformed
     private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
  try {
@@ -378,59 +350,13 @@ public EnterItems() {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   TableController tableController = new TableController(dbConnection);
+        TableController tableController = new TableController(dbConnection);
         jTable1.setModel(tableController.getTableModel());
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-
-String cell1 = txtId.getText();
-String cell2 = txtNameItems.getText();
-String cell3 = txtStock.getText();
-String cell4 = txtPrice.getText();
-String cell5 = txtDescription.getText();
-
-if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
-    JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
-    return;
-}
-
-try {
-    
-    int id = Integer.parseInt(txtId.getText());
-    String name = txtNameItems.getText();
-    int stock = Integer.parseInt(txtStock.getText());
-    double price = Double.parseDouble(txtPrice.getText());
-    String description = txtDescription.getText();
-
-    Document selectedDocument = collection.find(Filters.eq("id", id)).first();
-
-    boolean articuloEncontrado = false;
-
-    if (selectedDocument != null) {
-        int selectedRow = jTable1.getSelectedRow();
-
-        selectedDocument.put("name", name);
-        selectedDocument.put("stock", stock);
-        selectedDocument.put("price", price);
-        selectedDocument.put("description", description);
-
-        collection.replaceOne(Filters.eq("id", id), selectedDocument);
-
-       
-        JOptionPane.showMessageDialog(this, "Artículo actualizado correctamente");
-
-        articuloEncontrado = true;
-    }
-
-    if (!articuloEncontrado) {
-        JOptionPane.showMessageDialog(this, "El artículo no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(this, "Ingrese solo números en los campos ID, Stock y Precio", "Error", JOptionPane.ERROR_MESSAGE);
-}
-
+        processProductData1();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnErrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErrarseActionPerformed
@@ -610,7 +536,82 @@ private void deleteSelectedItem() {
     
     } 
 
+public void processProductData() {
+    String cell1 = txtId.getText();
+    String cell2 = txtNameItems.getText();
+    String cell3 = txtStock.getText();
+    String cell4 = txtPrice.getText();
+    String cell5 = txtDescription.getText();
+    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        int id = Integer.parseInt(cell1);
+        if (checkIdExists(id)) {
+            JOptionPane.showMessageDialog(this, "El ID ya existe si desea actualizar aplaste el boton Editar", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            readData();
+            StringBuilder confirmationMessage = appendItems();
+            int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
 
+            if (option == JOptionPane.YES_OPTION) {
+                Gson gson = new Gson();
+                String json = gson.toJson(product);
+                Document document = Document.parse(json);
+                collection.insertOne(document);
+                JOptionPane.showMessageDialog(rootPane, "Guardado");
+                addToTable(product);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Cancelado");
+            }
+        }
+    }
+}
+
+public void processProductData1() {
+    String cell1 = txtId.getText();
+    String cell2 = txtNameItems.getText();
+    String cell3 = txtStock.getText();
+    String cell4 = txtPrice.getText();
+    String cell5 = txtDescription.getText();
+
+    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        int id = Integer.parseInt(txtId.getText());
+        String name = txtNameItems.getText();
+        int stock = Integer.parseInt(txtStock.getText());
+        double price = Double.parseDouble(txtPrice.getText());
+        String description = txtDescription.getText();
+
+        Document selectedDocument = collection.find(Filters.eq("id", id)).first();
+
+        boolean articuloEncontrado = false;
+
+        if (selectedDocument != null) {
+            int selectedRow = jTable1.getSelectedRow();
+
+            selectedDocument.put("name", name);
+            selectedDocument.put("stock", stock);
+            selectedDocument.put("price", price);
+            selectedDocument.put("description", description);
+
+            collection.replaceOne(Filters.eq("id", id), selectedDocument);
+
+            JOptionPane.showMessageDialog(this, "Artículo actualizado correctamente");
+
+            articuloEncontrado = true;
+        }
+
+        if (!articuloEncontrado) {
+            JOptionPane.showMessageDialog(this, "El artículo no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Ingrese solo números en los campos ID, Stock y Precio", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
 
 

@@ -39,6 +39,7 @@ public class DiscountManager {
                     confirmationMessage.append("ID: ").append(id).append("\n");
                     confirmationMessage.append("Name: ").append(name).append("\n");
                     confirmationMessage.append("Discounted Price: ").append(discountedPrice).append("\n");
+                    confirmationMessage.append("Discounted Applied: ").append(discount).append("\n");
                     JOptionPane.showMessageDialog(null, confirmationMessage.toString(), "Discount Applied", JOptionPane.INFORMATION_MESSAGE);
 
                 } else {
