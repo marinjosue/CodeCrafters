@@ -307,10 +307,9 @@ public class Cart extends javax.swing.JFrame {
                         .addGap(14, 14, 14)))
                 .addGroup(panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addGroup(panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtIva, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                        .addComponent(txtIvaAmount)
-                        .addComponent(txtTotalPrice)))
+                    .addComponent(txtIva, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                    .addComponent(txtIvaAmount, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTotalPrice, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(23, 23, 23))
         );
         panelGraficoLayout.setVerticalGroup(
@@ -410,7 +409,7 @@ public class Cart extends javax.swing.JFrame {
                                 .addComponent(jButton1)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
+                                .addGap(87, 87, 87)
                                 .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -551,16 +550,16 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPriceActionPerformed
 
     private void btnTotalPRice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalPRice1ActionPerformed
-String usePrice = txtPrice.getText();
-String useIva = txtIva.getText();
-double totalPriceWithVAT = PriceCalculator.calculateTotalPriceWithVAT(usePrice, useIva);
+        String usePrice = txtPrice.getText();
+        String useIva = txtIva.getText();
+        double totalPriceWithVAT = PriceCalculator.calculateTotalPriceWithVAT(usePrice, useIva);
 
-String formattedTotalPriceWithVAT = String.format("%.2f", totalPriceWithVAT); 
-txtTotalPrice.setText(formattedTotalPriceWithVAT);
+        String formattedTotalPriceWithVAT = String.format("%.2f", totalPriceWithVAT); 
+        txtTotalPrice.setText(formattedTotalPriceWithVAT);
 
-double ivaAmount = totalPriceWithVAT - Double.parseDouble(usePrice);
-String formattedIvaAmount = String.format("%.2f", ivaAmount); 
-txtIvaAmount.setText(formattedIvaAmount);
+        double ivaAmount = totalPriceWithVAT - Double.parseDouble(usePrice);
+        String formattedIvaAmount = String.format("%.2f", ivaAmount); 
+        txtIvaAmount.setText(formattedIvaAmount);
 
 
     }//GEN-LAST:event_btnTotalPRice1ActionPerformed

@@ -3,11 +3,14 @@ package ec.edu.espe.controller;
 
 import com.mongodb.client.MongoCollection;
 import ec.edu.espe.model.Product;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
@@ -24,26 +27,38 @@ public ProductController(MongoCollection<Document> collection, List<Product> car
         this.txtPrice = txtPrice;
     }
  
-public void btnAddActionPerformed(java.awt.event.ActionEvent evt, JTextField txtIdCart, JSpinner spnQuantity) {
-    try {
+public void btnAddActionPerformed(java.awt.event.ActionEvent evt, JTextField txtIdCart, JSpinner spnQuantity) {       try {
         int id = Integer.parseInt(txtIdCart.getText());
         Document document = collection.find(new Document("id", id)).first();
-        if (document != null) {
+        if (document == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró ningún producto con el ID ingresado", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (document != null) {            
             String name = document.getString("name");
             Double price = document.getDouble("price");
             int stock = document.getInteger("stock");
 
+        
+            
             if (stock > 0) {
                 int quantity = (int) spnQuantity.getValue();
                 if (quantity <= stock) {
                     Product existingProduct = null;
+                
                     for (Product product : cartProducts) {
                         if (product.getId() == id) {
                             existingProduct = product;
                             break;
                         }
                     }
-
+                    
+                    if (quantity <= 0) {
+                        JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor que 0", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
                     if (existingProduct != null) {
                         int updatedStock = stock - quantity;
                         document.put("stock", updatedStock);
@@ -79,10 +94,12 @@ private void updateCartTable() {
     cartTableModel.setRowCount(0);
 
     double totalValue = 0.0;
-        
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    
     for (Product product : cartProducts) {
         double quantity = product.getQuantity();
         double totalPrice = product.getPrice() * quantity;
+        totalPrice = Double.parseDouble(decimalFormat.format(totalPrice));
         product.setTotalPrice((float) totalPrice);
         totalValue += totalPrice;
         Object[] row = { product.getId(), product.getName(), product.getPrice(), quantity, totalPrice };
@@ -90,10 +107,7 @@ private void updateCartTable() {
     }
 
     cartTable.setModel(cartTableModel);
+    //String formattedTotalValue = decimalFormat.format(totalValue);
     txtPrice.setText(String.valueOf(totalValue));
-}
-    
-
-  
-    
+    }    
 }
