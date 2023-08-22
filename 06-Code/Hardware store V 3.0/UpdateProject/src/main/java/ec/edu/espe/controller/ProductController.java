@@ -1,10 +1,14 @@
+
 package ec.edu.espe.controller;
 
 import com.mongodb.client.MongoCollection;
 import ec.edu.espe.model.Product;
 import java.text.DecimalFormat;
 import java.util.List;
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 
@@ -21,7 +25,8 @@ public ProductController(MongoCollection<Document> collection, List<Product> car
         this.txtPrice = txtPrice;
     }
  
-public void btnAddActionPerformed(java.awt.event.ActionEvent evt, JTextField txtIdCart, JSpinner spnQuantity) {       try {
+public void btnAddActionPerformed(java.awt.event.ActionEvent evt, JTextField txtIdCart, JSpinner spnQuantity) {      
+  
         int id = Integer.parseInt(txtIdCart.getText());
         Document document = collection.find(new Document("id", id)).first();
         if (document == null) {
@@ -34,8 +39,6 @@ public void btnAddActionPerformed(java.awt.event.ActionEvent evt, JTextField txt
             Double price = document.getDouble("price");
             int stock = document.getInteger("stock");
 
-        
-            
             if (stock > 0) {
                 int quantity = (int) spnQuantity.getValue();
                 if (quantity <= stock) {
@@ -77,10 +80,9 @@ public void btnAddActionPerformed(java.awt.event.ActionEvent evt, JTextField txt
                 JOptionPane.showMessageDialog(null, "El producto seleccionado no se encuentra disponible", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Ingrese solo números en el campo ID", "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
+    
+
    
 
 private void updateCartTable() {

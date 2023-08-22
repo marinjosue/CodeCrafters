@@ -5,8 +5,11 @@
 package ec.edu.espe.view;
 
 import ec.edu.espe.controller.DatabaseConnection;
-import ec.edu.espe.controller.TableController;
 import ec.edu.espe.controller.UserControllers;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 
 /**
@@ -14,12 +17,15 @@ import ec.edu.espe.controller.UserControllers;
  * @author Josue Marin, CodeCrafters: DCCO-ESPE
  */
 public class Customers extends javax.swing.JFrame {
- private DatabaseConnection dbConnection;
+    FondoPanel fondo = new FondoPanel();
+ 
+  private DatabaseConnection dbConnection;
     /**
      * Creates new form Customers
      */
     public Customers() {
          dbConnection = new DatabaseConnection("User");
+         this.setContentPane(fondo);
         initComponents();
     }
 
@@ -166,3 +172,17 @@ public class Customers extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+
+class FondoPanel extends JPanel
+    {
+        private Image imagen;
+        @Override
+        public void paint (Graphics g){            
+            imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
+            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    
+    } 
+
