@@ -390,18 +390,26 @@ int id = (int) Table.getValueAt(selectedRow, 1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
-        int fila = Table.getSelectedRow();
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
-        } else {
-            try {
-                int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
-                txtId.setText(String.valueOf(id));
+      int fila = Table.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
+    } else {
+        try {
+            int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
+            String nom = (String) Table.getValueAt(fila, 1);
+            int stock = Integer.parseInt(Table.getValueAt(fila, 2).toString());
+            double price = Double.parseDouble(Table.getValueAt(fila, 3).toString());
+            String descrip = (String) Table.getValueAt(fila, 4);
 
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
-            }
+            txtId.setText(String.valueOf(id));
+            txtNameItems.setText(nom);
+            txtStock.setText(String.valueOf(stock));
+            txtPrice.setText(String.valueOf(price));
+            txtDescription.setText(descrip);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
         }
+    }
 
     }//GEN-LAST:event_TableMouseClicked
 
