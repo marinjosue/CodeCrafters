@@ -3,8 +3,10 @@ package ec.edu.espe.controller;
 
 import com.mongodb.client.MongoCollection;
 import ec.edu.espe.model.Product;
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -35,7 +37,7 @@ public ProductController(MongoCollection<Document> collection, List<Product> car
 
         if (stock > 0) {
             int quantity = (int) spnQuantity.getValue();
-            if (quantity > 0 && quantity <= stock) { // Permitir cantidad mayor a 0
+            if (quantity > 0 && quantity <= stock) { 
                 int updatedStock = stock - quantity;
                 document.put("stock", updatedStock);
                 collection.replaceOne(new Document("id", id), document);
@@ -78,22 +80,29 @@ private void updateCartTable() {
         double quantity = product.getQuantity();
         double totalPrice = product.getPrice() * quantity;
         totalValue += totalPrice;
+        
+        // Configura la localización para utilizar punto como separador decimal
+        Locale locale = new Locale("en", "US");
+        NumberFormat nf = NumberFormat.getNumberInstance(locale);
+        nf.setMaximumFractionDigits(2);  // Define la cantidad de decimales
+        
         Object[] row = { 
             product.getId(), 
             product.getName(), 
             product.getPrice(), 
             quantity, 
-            String.format("%.2f", totalPrice) 
+            nf.format(totalPrice)  
         };
         cartTableModel.addRow(row);
     }
 
     cartTable.setModel(cartTableModel);
-    txtPrice.setText(String.format("%.2f", totalValue)); 
+
+    // Formatea el totalValue con la localización configurada
+    NumberFormat totalValueFormat = NumberFormat.getNumberInstance(Locale.US);
+    totalValueFormat.setMaximumFractionDigits(2);
+    txtPrice.setText(totalValueFormat.format(totalValue));
 }
 
- 
- 
- 
- 
+
 }
