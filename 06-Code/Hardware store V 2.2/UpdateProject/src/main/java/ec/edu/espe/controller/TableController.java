@@ -15,6 +15,7 @@ import org.bson.Document;
  */
 public class TableController {
     private DatabaseConnection dbConnection;
+    private DatabaseConnection dbConnection2;
 
     public TableController(DatabaseConnection dbConnection) {
         this.dbConnection = dbConnection;
@@ -45,7 +46,7 @@ public class TableController {
         return tableModel;
     }
     public DefaultTableModel getTableModelForUser() {
-    MongoCollection<Document> collection = dbConnection.getCollection();
+    MongoCollection<Document> collection = dbConnection2.getCollection();
     MongoCursor<Document> cursor = collection.find().iterator();
     DefaultTableModel tableModel1 = new DefaultTableModel();
     tableModel1.addColumn("Nombres");
