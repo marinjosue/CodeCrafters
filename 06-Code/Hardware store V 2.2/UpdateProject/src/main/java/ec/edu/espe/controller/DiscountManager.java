@@ -27,7 +27,7 @@ public class DiscountManager {
                 if (discount >= 0 && discount <= 100) {
                     double discountedPrice = price * (1 - (discount / 100.0));
                     document.put("price", discountedPrice);
-                    document.put("discount", discount);
+                    document.put("discountPercentage", discount);
 
                     collection.replaceOne(query, document);
 

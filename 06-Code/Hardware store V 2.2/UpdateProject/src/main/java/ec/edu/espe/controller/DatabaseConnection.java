@@ -27,8 +27,5 @@ public class DatabaseConnection {
     public MongoCollection<Document> getCollection() {
         return collection;
     }
-    
-
-
-}
+ }
 

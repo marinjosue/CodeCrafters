@@ -30,7 +30,7 @@ public class TableController {
         tableModel.addColumn("Stock");
         tableModel.addColumn("Price");
         tableModel.addColumn("Description");
-        tableModel.addColumn("Descuento");
+
         while (cursor.hasNext()) {
             Document document = cursor.next();
             int id = document.getInteger("id");
@@ -38,9 +38,9 @@ public class TableController {
             int stock = document.getInteger("stock");
             double price = document.getDouble("price");
             String description = document.getString("description");
-            //int discount = document.getInteger("discount");
+         
             
-            Object[] row = {id, name, stock, price, description };
+            Object[] row = {id, name, stock, price, description};
             tableModel.addRow(row);
         }
         return tableModel;
@@ -69,7 +69,4 @@ public class TableController {
     
     return tableModel1;
 }
-
-   
-
 }

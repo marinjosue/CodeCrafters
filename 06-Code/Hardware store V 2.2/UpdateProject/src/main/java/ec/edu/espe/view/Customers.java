@@ -116,7 +116,7 @@ public class Customers extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      TableController tableController = new TableController(dbConnection);
-     jTable1.setModel(tableController.getTableModel());
+     jTable1.setModel(tableController.getTableModelForUser());
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
