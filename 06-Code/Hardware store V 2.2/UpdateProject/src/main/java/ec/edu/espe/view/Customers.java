@@ -6,6 +6,7 @@ package ec.edu.espe.view;
 
 import ec.edu.espe.controller.DatabaseConnection;
 import ec.edu.espe.controller.TableController;
+import ec.edu.espe.controller.UserControllers;
 
 
 /**
@@ -58,13 +59,13 @@ public class Customers extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombres", "Apellidos", "C.I.", "Direccion", "Email"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -115,8 +116,8 @@ public class Customers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     TableController tableController = new TableController(dbConnection);
-     jTable1.setModel(tableController.getTableModelForUser());
+     UserControllers userControllers = new UserControllers(dbConnection);
+     jTable1.setModel(userControllers.getTableModelForUser());
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

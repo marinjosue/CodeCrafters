@@ -45,28 +45,5 @@ public class TableController {
         }
         return tableModel;
     }
-    public DefaultTableModel getTableModelForUser() {
-    MongoCollection<Document> collection = dbConnection2.getCollection();
-    MongoCursor<Document> cursor = collection.find().iterator();
-    DefaultTableModel tableModel1 = new DefaultTableModel();
-    tableModel1.addColumn("Nombres");
-    tableModel1.addColumn("Apellidos");
-    tableModel1.addColumn("CI");
-    tableModel1.addColumn("Direccion");
-    tableModel1.addColumn("Email");
     
-    while (cursor.hasNext()) {
-        Document document = cursor.next();
-        String nombres = document.getString("nombres");
-        String apellidos = document.getString("apellidos");
-        String ci = document.getString("ci");
-        String direccion = document.getString("direccion");
-        String email = document.getString("email");
-        
-        Object[] row = {nombres, apellidos, ci, direccion, email};
-        tableModel1.addRow(row);
-    }
-    
-    return tableModel1;
-}
 }
