@@ -184,7 +184,8 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     String user = txtUser.getText();
     String password = txtPassword.getText();
     UserAuthentication.authenticateUser(user, password);
-   
+    dispose();
+
 
     }//GEN-LAST:event_btnIniciarActionPerformed
 
@@ -192,7 +193,8 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
        ShowComments coment=new ShowComments();
        coment.setVisible(true);
        this.setVisible(false);
-      
+       dispose();
+
 
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed

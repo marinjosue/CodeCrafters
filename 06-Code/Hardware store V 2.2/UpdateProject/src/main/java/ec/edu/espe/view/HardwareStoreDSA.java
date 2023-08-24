@@ -183,7 +183,6 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
     String user = txtUser.getText();
     String password = txtPassword.getText();
-
     UserAuthentication.authenticateUser(user, password);
     dispose();
 
