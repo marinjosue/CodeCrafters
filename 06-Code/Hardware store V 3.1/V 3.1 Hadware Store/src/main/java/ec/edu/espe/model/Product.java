@@ -1,14 +1,15 @@
-
 package ec.edu.espe.model;
 
 /**
  *
- * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda, Mesias Mariscal CodeCrafters: DCCO-ESPE
+ * @author Josue Marin, Jhordy Marcillo, Jeffrey Manobanda, Mesias Mariscal
+ * CodeCrafters: DCCO-ESPE
  */
 import java.util.List;
 import java.util.Locale.Category;
 
 public class Product {
+
     private int id;
     private String name;
     private int stock;
@@ -28,8 +29,7 @@ public class Product {
         this.quantity = quantity;
         this.totalPrice = (float) totalPrice;
     }
-    
-    
+
     public float getTotalPrice() {
         return totalPrice;
     }
@@ -37,8 +37,6 @@ public class Product {
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
-
-   
 
     public float getDiscountPercentage() {
         return discountPercentage;
@@ -55,7 +53,6 @@ public class Product {
     public void setDiscount(float discount) {
         this.discount = discount;
     }
-
 
     public int getId() {
         return id;
@@ -104,13 +101,15 @@ public class Product {
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
+
     public int getQuantity() {
         return quantity;
     }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
     public Product(int id, String name, int stock, double price) {
         this.id = id;
         this.name = name;
@@ -120,11 +119,13 @@ public class Product {
         this.categoryList = categoryList;
         this.regularPrice = regularPrice;
     }
-     public float getRegularPrice() {
+
+    public float getRegularPrice() {
         return regularPrice;
-      }
+    }
+
     public void checkIn() {
-       
+
     }
 
     public void modifyProduct() {

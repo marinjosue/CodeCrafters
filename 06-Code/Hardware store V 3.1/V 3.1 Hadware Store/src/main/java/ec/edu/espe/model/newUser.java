@@ -1,4 +1,3 @@
-
 package ec.edu.espe.model;
 
 import com.mongodb.client.MongoCollection;
@@ -11,22 +10,22 @@ import org.bson.Document;
  * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
  */
 public class newUser {
-    private String nombre;
-    private String apellido;
+
+    private String name;
+    private String lastname;
     private String ci;
-    private String direccion;
+    private String address;
     private String email;
     private DatabaseConnection dbConnection;
 
-
     public newUser(String nombre, String apellido, String ci, String direccion, String email) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.name = nombre;
+        this.lastname = apellido;
         this.ci = ci;
-        this.direccion = direccion;
+        this.address = direccion;
         this.email = email;
         this.dbConnection = new DatabaseConnection("User");
-        
+
     }
 
     public DatabaseConnection getDbConnection() {
@@ -37,22 +36,20 @@ public class newUser {
         this.dbConnection = dbConnection;
     }
 
-
-
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String nombre) {
+        this.name = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setLastname(String apellido) {
+        this.lastname = apellido;
     }
 
     public String getCi() {
@@ -63,12 +60,12 @@ public class newUser {
         this.ci = ci;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setAddress(String direccion) {
+        this.address = direccion;
     }
 
     public String getEmail() {
@@ -79,13 +76,11 @@ public class newUser {
         this.email = email;
     }
 
-   
-
-    public boolean validar() {
-        if (nombre.isEmpty() || apellido.isEmpty() || ci.isEmpty() || direccion.isEmpty() || email.isEmpty()) {
+    public boolean validate() {
+        if (name.isEmpty() || lastname.isEmpty() || ci.isEmpty() || address.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese todos los campos requeridos", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if (nombre.matches(".*\\d.*") || apellido.matches(".*\\d.*")) {
+        } else if (name.matches(".*\\d.*") || lastname.matches(".*\\d.*")) {
             JOptionPane.showMessageDialog(null, "Ingrese un nombre y apellido válidos", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (ci.length() != 10 || !ci.matches("\\d+")) {
@@ -96,17 +91,17 @@ public class newUser {
         }
     }
 
-    public void registrar() {
-        if (validar()) {
+    public void toregister() {
+        if (validate()) {
             MongoCollection<Document> collection = dbConnection.getCollection();
-            
+
             StringBuilder nombresTexto = new StringBuilder();
-            for (String nombre : this.nombre.split(" ")) {
+            for (String nombre : this.name.split(" ")) {
                 nombresTexto.append(nombre).append(" ");
             }
 
             StringBuilder apellidosTexto = new StringBuilder();
-            for (String apellido : this.apellido.split(" ")) {
+            for (String apellido : this.lastname.split(" ")) {
                 apellidosTexto.append(apellido).append(" ");
             }
 
@@ -114,7 +109,7 @@ public class newUser {
             document.append("nombres", nombresTexto.toString().trim());
             document.append("apellidos", apellidosTexto.toString().trim());
             document.append("ci", this.ci);
-            document.append("direccion", this.direccion);
+            document.append("direccion", this.address);
             document.append("email", this.email);
 
             collection.insertOne(document);
@@ -123,4 +118,3 @@ public class newUser {
         }
     }
 }
-

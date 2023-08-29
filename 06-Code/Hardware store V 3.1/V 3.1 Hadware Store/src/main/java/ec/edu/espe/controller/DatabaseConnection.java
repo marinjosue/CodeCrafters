@@ -1,4 +1,3 @@
-
 package ec.edu.espe.controller;
 
 import com.mongodb.client.MongoClient;
@@ -7,13 +6,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-
-
 /**
  *
  * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
  */
 public class DatabaseConnection {
+
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection<Document> collection;
@@ -27,5 +25,4 @@ public class DatabaseConnection {
     public MongoCollection<Document> getCollection() {
         return collection;
     }
- }
-
+}

@@ -1,6 +1,5 @@
 package ec.edu.espe.controller;
 
-
 import ec.edu.espe.model.UserData;
 import org.bson.Document;
 import com.mongodb.client.MongoCollection;
@@ -15,14 +14,14 @@ public class LoginUser {
 
     public boolean loginUser(String userCi) {
         MongoCollection<Document> collection = dbConnection.getCollection();
-        
+
         Document query = new Document("ci", userCi);
         Document existingUser = collection.find(query).first();
 
         if (existingUser != null) {
             String storedCi = existingUser.getString("ci");
             if (storedCi.equals(userCi)) {
-                UserData.userCi = userCi; 
+                UserData.userCi = userCi;
                 return true;
             }
         }

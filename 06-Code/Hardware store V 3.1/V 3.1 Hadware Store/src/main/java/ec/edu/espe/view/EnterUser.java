@@ -1,6 +1,4 @@
-
 package ec.edu.espe.view;
-
 
 import ec.edu.espe.controller.DatabaseConnection;
 import ec.edu.espe.controller.LoginUser;
@@ -10,31 +8,32 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
 /**
  *
  * @author Josue Marin, CodeCrafters: DCCO-ESPE
  */
 public class EnterUser extends javax.swing.JFrame {
+
     FondoPanel fondo = new FondoPanel();
-   
+
     private LoginUser enterUser;
     private DatabaseConnection dbConnection;
-    
+
     /**
      * Creates new form UserRegister
      */
     public EnterUser() {
-        
+
         this.setContentPane(fondo);
         initComponents();
         this.setLocationRelativeTo(null);
         DatabaseConnection dbConnection = new DatabaseConnection("User");
-       enterUser = new LoginUser (dbConnection);
+        enterUser = new LoginUser(dbConnection);
     }
 
     private EnterUser(DatabaseConnection dbConnection) {
-        throw new UnsupportedOperationException("Not supported yet."); }
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,14 +161,14 @@ public class EnterUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      registerUser rUser=new registerUser();
-      rUser.setVisible(true);
-      this.setVisible(false);
+        registerUser rUser = new registerUser();
+        rUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
-   String userCi = txtCi.getText();
-        
+        String userCi = txtCi.getText();
+
         try {
             boolean loginSuccessful = enterUser.loginUser(userCi);
 
@@ -184,13 +183,13 @@ public class EnterUser extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al intentar iniciar sesión: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-     
+
     }//GEN-LAST:event_btnGetActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         MenuOwner addOfers = new MenuOwner();
         addOfers.setVisible(true);
-        this.setVisible(false);     
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiActionPerformed
@@ -198,11 +197,11 @@ public class EnterUser extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCiActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      Cart cart = new Cart();
-      cart.setVisible(true);
-     this.setVisible(false);
+        Cart cart = new Cart();
+        cart.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
- 
+
     /**
      * @param args the command line arguments
      */
@@ -251,22 +250,20 @@ public class EnterUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtCi;
     // End of variables declaration//GEN-END:variables
-   class FondoPanel extends JPanel
-    {
+   class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
 
-
+    }
 
 }

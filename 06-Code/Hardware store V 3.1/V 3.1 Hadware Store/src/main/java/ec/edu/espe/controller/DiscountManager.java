@@ -10,16 +10,16 @@ public class DiscountManager {
 
     private DatabaseConnection dbConnection;
     private final JTextField txtDisscount;
- 
+
     public DiscountManager(DatabaseConnection dbConnection, javax.swing.JTextField txtDisscount) {
         this.dbConnection = dbConnection;
         this.txtDisscount = txtDisscount;
     }
 
-
-public DiscountManager(JTextField txtPrice) {
-         this.txtDisscount = txtPrice;
+    public DiscountManager(JTextField txtPrice) {
+        this.txtDisscount = txtPrice;
     }
+
     public void applyDiscount(String discountText, String productIdText) {
         try {
             int discount = Integer.parseInt(discountText);
@@ -28,7 +28,7 @@ public DiscountManager(JTextField txtPrice) {
 
             Document query = new Document("id", productId);
             Document document = collection.find(query).first();
-if (document != null) {
+            if (document != null) {
                 double price = document.getDouble("price");
                 if (discount >= 0 && discount <= 100) {
                     double discountedPrice = price * (1 - (discount / 100.0));

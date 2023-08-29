@@ -1,4 +1,3 @@
-
 package ec.edu.espe.model;
 
 import com.mongodb.client.MongoClient;
@@ -12,8 +11,9 @@ import org.bson.Document;
  * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
  */
 public class UserFinder {
+
     public static User findUser(String ci) {
-       
+
         MongoClient mongoClient = MongoClients.create("mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/");
 
         MongoDatabase database = mongoClient.getDatabase("Project");
@@ -32,15 +32,10 @@ public class UserFinder {
             String CI = existingUser.getString("ci");
             String email = existingUser.getString("email");
 
-
             return new User(nombres, apellidos, direccion, CI, email);
         } else {
-           
+
             return null;
         }
     }
 }
-
-
-
-

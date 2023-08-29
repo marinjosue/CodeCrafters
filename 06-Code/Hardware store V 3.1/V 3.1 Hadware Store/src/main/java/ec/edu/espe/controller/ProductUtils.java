@@ -1,4 +1,3 @@
-
 package ec.edu.espe.controller;
 
 import com.mongodb.client.MongoCollection;
@@ -11,11 +10,11 @@ import org.bson.Document;
  * @author Mesias Mariscal, CodeCrafters; DCCO-ESPE
  */
 public class ProductUtils {
-    
+
     private DatabaseConnection dbConnection;
 
     public ProductUtils() {
-        this.dbConnection = new DatabaseConnection("products"); 
+        this.dbConnection = new DatabaseConnection("products");
     }
 
     public void displayStockZeroProducts(JTextArea txtAStock) {

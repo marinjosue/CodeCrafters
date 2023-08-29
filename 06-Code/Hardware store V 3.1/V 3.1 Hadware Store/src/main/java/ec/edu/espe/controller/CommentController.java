@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.controller;
 
 import com.mongodb.client.MongoCollection;
@@ -14,9 +10,9 @@ import org.bson.Document;
  * @author USER
  */
 public class CommentController {
-    
+
     public CommentController(DatabaseConnection dbConnection1) {
-        this.dbConnection = dbConnection1; 
+        this.dbConnection = dbConnection1;
     }
     private DatabaseConnection dbConnection;
 
@@ -27,8 +23,8 @@ public class CommentController {
     public void setDbConnection(DatabaseConnection dbConnection) {
         this.dbConnection = dbConnection;
     }
-    
-    public void loadProductsFromDatabase(DefaultTableModel tableModel) {        
+
+    public void loadProductsFromDatabase(DefaultTableModel tableModel) {
         MongoCollection<Document> collection = dbConnection.getCollection();
         MongoCursor<Document> cursor = collection.find().iterator();
         tableModel.setRowCount(0);

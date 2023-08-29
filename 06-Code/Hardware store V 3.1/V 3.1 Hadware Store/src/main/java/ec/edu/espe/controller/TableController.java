@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.controller;
 
 import com.mongodb.client.MongoCollection;
@@ -14,6 +10,7 @@ import org.bson.Document;
  * @author USER
  */
 public class TableController {
+
     private DatabaseConnection dbConnection;
     private DatabaseConnection dbConnection2;
 
@@ -38,12 +35,11 @@ public class TableController {
             int stock = document.getInteger("stock");
             double price = document.getDouble("price");
             String description = document.getString("description");
-         
-            
+
             Object[] row = {id, name, stock, price, description};
             tableModel.addRow(row);
         }
         return tableModel;
     }
-    
+
 }

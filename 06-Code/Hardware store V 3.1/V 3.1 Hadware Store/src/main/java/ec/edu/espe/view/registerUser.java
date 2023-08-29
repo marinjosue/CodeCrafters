@@ -1,4 +1,3 @@
-
 package ec.edu.espe.view;
 
 import ec.edu.espe.controller.DatabaseConnection;
@@ -7,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
 
 /**
  *
@@ -21,12 +19,11 @@ public class registerUser extends javax.swing.JFrame {
     FondoPanel fondo = new FondoPanel();
 
     public registerUser() {
-        
+
         this.setContentPane(fondo);
         initComponents();
         this.setLocationRelativeTo(null);
 
-        
     }
 
     /**
@@ -198,15 +195,15 @@ public class registerUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUserActionPerformed
-    newUser user = new newUser(txtUserName1.getText(), txtUserName2.getText(), txtCi.getText(), txtDirection.getText(), txtEmail.getText());
+        newUser user = new newUser(txtUserName1.getText(), txtUserName2.getText(), txtCi.getText(), txtDirection.getText(), txtEmail.getText());
 
-    if (user.validar()) {
-        user.registrar();
-        dispose();
+        if (user.validate()) {
+            user.toregister();
+            dispose();
 
-        EnterUser enterUserWindow = new EnterUser();
-        enterUserWindow.setVisible(true);
-    }
+            EnterUser enterUserWindow = new EnterUser();
+            enterUserWindow.setVisible(true);
+        }
     }//GEN-LAST:event_btnMenuUserActionPerformed
 
     private void txtUserName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserName2ActionPerformed
@@ -226,7 +223,7 @@ public class registerUser extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDirectionActionPerformed
 
     private void btnMenuUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuUser1ActionPerformed
-       EnterUser userRegister = new EnterUser();
+        EnterUser userRegister = new EnterUser();
         userRegister.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuUser1ActionPerformed
@@ -250,20 +247,20 @@ public class registerUser extends javax.swing.JFrame {
     private javax.swing.JTextField txtUserName2;
     // End of variables declaration//GEN-END:variables
 
-    class FondoPanel extends JPanel
-    {
+    class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
+
+    }
 
 }

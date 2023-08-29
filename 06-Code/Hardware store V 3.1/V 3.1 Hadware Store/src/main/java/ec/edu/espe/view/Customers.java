@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.view;
 
 import com.mongodb.ConnectionString;
@@ -19,52 +15,45 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
-
 
 /**
  *
  * @author Josue Marin, CodeCrafters: DCCO-ESPE
  */
 public class Customers extends javax.swing.JFrame {
-     
+
     Customers.FondoPanel fondo = new Customers.FondoPanel();
     private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
     private static MongoClient mongoClient;
     private static MongoDatabase database;
-    private static MongoCollection<Document>collection;
+    private static MongoCollection<Document> collection;
     private DatabaseConnection dbConnection;
 
-   DefaultTableModel tableModel;
- 
+    DefaultTableModel tableModel;
+
     /**
      * Creates new form Customers
      */
     public Customers() {
-    ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
-    this.setContentPane(fondo);
-    initComponents();
-    this.setLocationRelativeTo(null);
-   
+        ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
+        this.setContentPane(fondo);
+        initComponents();
+        this.setLocationRelativeTo(null);
 
-    
-    
-    MongoClientSettings settings = MongoClientSettings.builder()
-            .applyConnectionString(connectionString)
-            .build();
-    mongoClient = MongoClients.create(settings);
-    database = mongoClient.getDatabase("Project");
-    collection = database.getCollection("User");
-    
-    
-    
-    tableModel = (DefaultTableModel) Table.getModel();
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .build();
+        mongoClient = MongoClients.create(settings);
+        database = mongoClient.getDatabase("Project");
+        collection = database.getCollection("User");
 
-    
-    dbConnection = new DatabaseConnection("User");
-}
+        tableModel = (DefaultTableModel) Table.getModel();
 
+        dbConnection = new DatabaseConnection("User");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -246,64 +235,50 @@ public class Customers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     UserControllers userControllers = new UserControllers(dbConnection);
-     Table.setModel(userControllers.getTableModelForUser());
+        UserControllers userControllers = new UserControllers(dbConnection);
+        Table.setModel(userControllers.getTableModelForUser());
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       MenuOwner addOfers = new MenuOwner();
+        MenuOwner addOfers = new MenuOwner();
         addOfers.setVisible(true);
-        this.setVisible(false);   
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      registerUser rUser=new registerUser();
-      rUser.setVisible(true);
-      this.setVisible(false);
+        registerUser rUser = new registerUser();
+        rUser.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
         int fila = Table.getSelectedRow();
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
-    } else {
-        try {
-            String nom1 = (String) Table.getValueAt(fila, 0);
-            String nom2 = (String) Table.getValueAt(fila, 1);
-            String nom3 = (String) Table.getValueAt(fila, 2);
-            String nom4 = (String) Table.getValueAt(fila, 3);
-            String email = (String) Table.getValueAt(fila, 4);
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
+        } else {
+            try {
+                String nom1 = (String) Table.getValueAt(fila, 0);
+                String nom2 = (String) Table.getValueAt(fila, 1);
+                String nom3 = (String) Table.getValueAt(fila, 2);
+                String nom4 = (String) Table.getValueAt(fila, 3);
+                String email = (String) Table.getValueAt(fila, 4);
 
-            txtNombre.setText(String.valueOf(nom1));
-            txtApellido.setText(nom2);
-            txtCi.setText(String.valueOf(nom3));
-            txtDireccion.setText(String.valueOf(nom4));
-            txtEmail.setText(email);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+                txtNombre.setText(String.valueOf(nom1));
+                txtApellido.setText(nom2);
+                txtCi.setText(String.valueOf(nom3));
+                txtDireccion.setText(String.valueOf(nom4));
+                txtEmail.setText(email);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+            }
         }
-    }
-        
-        
-        
+
+
     }//GEN-LAST:event_TableMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-  int selectedRow = Table.getSelectedRow();
-if (selectedRow == -1) {
-    JOptionPane.showMessageDialog(this, "Seleccione un artículo para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
-} else {
-    String nom1 = (String) Table.getValueAt(selectedRow, 0);
-
-    int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-
-    if (option == JOptionPane.YES_OPTION) {
-        collection.deleteOne(Filters.eq("nombres", nom1));
-        tableModel.removeRow(selectedRow);
-        JOptionPane.showMessageDialog(this, "Artículo eliminado correctamente");
-    }
-}
+        checkAndDeleteArticle(Table, tableModel, collection);
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -366,47 +341,63 @@ if (selectedRow == -1) {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 public void processProductData1() {
-    String cell1 = txtNombre.getText();
-    String cell2 = txtApellido.getText();
-    String cell3 = txtCi.getText();
-    String cell4 = txtDireccion.getText();
-    String cell5 = txtEmail.getText();
+        String cell1 = txtNombre.getText();
+        String cell2 = txtApellido.getText();
+        String cell3 = txtCi.getText();
+        String cell4 = txtDireccion.getText();
+        String cell5 = txtEmail.getText();
 
-    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    try {
-        String ci = txtCi.getText();
-        String direccion = txtDireccion.getText();
-        String email = txtEmail.getText();
-         
-      
-        Document updateData = new Document("$set", new Document("ci", ci).append("direccion", direccion).append("email", email));
-        UpdateResult updateResult = collection.updateOne(Filters.eq("ci", ci), updateData);
-
-        if (updateResult.getModifiedCount() > 0) {
-            JOptionPane.showMessageDialog(this, "Artículo actualizado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(this, "El artículo no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+        if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Ingrese solo números en los campos ID, Stock y Precio", "Error", JOptionPane.ERROR_MESSAGE);
+
+        try {
+            String ci = txtCi.getText();
+            String direccion = txtDireccion.getText();
+            String email = txtEmail.getText();
+
+            Document updateData = new Document("$set", new Document("ci", ci).append("direccion", direccion).append("email", email));
+            UpdateResult updateResult = collection.updateOne(Filters.eq("ci", ci), updateData);
+
+            if (updateResult.getModifiedCount() > 0) {
+                JOptionPane.showMessageDialog(this, "Artículo actualizado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "El artículo no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo números en los campos ID, Stock y Precio", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
-  class FondoPanel extends JPanel
-    {
+
+    class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){            
+        public void paint(Graphics g) {
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
 
+    }
+
+    public static void checkAndDeleteArticle(JTable table, DefaultTableModel tableModel, MongoCollection<Document> collection) {
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un artículo para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String nom1 = (String) table.getValueAt(selectedRow, 0);
+
+            int option = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (option == JOptionPane.YES_OPTION) {
+                collection.deleteOne(Filters.eq("nombres", nom1));
+                tableModel.removeRow(selectedRow);
+                JOptionPane.showMessageDialog(null, "Artículo eliminado correctamente");
+            }
+        }
+    }
 }
- 

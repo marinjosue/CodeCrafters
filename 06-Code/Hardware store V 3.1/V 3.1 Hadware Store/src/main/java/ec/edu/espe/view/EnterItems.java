@@ -1,4 +1,3 @@
-
 package ec.edu.espe.view;
 
 import com.google.gson.Gson;
@@ -27,23 +26,21 @@ import org.bson.Document;
  * @author USER
  */
 public class EnterItems extends javax.swing.JFrame {
-  
+
     FondoPanel fondo = new FondoPanel();
- 
+
     private static final String CONNECTION_STRING = "mongodb+srv://josuemarin:josuemarin@cluster0.lntjz9j.mongodb.net/";
     private static MongoClient mongoClient;
     private static MongoDatabase database;
-    private static MongoCollection<Document>collection;
+    private static MongoCollection<Document> collection;
     Product product;
     DefaultTableModel tableModel;
     private DatabaseConnection dbConnection;
 
-    
     /**
      * Creates new form EnterItems
      */
-   
-public EnterItems() {
+    public EnterItems() {
         this.setContentPane(fondo);
 
         ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
@@ -60,9 +57,8 @@ public EnterItems() {
         btnEdit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(rootPane, "Artículo actualizado correctamente");
-           
+
                 jButton1ActionPerformed(e);
-       
 
             }
         });
@@ -70,7 +66,7 @@ public EnterItems() {
             public void actionPerformed(ActionEvent e) {
                 deleteSelectedItem();
             }
-        });  
+        });
         dbConnection = new DatabaseConnection("products");
     }
 
@@ -321,7 +317,7 @@ public EnterItems() {
         processProductData();
     }//GEN-LAST:event_btnAcceptActionPerformed
     private void btnAcceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptMouseClicked
- try {
+        try {
             readData();
             StringBuilder confirmationMessage = appendItems();
 
@@ -329,7 +325,7 @@ public EnterItems() {
 
             if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.NO_OPTION) {
                 JOptionPane.showMessageDialog(rootPane, "Cancelado");
-                return; 
+                return;
             }
 
             if (option == JOptionPane.YES_OPTION) {
@@ -353,7 +349,7 @@ public EnterItems() {
         txtPrice.setText("");
         txtDescription.setText("");
 
-        
+
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -361,18 +357,17 @@ public EnterItems() {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnErrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErrarseActionPerformed
- int selectedRow = Table.getSelectedRow();
+        int selectedRow = Table.getSelectedRow();
 
-int id = (int) Table.getValueAt(selectedRow, 1);
+        int id = (int) Table.getValueAt(selectedRow, 1);
 
+        int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
-    int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-
-    if (option == JOptionPane.YES_OPTION) {
-        collection.deleteOne(Filters.eq("id", id));
-        tableModel.removeRow(selectedRow);
-        JOptionPane.showMessageDialog(this, "Artículo eliminado correctamente");
-    }
+        if (option == JOptionPane.YES_OPTION) {
+            collection.deleteOne(Filters.eq("id", id));
+            tableModel.removeRow(selectedRow);
+            JOptionPane.showMessageDialog(this, "Artículo eliminado correctamente");
+        }
     }//GEN-LAST:event_btnErrarseActionPerformed
 
     private void btnErrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnErrarseMouseClicked
@@ -390,26 +385,26 @@ int id = (int) Table.getValueAt(selectedRow, 1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
-      int fila = Table.getSelectedRow();
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
-    } else {
-        try {
-            int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
-            String nom = (String) Table.getValueAt(fila, 1);
-            int stock = Integer.parseInt(Table.getValueAt(fila, 2).toString());
-            double price = Double.parseDouble(Table.getValueAt(fila, 3).toString());
-            String descrip = (String) Table.getValueAt(fila, 4);
+        int fila = Table.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
+        } else {
+            try {
+                int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
+                String nom = (String) Table.getValueAt(fila, 1);
+                int stock = Integer.parseInt(Table.getValueAt(fila, 2).toString());
+                double price = Double.parseDouble(Table.getValueAt(fila, 3).toString());
+                String descrip = (String) Table.getValueAt(fila, 4);
 
-            txtId.setText(String.valueOf(id));
-            txtNameItems.setText(nom);
-            txtStock.setText(String.valueOf(stock));
-            txtPrice.setText(String.valueOf(price));
-            txtDescription.setText(descrip);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+                txtId.setText(String.valueOf(id));
+                txtNameItems.setText(nom);
+                txtStock.setText(String.valueOf(stock));
+                txtPrice.setText(String.valueOf(price));
+                txtDescription.setText(descrip);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+            }
         }
-    }
 
     }//GEN-LAST:event_TableMouseClicked
 
@@ -423,52 +418,48 @@ int id = (int) Table.getValueAt(selectedRow, 1);
         confirmationMessage.append("Description: ").append(product.getDescription()).append("\n");
         return confirmationMessage;
     }
-    
+
     private boolean checkIdExists(int id) {
-    Document query = new Document("id", id);
-    return collection.countDocuments(query) > 0;
+        Document query = new Document("id", id);
+        return collection.countDocuments(query) > 0;
     }
-    
+
     private void readData() throws NumberFormatException {
-    int id;
-    String name;
-    int stock;
-    double price;
-    String description;
+        int id;
+        String name;
+        int stock;
+        double price;
+        String description;
 
-    id = Integer.parseInt(txtId.getText());
-    name = txtNameItems.getText();
-    stock = Integer.parseInt(txtStock.getText());
-    price = Double.parseDouble(txtPrice.getText());
-    description = txtDescription.getText();
+        id = Integer.parseInt(txtId.getText());
+        name = txtNameItems.getText();
+        stock = Integer.parseInt(txtStock.getText());
+        price = Double.parseDouble(txtPrice.getText());
+        description = txtDescription.getText();
 
-    product = new Product(id, name, stock, price);
-    product.setDescription(description);
+        product = new Product(id, name, stock, price);
+        product.setDescription(description);
     }
 
     private void addToTable(Product product) {
         Object[] row = {product.getId(), product.getName(), product.getStock(), product.getPrice(), product.getDescription()};
         tableModel.addRow(row);
     }
-    
 
+    private void deleteSelectedItem() {
+        int selectedRow = Table.getSelectedRow();
 
-private void deleteSelectedItem() {
-    int selectedRow = Table.getSelectedRow();
+        int id = (int) Table.getValueAt(selectedRow, 0);
 
-    int id = (int) Table.getValueAt(selectedRow, 0);
+        int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
-    int option = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el artículo seleccionado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-
-    if (option == JOptionPane.YES_OPTION) {
-        collection.deleteOne(Filters.eq("id", id));
-        tableModel.removeRow(selectedRow);
-        JOptionPane.showMessageDialog(this, "Artículo eliminado correctamente");
+        if (option == JOptionPane.YES_OPTION) {
+            collection.deleteOne(Filters.eq("id", id));
+            tableModel.removeRow(selectedRow);
+            JOptionPane.showMessageDialog(this, "Artículo eliminado correctamente");
+        }
     }
-}
 
-
-    
     /**
      * @param args the command line arguments
      */
@@ -528,96 +519,94 @@ private void deleteSelectedItem() {
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
    class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
 
-public void processProductData() {
-    String cell1 = txtId.getText();
-    String cell2 = txtNameItems.getText();
-    String cell3 = txtStock.getText();
-    String cell4 = txtPrice.getText();
-    String cell5 = txtDescription.getText();
-    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
-        int id = Integer.parseInt(cell1);
-        if (checkIdExists(id)) {
-            JOptionPane.showMessageDialog(this, "El ID ya existe si desea actualizar aplaste el boton Editar", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void processProductData() {
+        String cell1 = txtId.getText();
+        String cell2 = txtNameItems.getText();
+        String cell3 = txtStock.getText();
+        String cell4 = txtPrice.getText();
+        String cell5 = txtDescription.getText();
+        if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            readData();
-            StringBuilder confirmationMessage = appendItems();
-            int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
-
-            if (option == JOptionPane.YES_OPTION) {
-                Gson gson = new Gson();
-                String json = gson.toJson(product);
-                Document document = Document.parse(json);
-                collection.insertOne(document);
-                JOptionPane.showMessageDialog(rootPane, "Guardado");
-                addToTable(product);
+            int id = Integer.parseInt(cell1);
+            if (checkIdExists(id)) {
+                JOptionPane.showMessageDialog(this, "El ID ya existe si desea actualizar aplaste el boton Editar", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Cancelado");
+                readData();
+                StringBuilder confirmationMessage = appendItems();
+                int option = JOptionPane.showConfirmDialog(this, confirmationMessage.toString());
+
+                if (option == JOptionPane.YES_OPTION) {
+                    Gson gson = new Gson();
+                    String json = gson.toJson(product);
+                    Document document = Document.parse(json);
+                    collection.insertOne(document);
+                    JOptionPane.showMessageDialog(rootPane, "Guardado");
+                    addToTable(product);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Cancelado");
+                }
             }
         }
     }
-}
 
-public void processProductData1() {
-    String cell1 = txtId.getText();
-    String cell2 = txtNameItems.getText();
-    String cell3 = txtStock.getText();
-    String cell4 = txtPrice.getText();
-    String cell5 = txtDescription.getText();
+    public void processProductData1() {
+        String cell1 = txtId.getText();
+        String cell2 = txtNameItems.getText();
+        String cell3 = txtStock.getText();
+        String cell4 = txtPrice.getText();
+        String cell5 = txtDescription.getText();
 
-    if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    try {
-        int id = Integer.parseInt(txtId.getText());
-        String name = txtNameItems.getText();
-        int stock = Integer.parseInt(txtStock.getText());
-        double price = Double.parseDouble(txtPrice.getText());
-        String description = txtDescription.getText();
-
-        Document selectedDocument = collection.find(Filters.eq("id", id)).first();
-
-        boolean articuloEncontrado = false;
-
-        if (selectedDocument != null) {
-            selectedDocument.put("name", name);
-            selectedDocument.put("stock", stock);
-            selectedDocument.put("price", price);
-            selectedDocument.put("description", description);
-
-            collection.replaceOne(Filters.eq("id", id), selectedDocument);
-
-            JOptionPane.showMessageDialog(this, "Artículo actualizado correctamente");
-
-            articuloEncontrado = true;
+        if (cell1.isEmpty() || cell2.isEmpty() || cell3.isEmpty() || cell4.isEmpty() || cell5.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        if (!articuloEncontrado) {
-            JOptionPane.showMessageDialog(this, "El artículo no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            int id = Integer.parseInt(txtId.getText());
+            String name = txtNameItems.getText();
+            int stock = Integer.parseInt(txtStock.getText());
+            double price = Double.parseDouble(txtPrice.getText());
+            String description = txtDescription.getText();
+
+            Document selectedDocument = collection.find(Filters.eq("id", id)).first();
+
+            boolean articuloEncontrado = false;
+
+            if (selectedDocument != null) {
+                selectedDocument.put("name", name);
+                selectedDocument.put("stock", stock);
+                selectedDocument.put("price", price);
+                selectedDocument.put("description", description);
+
+                collection.replaceOne(Filters.eq("id", id), selectedDocument);
+
+                JOptionPane.showMessageDialog(this, "Artículo actualizado correctamente");
+
+                articuloEncontrado = true;
+            }
+
+            if (!articuloEncontrado) {
+                JOptionPane.showMessageDialog(this, "El artículo no existe en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo números en los campos ID, Stock y Precio", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Ingrese solo números en los campos ID, Stock y Precio", "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
-
-
-
 
 }

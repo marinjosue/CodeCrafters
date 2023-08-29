@@ -1,4 +1,3 @@
-
 package ec.edu.espe.view;
 
 import com.mongodb.client.MongoCollection;
@@ -19,23 +18,22 @@ import org.bson.Document;
  */
 public class AddOfersFound extends javax.swing.JFrame {
 
-     FondoPanel fondo = new FondoPanel();
+    FondoPanel fondo = new FondoPanel();
 
     private DatabaseConnection dbConnection;
-    DiscountManager  discountManager;
+    DiscountManager discountManager;
     DefaultTableModel tableModel;
-    
-    
+
     /**
      * Creates new form AddOfers2
      */
     public AddOfersFound() {
-       this.setContentPane(fondo);
-       initComponents();
-       dbConnection = new DatabaseConnection("products");
-       discountManager = new DiscountManager(dbConnection, null);
-       this.setLocationRelativeTo(null);
-       
+        this.setContentPane(fondo);
+        initComponents();
+        dbConnection = new DatabaseConnection("products");
+        discountManager = new DiscountManager(dbConnection, null);
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -185,8 +183,8 @@ public class AddOfersFound extends javax.swing.JFrame {
     private void btnAcceptOfersFounfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOfersFounfActionPerformed
         String discountText = txtDisscount.getText();
         String productIdText = txtId.getText();
-       discountManager.applyDiscount(discountText, productIdText);
-    
+        discountManager.applyDiscount(discountText, productIdText);
+
     }//GEN-LAST:event_btnAcceptOfersFounfActionPerformed
 
     private void txtDisscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDisscountActionPerformed
@@ -206,23 +204,23 @@ public class AddOfersFound extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         TableController tableController = new TableController(dbConnection);
         DefaultTableModel tableModel = tableController.getTableModel();
-                Table.setModel(tableModel);
+        Table.setModel(tableModel);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
-    int fila = Table.getSelectedRow();
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
-    } else {
-        try {
-            int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
-            txtId.setText(String.valueOf(id));
-            
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+        int fila = Table.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
+        } else {
+            try {
+                int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
+                txtId.setText(String.valueOf(id));
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+            }
         }
-    }
-   
+
     }//GEN-LAST:event_TableMouseClicked
 
     /**
@@ -256,18 +254,19 @@ public class AddOfersFound extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddOfersFound().setVisible(true);
             }
         });
     }
-    private boolean verificarExistenciaId(String id) {
-    MongoCollection<Document> collection = dbConnection.getCollection();
 
-    Document query = new Document("id", Integer.parseInt(id));
-    return collection.countDocuments(query) > 0;
-}
+    private boolean verificarExistenciaId(String id) {
+        MongoCollection<Document> collection = dbConnection.getCollection();
+
+        Document query = new Document("id", Integer.parseInt(id));
+        return collection.countDocuments(query) > 0;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table;
@@ -281,24 +280,20 @@ public class AddOfersFound extends javax.swing.JFrame {
     private javax.swing.JTextField txtDisscount;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
-   class FondoPanel extends JPanel
-    {
+   class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
 
-
-
-
+    }
 
 }

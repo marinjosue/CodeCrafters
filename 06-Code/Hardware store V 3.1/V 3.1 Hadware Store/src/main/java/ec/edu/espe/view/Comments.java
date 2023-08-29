@@ -1,6 +1,4 @@
-
 package ec.edu.espe.view;
-
 
 import ec.edu.espe.controller.CommentManager;
 import ec.edu.espe.controller.DatabaseConnection;
@@ -15,10 +13,11 @@ import javax.swing.JPanel;
  * @author USER
  */
 public class Comments extends javax.swing.JFrame {
+
     FondoPanel fondo = new FondoPanel();
     private final DatabaseConnection dbConnection;
-    private final CommentManager commentManager; 
-   
+    private final CommentManager commentManager;
+
     /**
      * Creates new form Comments
      */
@@ -28,9 +27,8 @@ public class Comments extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         commentManager = new CommentManager(dbConnection);
-    } 
+    }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -134,23 +132,23 @@ public class Comments extends javax.swing.JFrame {
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         String cell1 = txtName.getText();
         String cell2 = txtComment.getText();
-        
+
         if (cell1.isEmpty() || cell2.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todas las celdas", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             commentManager.addComment(cell1, cell2);
-            
+
             JOptionPane.showMessageDialog(rootPane, "El comentario se guardó con éxito");
-            
+
             MenuOwner addOffers = new MenuOwner();
             addOffers.setVisible(true);
             this.setVisible(false);
         }
-     
+
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-         MenuOwner addOfers = new MenuOwner();
+        MenuOwner addOfers = new MenuOwner();
         addOfers.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -189,7 +187,7 @@ public class Comments extends javax.swing.JFrame {
             }
         });
     }
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TxtComentario;
     private javax.swing.JButton btnAccept;
@@ -201,20 +199,20 @@ public class Comments extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JLabel txtNombre;
     // End of variables declaration//GEN-END:variables
-   class FondoPanel extends JPanel
-    {
+   class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
+
+    }
 
 }

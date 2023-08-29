@@ -1,8 +1,6 @@
 package ec.edu.espe.view;
 
-
 import ec.edu.espe.controller.UserAuthentication;
-
 
 /**
  *
@@ -10,8 +8,6 @@ import ec.edu.espe.controller.UserAuthentication;
  */
 public class HardwareStoreDSA extends javax.swing.JFrame {
 
-
-    
     public HardwareStoreDSA() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -181,28 +177,26 @@ public class HardwareStoreDSA extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-    String user = txtUser.getText();
-    String password = txtPassword.getText();
-    UserAuthentication.authenticateUser(user, password);
-    dispose();
+        String user = txtUser.getText();
+        String password = txtPassword.getText();
+        UserAuthentication.authenticateUser(user, password);
+        dispose();
 
 
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       ShowComments coment=new ShowComments();
-       coment.setVisible(true);
-       this.setVisible(false);
-       dispose();
+        ShowComments coment = new ShowComments();
+        coment.setVisible(true);
+        this.setVisible(false);
+        dispose();
 
 
-        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu JComent;

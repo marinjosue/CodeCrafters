@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.view;
 
 import java.awt.Graphics;
@@ -14,6 +10,7 @@ import javax.swing.JPanel;
  * @author USER
  */
 public class MenuOwner extends javax.swing.JFrame {
+
     FondoPanel fondo = new FondoPanel();
 
     /**
@@ -155,9 +152,9 @@ public class MenuOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterItemsActionPerformed
 
     private void btnAddOfersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOfersActionPerformed
-       AddOfersFound addOfers = new AddOfersFound();
-       addOfers.setVisible(true);
-       this.setVisible(false);
+        AddOfersFound addOfers = new AddOfersFound();
+        addOfers.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAddOfersActionPerformed
 
     private void btnVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifyActionPerformed
@@ -173,14 +170,14 @@ public class MenuOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            EnterUser User = new EnterUser();
-            User.setVisible(true);
-            this.setVisible(false);
-        
+        EnterUser User = new EnterUser();
+        User.setVisible(true);
+        this.setVisible(false);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      Comments comments = new Comments();
+        Comments comments = new Comments();
         comments.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -236,24 +233,20 @@ public class MenuOwner extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
-   class FondoPanel extends JPanel
-    {
+   class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
 
-
-
-
+    }
 
 }

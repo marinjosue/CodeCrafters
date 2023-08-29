@@ -1,4 +1,3 @@
-
 package ec.edu.espe.view;
 
 import ec.edu.espe.controller.ProductUtils;
@@ -7,21 +6,17 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-
 /**
  *
  * @author Code Crafther
  */
 public class VerifyStock extends javax.swing.JFrame {
-   
-    FondoPanel fondo = new FondoPanel();
 
+    FondoPanel fondo = new FondoPanel();
 
     /**
      * Creates new form VerifyStock
      */
-     
-    
     public VerifyStock() {
         this.setContentPane(fondo);
         initComponents();
@@ -109,8 +104,8 @@ public class VerifyStock extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetunrActionPerformed
 
     private void btnViewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProductActionPerformed
-    ProductUtils productUtils = new ProductUtils();
-    productUtils.displayStockZeroProducts(txtAStock);
+        ProductUtils productUtils = new ProductUtils();
+        productUtils.displayStockZeroProducts(txtAStock);
     }//GEN-LAST:event_btnViewProductActionPerformed
 
     /**
@@ -155,22 +150,20 @@ public class VerifyStock extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAStock;
     // End of variables declaration//GEN-END:variables
-   class FondoPanel extends JPanel
-    {
+   class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
 
-
+    }
 
 }

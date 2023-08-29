@@ -1,5 +1,5 @@
-
 package ec.edu.espe.view;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.controller.CommentController;
@@ -11,33 +11,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-
-
 /**
  *
  * @author Josue Marin, CodeCrafters: DCCO-ESPE
  */
 public class ShowComments extends javax.swing.JFrame {
+
     FondoPanel fondo = new FondoPanel();
 
     private DatabaseConnection dbConnection;
 
     Product product;
     DefaultTableModel tableModel;
-    
+
     /**
      * Creates new form ShowComments
      */
     public ShowComments() {
         this.setContentPane(fondo);
-        dbConnection = new DatabaseConnection("comments");        
+        dbConnection = new DatabaseConnection("comments");
         initComponents();
         this.setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) jTable1.getModel();
         CommentController commentController = new CommentController(dbConnection);
-        commentController.loadProductsFromDatabase(tableModel); 
+        commentController.loadProductsFromDatabase(tableModel);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,7 +120,7 @@ public class ShowComments extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CommentController commentController = new CommentController(dbConnection); 
+        CommentController commentController = new CommentController(dbConnection);
         commentController.loadProductsFromDatabase(tableModel);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -174,23 +172,20 @@ public class ShowComments extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-   class FondoPanel extends JPanel
-    {
+   class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
-            
+        public void paint(Graphics g) {
+
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            
-           
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
 
-
-
+    }
 
 }

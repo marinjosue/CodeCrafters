@@ -1,6 +1,4 @@
-
 package ec.edu.espe.view;
-
 
 import ec.edu.espe.model.UserData;
 import ec.edu.espe.model.User;
@@ -20,11 +18,12 @@ import javax.swing.*;
  * @author USER
  */
 public class Cart extends javax.swing.JFrame {
+
     Cart.FondoPanel fondo = new Cart.FondoPanel();
     private final DatabaseConnection dbConnection;
     List<Product> cartProducts;
-    Product product ;
-    
+    Product product;
+
     /**
      * Creates new form Cart
      */
@@ -33,11 +32,10 @@ public class Cart extends javax.swing.JFrame {
         this.setContentPane(fondo);
         initComponents();
         this.setLocationRelativeTo(null);
-        cartProducts = new ArrayList<>(); 
-        
+        cartProducts = new ArrayList<>();
+
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -460,7 +458,7 @@ public class Cart extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTotalPRice1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3))))
@@ -470,9 +468,9 @@ public class Cart extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-    MenuOwner addOfers = new MenuOwner();
+        MenuOwner addOfers = new MenuOwner();
         addOfers.setVisible(true);
-        this.setVisible(false);      
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -481,42 +479,42 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-       
-    ProductController productController = new ProductController(dbConnection.getCollection(), cartProducts, tableCart, txtPrice);
-    productController.btnAddActionPerformed(evt, txtId, spnQuantity);
+
+        ProductController productController = new ProductController(dbConnection.getCollection(), cartProducts, tableCart, txtPrice);
+        productController.btnAddActionPerformed(evt, txtId, spnQuantity);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtNameAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtNameAncestorAdded
         User user = UserFinder.findUser(UserData.userCi);
         if (user != null) {
-            String userName = user.getNombres();
-            String userlastName = user.getApellidos();
-            txtName.setText(userName +" "+ userlastName);
-        }   else {
+            String userName = user.getNames();
+            String userlastName = user.getLastnames();
+            txtName.setText(userName + " " + userlastName);
+        } else {
             String ci = "Cosumidor Final";
-            txtName.setText( ci);   
-        }  
+            txtName.setText(ci);
+        }
     }//GEN-LAST:event_txtNameAncestorAdded
 
     private void txtciAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtciAncestorAdded
         User user = UserFinder.findUser(UserData.userCi);
         if (user != null) {
             String ci = user.getCI();
-            txtci.setText( ci);    
-        }else {
+            txtci.setText(ci);
+        } else {
             String ci = "Cosumidor Final";
-            txtci.setText( ci);   
+            txtci.setText(ci);
         }
     }//GEN-LAST:event_txtciAncestorAdded
 
     private void txtemailAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtemailAncestorAdded
-         User user = UserFinder.findUser(UserData.userCi);
+        User user = UserFinder.findUser(UserData.userCi);
         if (user != null) {
             String email = user.getEmail();
-            txtemail.setText( email);
-        }else {
+            txtemail.setText(email);
+        } else {
             String ci = "Cosumidor Final";
-           txtemail.setText( ci);   
+            txtemail.setText(ci);
         }
     }//GEN-LAST:event_txtemailAncestorAdded
 
@@ -528,13 +526,13 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_txtdateAncestorAdded
 
     private void txtadressAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtadressAncestorAdded
-            User user = UserFinder.findUser(UserData.userCi);
+        User user = UserFinder.findUser(UserData.userCi);
         if (user != null) {
-            String adress = user.getDireccion();
-            txtadress.setText( adress);
-        }else {
+            String adress = user.getAddress();
+            txtadress.setText(adress);
+        } else {
             String ci = "Cosumidor Final";
-           txtadress.setText( ci);   
+            txtadress.setText(ci);
         }
     }//GEN-LAST:event_txtadressAncestorAdded
 
@@ -542,7 +540,7 @@ public class Cart extends javax.swing.JFrame {
         PrintController printController = new PrintController(panelGrafico);
         PrinterJob printerJob = PrinterJob.getPrinterJob();
         printerJob.setPrintable(printController);
-            
+
         if (printerJob.printDialog()) {
             try {
                 printerJob.print();
@@ -561,17 +559,17 @@ public class Cart extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPriceActionPerformed
 
     private void btnTotalPRice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalPRice1ActionPerformed
-  String usePrice = txtPrice.getText();
-String useIva = txtIva.getText();
-double totalPriceWithVAT = PriceCalculator.calculateTotalPriceWithVAT(usePrice, useIva);
-String formattedTotalPriceWithVAT = String.format("%.2f", totalPriceWithVAT);
-txtTotalPrice.setText(formattedTotalPriceWithVAT);
-double ivaAmount = totalPriceWithVAT - Double.parseDouble(usePrice);
-Locale locale = new Locale("en", "US");
-NumberFormat nf = NumberFormat.getNumberInstance(locale);
-nf.setMaximumFractionDigits(2);
-String formattedIvaAmount = nf.format(ivaAmount);
-txtIvaAmount.setText(formattedIvaAmount);
+        String usePrice = txtPrice.getText();
+        String useIva = txtIva.getText();
+        double totalPriceWithVAT = PriceCalculator.calculateTotalPriceWithVAT(usePrice, useIva);
+        String formattedTotalPriceWithVAT = String.format("%.2f", totalPriceWithVAT);
+        txtTotalPrice.setText(formattedTotalPriceWithVAT);
+        double ivaAmount = totalPriceWithVAT - Double.parseDouble(usePrice);
+        Locale locale = new Locale("en", "US");
+        NumberFormat nf = NumberFormat.getNumberInstance(locale);
+        nf.setMaximumFractionDigits(2);
+        String formattedIvaAmount = nf.format(ivaAmount);
+        txtIvaAmount.setText(formattedIvaAmount);
 
     }//GEN-LAST:event_btnTotalPRice1ActionPerformed
 
@@ -584,21 +582,21 @@ txtIvaAmount.setText(formattedIvaAmount);
     }//GEN-LAST:event_txtIvaAmountActionPerformed
 
     private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
-      int fila = Table.getSelectedRow();
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
-    } else {
-        try {
-            int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
-            
-            txtId.setText(String.valueOf(id));
-           
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+        int fila = Table.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "No se encontró ninguna fila seleccionada");
+        } else {
+            try {
+                int id = Integer.parseInt(Table.getValueAt(fila, 0).toString());
+
+                txtId.setText(String.valueOf(id));
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al obtener los valores de la fila seleccionada");
+            }
         }
-    }
     }//GEN-LAST:event_TableMouseClicked
- 
+
     /**
      * @param args the command line arguments
      */
@@ -674,16 +672,17 @@ txtIvaAmount.setText(formattedIvaAmount);
     private javax.swing.JTextField txtdate;
     private javax.swing.JTextField txtemail;
     // End of variables declaration//GEN-END:variables
-   class FondoPanel extends JPanel
-    {
+   class FondoPanel extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){            
+        public void paint(Graphics g) {
             imagen = new ImageIcon(getClass().getResource("/Pictures/General.jpg")).getImage();
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(), this);
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
-    
-    } 
+
+    }
 }
